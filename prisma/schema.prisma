@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Event {
+  id            String         @id @default(cuid())
+  name          String
+  date          DateTime
+  status        EventStatus    @default(UPCOMING)
+  createdAt     DateTime       @default(now())
+  registrations Registration[]
+  eventSongs    EventSong[]
+  waitlistItems WaitlistItem[]
+}
+
+enum EventStatus {
+  UPCOMING
+  ACTIVE
+  CLOSED
+}
+
+model Song {
+  id            String         @id @default(cuid())
+  title         String
+  artist        String
+  genre         String?
+  lyrics        String?        @db.Text
+  active        Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  eventSongs    EventSong[]
+  registrations Registration[]
+  waitlistItems WaitlistItem[]
+}
+
+model EventSong {
+  id      String     @id @default(cuid())
+  event   Event      @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId String
+  song    Song       @relation(fields: [songId], references: [id], onDelete: Cascade)
+  songId  String
+  status  SongStatus @default(AVAILABLE)
+
+  @@unique([eventId, songId])
+}
+
+enum SongStatus {
+  AVAILABLE
+  TAKEN
+  SUNG
+}
+
+model Registration {
+  id         String             @id @default(cuid())
+  event      Event              @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId    String
+  song       Song               @relation(fields: [songId], references: [id])
+  songId     String
+  singerName String
+  position   Int                @default(0)
+  status     RegistrationStatus @default(WAITING)
+  createdAt  DateTime           @default(now())
+
+  @@unique([eventId, songId])
+}
+
+enum RegistrationStatus {
+  WAITING
+  CALLED
+  SUNG
+}
+
+model WaitlistItem {
+  id         String   @id @default(cuid())
+  event      Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId    String
+  song       Song     @relation(fields: [songId], references: [id], onDelete: Cascade)
+  songId     String
+  singerName String
+  createdAt  DateTime @default(now())
+}
