@@ -63,7 +63,7 @@ export default function HomePage() {
         {/* Logo / Header */}
         <div className="text-center mb-10">
           <div className="text-8xl mb-4">🎤</div>
-          <h1 className="font-display text-6xl neon-text-pink mb-2">KaraOK</h1>
+          <h1 className="font-display text-5xl neon-text-pink mb-2">Una que sepamos todos</h1>
           <p className="text-slate-400 text-sm">Karaoke en vivo</p>
         </div>
 

@@ -49,7 +49,7 @@ export default function AdminDashboard() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="font-display text-4xl neon-text-purple">Panel Admin</h1>
-          <p className="text-slate-500 text-xs">KaraOK 🎤</p>
+          <p className="text-slate-500 text-xs">Una que sepamos todos 🎤</p>
         </div>
         <button
           onClick={() => { sessionStorage.removeItem('admin_auth'); router.push('/') }}

@@ -2,13 +2,13 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'KaraOK 🎤',
+  title: 'Una que sepamos todos 🎤',
   description: 'Karaoke en vivo – elegí tu canción y cantá!',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'KaraOK',
+    title: 'Una que sepamos todos',
   },
 }
 
