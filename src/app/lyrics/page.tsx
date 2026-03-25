@@ -29,6 +29,8 @@ function LyricsContent() {
   const [song, setSong] = useState<Song | null>(null)
   const [myReg, setMyReg] = useState<Registration | null>(null)
   const [queue, setQueue] = useState<Registration[]>([])
+  const [cancelling, setCancelling] = useState(false)
+  const [showConfirm, setShowConfirm] = useState(false)
   const { youAreUp, resetYouAreUp, on } = useSocket(eventId, singerName)
 
   const loadData = useCallback(async () => {
@@ -60,6 +62,25 @@ function LyricsContent() {
   const position = myReg
     ? queue.filter((r) => r.status === 'WAITING').findIndex((r) => r.id === myReg.id) + 1
     : null
+
+  const handleCancel = async () => {
+    if (!myReg) return
+    setCancelling(true)
+    const res = await fetch('/api/queue', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'cancel', registrationId: myReg.id, eventId }),
+    })
+    if (res.ok) {
+      sessionStorage.removeItem('karaoke_session')
+      router.replace('/')
+    } else {
+      const data = await res.json()
+      alert(data.error || 'No se pudo cancelar')
+      setCancelling(false)
+      setShowConfirm(false)
+    }
+  }
 
   if (youAreUp) {
     return (
@@ -129,7 +150,46 @@ function LyricsContent() {
             <p className="text-sm mt-2">El animador la va a mostrar en pantalla</p>
           </div>
         )}
+
+        {/* Drop-out button — only when WAITING */}
+        {myReg && myReg.status === 'WAITING' && (
+          <div className="mt-10 pb-4">
+            <button
+              onClick={() => setShowConfirm(true)}
+              className="w-full py-3 rounded-xl border border-red-500/30 bg-red-500/10 text-red-400 text-sm font-semibold hover:bg-red-500/20 transition-all active:scale-95"
+            >
+              🙅 Me quiero bajar
+            </button>
+          </div>
+        )}
       </div>
+
+      {/* Confirm drop-out modal */}
+      {showConfirm && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-sm">
+          <div className="glass-card w-full max-w-sm mx-4 mb-8 p-6 slide-up">
+            <h2 className="font-display text-2xl neon-text-pink mb-2">¿Seguro?</h2>
+            <p className="text-slate-300 mb-1">Vas a cancelar tu inscripción para:</p>
+            <p className="font-bold text-white mb-1">{song?.title}</p>
+            <p className="text-slate-400 text-sm mb-6">{song?.artist}</p>
+            <p className="text-slate-500 text-xs mb-6 text-center">
+              La canción va a quedar libre para que otra persona la elija.
+            </p>
+            <div className="flex flex-col gap-3">
+              <button
+                onClick={handleCancel}
+                disabled={cancelling}
+                className="w-full py-3 rounded-xl bg-red-500/20 border border-red-500/40 text-red-400 font-bold text-sm hover:bg-red-500/30 transition-all"
+              >
+                {cancelling ? 'Cancelando...' : 'Sí, me bajo 🙅'}
+              </button>
+              <button className="btn-secondary" onClick={() => setShowConfirm(false)}>
+                No, me quedo 🎵
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

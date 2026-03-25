@@ -75,5 +75,25 @@ export async function PATCH(req: Request) {
     return NextResponse.json(reg)
   }
 
+  if (action === 'cancel' && registrationId) {
+    const reg = await prisma.registration.findUnique({
+      where: { id: registrationId },
+    })
+    if (!reg) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+    // Only allow cancel if not already called or sung
+    if (reg.status === 'CALLED' || reg.status === 'SUNG') {
+      return NextResponse.json({ error: 'No podés bajarte cuando ya te llamaron o ya cantaste' }, { status: 400 })
+    }
+    await prisma.$transaction([
+      prisma.registration.delete({ where: { id: registrationId } }),
+      prisma.eventSong.update({
+        where: { eventId_songId: { eventId: reg.eventId, songId: reg.songId } },
+        data: { status: 'AVAILABLE' },
+      }),
+    ])
+    emitQueueUpdate(reg.eventId, { type: 'cancel', registrationId, songId: reg.songId })
+    return NextResponse.json({ ok: true })
+  }
+
   return NextResponse.json({ error: 'Unknown action' }, { status: 400 })
 }
