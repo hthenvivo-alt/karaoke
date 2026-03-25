@@ -34,6 +34,15 @@ export async function POST(req: Request) {
   // Count existing registrations to set position
   const count = await prisma.registration.count({ where: { eventId } })
 
+  // Enforce capacity limit (0 = unlimited)
+  if (event.maxSingers > 0 && count >= event.maxSingers) {
+    return NextResponse.json(
+      { error: `El evento está lleno (máximo ${event.maxSingers} cantantes)` },
+      { status: 409 }
+    )
+  }
+
+
   // Create registration and mark song as taken
   const [registration] = await prisma.$transaction([
     prisma.registration.create({

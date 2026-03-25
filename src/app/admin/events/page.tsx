@@ -8,6 +8,7 @@ interface Event {
   name: string
   date: string
   status: string
+  maxSingers: number
   _count?: { registrations: number }
 }
 
@@ -23,7 +24,7 @@ export default function AdminEventsPage() {
   const [songs, setSongs] = useState<Song[]>([])
   const [loading, setLoading] = useState(true)
   const [creating, setCreating] = useState(false)
-  const [form, setForm] = useState({ name: '', date: '' })
+  const [form, setForm] = useState({ name: '', date: '', maxSingers: '' })
 
   useEffect(() => {
     if (typeof window !== 'undefined' && !sessionStorage.getItem('admin_auth')) {
@@ -47,11 +48,11 @@ export default function AdminEventsPage() {
     const res = await fetch('/api/events', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: form.name, date: form.date }),
+      body: JSON.stringify({ name: form.name, date: form.date, maxSingers: form.maxSingers || 0 }),
     })
     const event = await res.json()
     setEvents(prev => [event, ...prev])
-    setForm({ name: '', date: '' })
+    setForm({ name: '', date: '', maxSingers: '' })
     setCreating(false)
   }
 
@@ -111,6 +112,17 @@ export default function AdminEventsPage() {
               value={form.date}
               onChange={e => setForm(f => ({ ...f, date: e.target.value }))}
             />
+            <div className="flex items-center gap-2">
+              <input
+                className="input-neon text-sm flex-1"
+                type="number"
+                min="0"
+                placeholder="Máx. cantantes (0 = sin límite)"
+                value={form.maxSingers}
+                onChange={e => setForm(f => ({ ...f, maxSingers: e.target.value }))}
+              />
+            </div>
+            <p className="text-slate-500 text-xs -mt-1">Dejá en 0 o vacío si no querés límite de inscriptos.</p>
             <button type="submit" className="btn-neon py-3 text-sm" disabled={!form.name || !form.date || creating}>
               {creating ? 'Creando...' : '+ Crear evento (todas las canciones activas)'}
             </button>
@@ -131,7 +143,13 @@ export default function AdminEventsPage() {
                     {new Date(event.date).toLocaleDateString('es-AR', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' })}
                   </p>
                   {event._count && (
-                    <p className="text-slate-500 text-xs">{event._count.registrations} inscriptos</p>
+                    <p className="text-slate-500 text-xs">
+                      {event._count.registrations} inscriptos
+                      {event.maxSingers > 0 && ` / ${event.maxSingers} máximo`}
+                      {event.maxSingers > 0 && event._count.registrations >= event.maxSingers && (
+                        <span className="ml-2 text-red-400 font-semibold">● LLENO</span>
+                      )}
+                    </p>
                   )}
                 </div>
               </div>

@@ -11,6 +11,7 @@ model Event {
   name          String
   date          DateTime
   status        EventStatus    @default(UPCOMING)
+  maxSingers    Int            @default(0)
   createdAt     DateTime       @default(now())
   registrations Registration[]
   eventSongs    EventSong[]

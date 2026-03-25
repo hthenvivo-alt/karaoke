@@ -14,7 +14,7 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { name, date, songIds } = await req.json()
+  const { name, date, songIds, maxSingers } = await req.json()
   if (!name || !date) {
     return NextResponse.json({ error: 'name and date are required' }, { status: 400 })
   }
@@ -23,6 +23,7 @@ export async function POST(req: Request) {
     data: {
       name,
       date: new Date(date),
+      maxSingers: maxSingers ? parseInt(maxSingers) : 0,
       eventSongs: songIds?.length
         ? {
             create: songIds.map((id: string) => ({ songId: id })),
