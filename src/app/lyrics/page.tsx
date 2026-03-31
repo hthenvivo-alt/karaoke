@@ -186,11 +186,14 @@ function LyricsContent() {
                 ✕
               </button>
             </div>
+            <p className="text-slate-500 text-xs text-center mb-3 italic">
+              El orden de la lista no indica un orden para subir a cantar
+            </p>
             <div className="overflow-y-auto flex-1 flex flex-col gap-2">
               {waitingQueue.length === 0 ? (
                 <p className="text-slate-500 text-sm text-center py-6">No hay cantantes en la cola aún</p>
               ) : (
-                waitingQueue.map((r, i) => {
+                waitingQueue.map((r) => {
                   const isMe = r.singerName.toLowerCase() === singerName.toLowerCase()
                   return (
                     <div
@@ -201,14 +204,13 @@ function LyricsContent() {
                           : 'bg-white/5 border border-white/10'
                       }`}
                     >
-                      <span className="text-slate-500 text-xs w-4 text-center font-mono">{i + 1}</span>
                       <div className="flex-1 min-w-0">
                         <p className={`text-sm font-semibold truncate ${isMe ? 'text-purple-300' : 'text-white'}`}>
                           {r.singerName} {isMe && '(vos)'}
                         </p>
-                        {(r.song || r.songId) && (
+                        {r.song && (
                           <p className="text-slate-500 text-xs truncate">
-                            {r.song ? `${r.song.title} — ${r.song.artist}` : ''}
+                            {r.song.title} — {r.song.artist}
                           </p>
                         )}
                       </div>

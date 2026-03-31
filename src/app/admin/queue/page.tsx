@@ -2,23 +2,6 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import {
-  DndContext,
-  closestCenter,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-  DragEndEvent,
-} from '@dnd-kit/core'
-import {
-  arrayMove,
-  SortableContext,
-  sortableKeyboardCoordinates,
-  useSortable,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable'
-import { CSS } from '@dnd-kit/utilities'
 import { useSocket } from '@/hooks/useSocket'
 
 interface Registration {
@@ -34,24 +17,45 @@ interface ActiveEvent {
   name: string
 }
 
-function SortableItem({
+function QueueItem({
   reg,
+  index,
+  total,
   onCall,
   onSung,
   onReset,
+  onMove,
 }: {
   reg: Registration
+  index: number
+  total: number
   onCall: (id: string) => void
   onSung: (id: string) => void
   onReset: (id: string) => void
+  onMove: (id: string, direction: 'up' | 'down') => void
 }) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: reg.id })
-  const style = { transform: CSS.Transform.toString(transform), transition, opacity: isDragging ? 0.5 : 1 }
-
   return (
-    <div ref={setNodeRef} style={style} className={`glass-card p-4 ${reg.status === 'SUNG' ? 'opacity-40' : ''}`}>
+    <div className={`glass-card p-4 ${reg.status === 'SUNG' ? 'opacity-40' : ''}`}>
       <div className="flex items-center gap-3">
-        <div {...attributes} {...listeners} className="drag-handle text-xl select-none">⠿</div>
+        {/* Up/Down arrows */}
+        <div className="flex flex-col gap-1 flex-shrink-0">
+          <button
+            onClick={() => onMove(reg.id, 'up')}
+            disabled={index === 0}
+            className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-700 text-slate-400 hover:border-purple-500 hover:text-purple-300 disabled:opacity-20 disabled:cursor-not-allowed transition-all active:scale-90 text-sm"
+          >
+            ▲
+          </button>
+          <button
+            onClick={() => onMove(reg.id, 'down')}
+            disabled={index === total - 1}
+            className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-700 text-slate-400 hover:border-purple-500 hover:text-purple-300 disabled:opacity-20 disabled:cursor-not-allowed transition-all active:scale-90 text-sm"
+          >
+            ▼
+          </button>
+        </div>
+
+        {/* Singer info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
             {reg.status === 'CALLED' && <span className="badge badge-called">¡AHORA!</span>}
@@ -61,6 +65,8 @@ function SortableItem({
           <p className="font-bold text-white">{reg.singerName}</p>
           <p className="text-slate-400 text-sm truncate">{reg.song.title} — {reg.song.artist}</p>
         </div>
+
+        {/* Action buttons */}
         <div className="flex flex-col gap-2 flex-shrink-0">
           {reg.status !== 'SUNG' && (
             <>
@@ -101,11 +107,6 @@ export default function AdminQueuePage() {
   const [showSung, setShowSung] = useState(false)
 
   const { on } = useSocket(activeEvent?.id)
-
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
-  )
 
   const loadQueue = useCallback(async (eventId: string) => {
     const res = await fetch(`/api/queue?eventId=${eventId}`)
@@ -163,14 +164,17 @@ export default function AdminQueuePage() {
     await loadQueue(activeEvent.id)
   }
 
-  const handleDragEnd = async (event: DragEndEvent) => {
-    const { active, over } = event
-    if (!over || active.id === over.id || !activeEvent) return
-
+  const handleMove = async (id: string, direction: 'up' | 'down') => {
+    if (!activeEvent) return
     const waiting = queue.filter(r => r.status !== 'SUNG')
-    const oldIndex = waiting.findIndex(r => r.id === active.id)
-    const newIndex = waiting.findIndex(r => r.id === over.id)
-    const reordered = arrayMove(waiting, oldIndex, newIndex)
+    const idx = waiting.findIndex(r => r.id === id)
+    if (idx === -1) return
+    const swapIdx = direction === 'up' ? idx - 1 : idx + 1
+    if (swapIdx < 0 || swapIdx >= waiting.length) return
+
+    // Swap in local state immediately for responsiveness
+    const reordered = [...waiting]
+    ;[reordered[idx], reordered[swapIdx]] = [reordered[swapIdx], reordered[idx]]
     const sung = queue.filter(r => r.status === 'SUNG')
     setQueue([...reordered, ...sung])
 
@@ -184,7 +188,6 @@ export default function AdminQueuePage() {
 
   const waiting = queue.filter(r => r.status !== 'SUNG')
   const sung = queue.filter(r => r.status === 'SUNG')
-  const sortableIds = waiting.map(r => r.id)
 
   if (loading) {
     return (
@@ -225,21 +228,20 @@ export default function AdminQueuePage() {
           </div>
         ) : (
           <>
-            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-              <SortableContext items={sortableIds} strategy={verticalListSortingStrategy}>
-                <div className="flex flex-col gap-3">
-                  {waiting.map(reg => (
-                    <SortableItem
-                      key={reg.id}
-                      reg={reg}
-                      onCall={handleCall}
-                      onSung={handleSung}
-                      onReset={handleReset}
-                    />
-                  ))}
-                </div>
-              </SortableContext>
-            </DndContext>
+            <div className="flex flex-col gap-3">
+              {waiting.map((reg, i) => (
+                <QueueItem
+                  key={reg.id}
+                  reg={reg}
+                  index={i}
+                  total={waiting.length}
+                  onCall={handleCall}
+                  onSung={handleSung}
+                  onReset={handleReset}
+                  onMove={handleMove}
+                />
+              ))}
+            </div>
 
             {sung.length > 0 && (
               <div className="mt-6">
