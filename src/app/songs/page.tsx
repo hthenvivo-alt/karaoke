@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useSocket } from '@/hooks/useSocket'
 
+
 interface Song {
   id: string
   title: string
@@ -19,6 +20,7 @@ interface EventSong {
 }
 
 interface Registration {
+  id: string
   songId: string
   singerName: string
   position: number
@@ -38,6 +40,7 @@ function SongsContent() {
   const searchParams = useSearchParams()
   const eventId = searchParams.get('eventId') || ''
   const singerName = searchParams.get('name') || ''
+  const isChanging = searchParams.get('change') === '1'
 
   const [event, setEvent] = useState<EventData | null>(null)
   const [search, setSearch] = useState('')
@@ -92,7 +95,8 @@ function SongsContent() {
     : []
 
   const handleSelectSong = (song: Song, status: string) => {
-    if (myRegistration) return
+    // In change mode, user can pick a new available song even if they already have a registration
+    if (myRegistration && !isChanging) return
     if (status === 'TAKEN' || status === 'SUNG') {
       if (status === 'TAKEN') {
         setWaitlistSong(song)
@@ -105,6 +109,20 @@ function SongsContent() {
   const handleConfirm = async () => {
     if (!selectedSong || !event) return
     setConfirming(true)
+    // If changing song, cancel old registration first
+    if (isChanging && myRegistration) {
+      const cancelRes = await fetch('/api/queue', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'cancel', registrationId: myRegistration.id, eventId }),
+      })
+      if (!cancelRes.ok) {
+        const err = await cancelRes.json()
+        alert(err.error || 'No se pudo cancelar la canción anterior')
+        setConfirming(false)
+        return
+      }
+    }
     const res = await fetch('/api/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -167,15 +185,25 @@ function SongsContent() {
       <div className="sticky top-0 z-20 glass-card rounded-none border-x-0 border-t-0 px-4 pt-safe pt-4 pb-3">
         <div className="flex items-center justify-between mb-3">
           <div>
-            <h1 className="font-display text-3xl neon-text-pink">Elegí tu canción</h1>
+            <h1 className="font-display text-3xl neon-text-pink">
+              {isChanging ? 'Cambiar canción' : 'Elegí tu canción'}
+            </h1>
             <p className="text-slate-400 text-xs">Hola, <span className="text-purple-400 font-semibold">{singerName}</span>!</p>
           </div>
-          {myRegistration && (
+          {myRegistration && !isChanging && (
             <button
               onClick={() => router.push(`/lyrics?songId=${myRegistration.songId}&eventId=${eventId}&name=${encodeURIComponent(singerName)}`)}
               className="badge badge-called text-xs px-3 py-2"
             >
               🎵 Mi canción
+            </button>
+          )}
+          {isChanging && (
+            <button
+              onClick={() => router.push(`/lyrics?songId=${myRegistration?.songId}&eventId=${eventId}&name=${encodeURIComponent(singerName)}`)}
+              className="text-slate-500 text-sm flex items-center gap-1"
+            >
+              ← Volver
             </button>
           )}
         </div>
@@ -210,10 +238,17 @@ function SongsContent() {
 
       {/* Songs list */}
       <div className="flex-1 overflow-y-auto px-4 py-4 pb-safe">
-        {myRegistration && (
+        {myRegistration && !isChanging && (
           <div className="glass-card p-4 mb-4 border-purple-500/40">
             <p className="text-sm text-purple-300 font-semibold text-center">
-              ✅ Ya elegiste tu canción — posición #{myRegistration.position} en la cola
+              ✅ Ya elegiste tu canción
+            </p>
+          </div>
+        )}
+        {isChanging && (
+          <div className="glass-card p-4 mb-4 border-blue-500/40">
+            <p className="text-sm text-blue-300 font-semibold text-center">
+              🔄 Elegí la canción que querés en cambio
             </p>
           </div>
         )}
@@ -226,7 +261,8 @@ function SongsContent() {
             const isAvailable = status === 'AVAILABLE'
             const isTaken = status === 'TAKEN'
             const isSung = status === 'SUNG'
-            const isDisabled = !!myRegistration || isSung
+            // In change mode, only available songs are clickable; existing registration doesn't block
+            const isDisabled = isChanging ? isSung || isTaken : (!!myRegistration || isSung)
 
             return (
               <div
@@ -264,15 +300,18 @@ function SongsContent() {
       {selectedSong && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-sm">
           <div className="glass-card w-full max-w-sm mx-4 mb-8 p-6 slide-up">
-            <h2 className="font-display text-3xl neon-text-pink mb-1">¿Esta es?</h2>
+            <h2 className="font-display text-3xl neon-text-pink mb-1">{isChanging ? '¿La cambiamos?' : '¿Esta es?'}</h2>
             <p className="text-white text-xl font-bold mb-1">{selectedSong.title}</p>
             <p className="text-slate-400 mb-6">{selectedSong.artist}</p>
             <p className="text-slate-500 text-sm mb-6 text-center">
-              Una vez que la elegís, la canción queda reservada para vos 🎤
+              {isChanging
+                ? 'Tu canción anterior quedará libre y se reservará esta 🔄'
+                : 'Una vez que la elegís, la canción queda reservada para vos 🎤'
+              }
             </p>
             <div className="flex flex-col gap-3">
               <button className="btn-neon" onClick={handleConfirm} disabled={confirming}>
-                {confirming ? 'Reservando...' : '¡Sí, la quiero! 🎵'}
+                {confirming ? (isChanging ? 'Cambiando...' : 'Reservando...') : (isChanging ? '¡Sí, cambiarla! 🔄' : '¡Sí, la quiero! 🎵')}
               </button>
               <button className="btn-secondary" onClick={() => setSelectedSong(null)}>
                 Seguir viendo
