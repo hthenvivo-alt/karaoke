@@ -12,6 +12,11 @@ interface Registration {
   song: { id: string; title: string; artist: string }
 }
 
+interface RandomPoolEntry {
+  id: string
+  singerName: string
+}
+
 interface ActiveEvent {
   id: string
   name: string
@@ -103,15 +108,23 @@ export default function AdminQueuePage() {
   const router = useRouter()
   const [activeEvent, setActiveEvent] = useState<ActiveEvent | null>(null)
   const [queue, setQueue] = useState<Registration[]>([])
+  const [randomPool, setRandomPool] = useState<RandomPoolEntry[]>([])
   const [loading, setLoading] = useState(true)
   const [showSung, setShowSung] = useState(false)
+  const [callingRandom, setCallingRandom] = useState(false)
+  const [lastCalledRandom, setLastCalledRandom] = useState<string | null>(null)
 
   const { on } = useSocket(activeEvent?.id)
 
   const loadQueue = useCallback(async (eventId: string) => {
-    const res = await fetch(`/api/queue?eventId=${eventId}`)
-    const data = await res.json()
-    setQueue(Array.isArray(data) ? data : [])
+    const [queueRes, poolRes] = await Promise.all([
+      fetch(`/api/queue?eventId=${eventId}`),
+      fetch(`/api/random-pool?eventId=${eventId}`),
+    ])
+    const queueData = await queueRes.json()
+    const poolData = await poolRes.json()
+    setQueue(Array.isArray(queueData) ? queueData : [])
+    setRandomPool(Array.isArray(poolData) ? poolData : [])
   }, [])
 
   useEffect(() => {
@@ -172,7 +185,6 @@ export default function AdminQueuePage() {
     const swapIdx = direction === 'up' ? idx - 1 : idx + 1
     if (swapIdx < 0 || swapIdx >= waiting.length) return
 
-    // Swap in local state immediately for responsiveness
     const reordered = [...waiting]
     ;[reordered[idx], reordered[swapIdx]] = [reordered[swapIdx], reordered[idx]]
     const sung = queue.filter(r => r.status === 'SUNG')
@@ -184,6 +196,25 @@ export default function AdminQueuePage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'reorder', eventId: activeEvent.id, newPositions }),
     })
+  }
+
+  const handleCallRandom = async () => {
+    if (!activeEvent || callingRandom) return
+    setCallingRandom(true)
+    setLastCalledRandom(null)
+    const res = await fetch('/api/queue', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'call_random', eventId: activeEvent.id }),
+    })
+    const data = await res.json()
+    if (res.ok) {
+      setLastCalledRandom(data.singerName)
+      await loadQueue(activeEvent.id)
+    } else {
+      alert(data.error || 'Error al llamar random')
+    }
+    setCallingRandom(false)
   }
 
   const waiting = queue.filter(r => r.status !== 'SUNG')
@@ -206,9 +237,17 @@ export default function AdminQueuePage() {
             <h1 className="font-display text-3xl neon-text-purple">Cola en vivo</h1>
             {activeEvent && <p className="text-slate-400 text-xs">{activeEvent.name}</p>}
           </div>
-          <div className="text-right">
-            <div className="text-2xl font-display neon-text-pink">{waiting.length}</div>
-            <div className="text-slate-500 text-xs">pendientes</div>
+          <div className="text-right flex gap-4">
+            <div>
+              <div className="text-2xl font-display neon-text-pink">{waiting.length}</div>
+              <div className="text-slate-500 text-xs">pendientes</div>
+            </div>
+            {randomPool.length > 0 && (
+              <div>
+                <div className="text-2xl font-display text-yellow-400">{randomPool.length}</div>
+                <div className="text-slate-500 text-xs">randoms</div>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -221,7 +260,7 @@ export default function AdminQueuePage() {
               Ir a eventos
             </button>
           </div>
-        ) : waiting.length === 0 && sung.length === 0 ? (
+        ) : waiting.length === 0 && sung.length === 0 && randomPool.length === 0 ? (
           <div className="text-center mt-20">
             <div className="text-4xl mb-4">🎵</div>
             <p className="text-slate-400">Nadie se anotó todavía</p>
@@ -242,6 +281,38 @@ export default function AdminQueuePage() {
                 />
               ))}
             </div>
+
+            {/* Random pool section */}
+            {randomPool.length > 0 && (
+              <div className="mt-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-yellow-400 text-sm font-semibold">🎲 Pool Random ({randomPool.length})</span>
+                  <span className="text-slate-600 text-xs">— esperando ser elegidos al azar</span>
+                </div>
+                <div className="flex flex-col gap-2 mb-4">
+                  {randomPool.map(entry => (
+                    <div key={entry.id} className="flex items-center gap-3 rounded-xl px-3 py-2 bg-yellow-500/5 border border-yellow-500/20">
+                      <span className="text-yellow-400 text-sm">🎲</span>
+                      <span className="text-slate-300 text-sm font-medium">{entry.singerName}</span>
+                    </div>
+                  ))}
+                </div>
+                {lastCalledRandom && (
+                  <div className="glass-card p-3 mb-3 border-green-500/40 text-center">
+                    <p className="text-green-400 text-sm font-semibold">
+                      🎤 ¡{lastCalledRandom} fue llamado al azar!
+                    </p>
+                  </div>
+                )}
+                <button
+                  onClick={handleCallRandom}
+                  disabled={callingRandom}
+                  className="w-full py-4 rounded-xl border-2 border-yellow-500/50 bg-yellow-500/10 text-yellow-300 font-bold text-base hover:bg-yellow-500/20 transition-all active:scale-95 disabled:opacity-50"
+                >
+                  {callingRandom ? 'Eligiendo...' : '🎲 Llamar un random'}
+                </button>
+              </div>
+            )}
 
             {sung.length > 0 && (
               <div className="mt-6">

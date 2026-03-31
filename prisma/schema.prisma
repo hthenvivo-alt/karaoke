@@ -7,15 +7,16 @@ datasource db {
 }
 
 model Event {
-  id            String         @id @default(cuid())
-  name          String
-  date          DateTime
-  status        EventStatus    @default(UPCOMING)
-  maxSingers    Int            @default(0)
-  createdAt     DateTime       @default(now())
-  registrations Registration[]
-  eventSongs    EventSong[]
-  waitlistItems WaitlistItem[]
+  id              String             @id @default(cuid())
+  name            String
+  date            DateTime
+  status          EventStatus        @default(UPCOMING)
+  maxSingers      Int                @default(0)
+  createdAt       DateTime           @default(now())
+  registrations   Registration[]
+  eventSongs      EventSong[]
+  waitlistItems   WaitlistItem[]
+  randomPool      RandomPoolEntry[]
 }
 
 enum EventStatus {
@@ -63,6 +64,7 @@ model Registration {
   singerName String
   position   Int                @default(0)
   status     RegistrationStatus @default(WAITING)
+  isRandom   Boolean            @default(false)
   createdAt  DateTime           @default(now())
 
   @@unique([eventId, songId])
@@ -82,4 +84,14 @@ model WaitlistItem {
   songId     String
   singerName String
   createdAt  DateTime @default(now())
+}
+
+model RandomPoolEntry {
+  id         String   @id @default(cuid())
+  event      Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId    String
+  singerName String
+  createdAt  DateTime @default(now())
+
+  @@unique([eventId, singerName])
 }

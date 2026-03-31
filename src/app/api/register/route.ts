@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma'
 import { emitSongTaken, emitQueueUpdate } from '@/lib/socket'
 
 export async function POST(req: Request) {
-  const { eventId, singerName, songId } = await req.json()
+  const { eventId, singerName, songId, isRandom } = await req.json()
 
   if (!eventId || !singerName || !songId) {
     return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Song not available' }, { status: 409 })
   }
 
-  // Check if this singer already has a song
+  // Check if this singer already has a song (regular or random)
   const existing = await prisma.registration.findFirst({
     where: { eventId, singerName: { equals: singerName, mode: 'insensitive' } },
   })
@@ -31,22 +31,21 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'You already registered a song', registration: existing }, { status: 409 })
   }
 
-  // Count existing registrations to set position
-  const count = await prisma.registration.count({ where: { eventId } })
+  // Count existing NON-random registrations for capacity check
+  const count = await prisma.registration.count({ where: { eventId, isRandom: false } })
 
-  // Enforce capacity limit (0 = unlimited)
-  if (event.maxSingers > 0 && count >= event.maxSingers) {
+  // Enforce capacity limit only for confirmed singers (isRandom entries bypass it)
+  if (!isRandom && event.maxSingers > 0 && count >= event.maxSingers) {
     return NextResponse.json(
-      { error: `El evento está lleno (máximo ${event.maxSingers} cantantes)` },
+      { error: `El evento está lleno (máximo ${event.maxSingers} cantantes)`, isFull: true },
       { status: 409 }
     )
   }
 
-
   // Create registration and mark song as taken
   const [registration] = await prisma.$transaction([
     prisma.registration.create({
-      data: { eventId, singerName, songId, position: count + 1 },
+      data: { eventId, singerName, songId, position: count + 1, isRandom: !!isRandom },
       include: { song: true },
     }),
     prisma.eventSong.update({

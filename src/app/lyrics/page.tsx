@@ -17,6 +17,7 @@ interface Registration {
   position: number
   status: string
   singerName: string
+  isRandom: boolean
   song?: { title: string; artist: string }
   songId?: string
 }
@@ -143,6 +144,11 @@ function LyricsContent() {
           </div>
           {myReg?.status === 'CALLED' && (
             <span className="badge badge-called flex-shrink-0">¡AHORA VOS!</span>
+          )}
+          {myReg?.isRandom && myReg.status === 'WAITING' && (
+            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-yellow-500/20 border border-yellow-500/40 text-yellow-300 flex-shrink-0">
+              🎲 Lista random
+            </span>
           )}
         </div>
       </div>

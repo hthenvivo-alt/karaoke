@@ -51,6 +51,10 @@ function SongsContent() {
   const [myRegistration, setMyRegistration] = useState<Registration | null>(null)
   const [waitlistSong, setWaitlistSong] = useState<Song | null>(null)
   const [waitlistMsg, setWaitlistMsg] = useState('')
+  const [showRandomModal, setShowRandomModal] = useState(false)
+  const [inRandomPool, setInRandomPool] = useState(false)
+  const [joiningPool, setJoiningPool] = useState(false)
+  const [poolJoinMsg, setPoolJoinMsg] = useState('')
 
   const { youAreUp, resetYouAreUp, youAreNext, resetYouAreNext, on } = useSocket(eventId, singerName)
 
@@ -63,6 +67,15 @@ function SongsContent() {
       (r: Registration) => r.singerName.toLowerCase() === singerName.toLowerCase()
     )
     setMyRegistration(reg || null)
+    // Check if already in random pool
+    if (!reg) {
+      const poolRes = await fetch(`/api/random-pool?eventId=${eventId}`)
+      const poolData = await poolRes.json()
+      const inPool = Array.isArray(poolData) && poolData.some(
+        (e: { singerName: string }) => e.singerName.toLowerCase() === singerName.toLowerCase()
+      )
+      setInRandomPool(inPool)
+    }
     setLoading(false)
   }, [eventId, singerName])
 
@@ -134,10 +147,40 @@ function SongsContent() {
       setSelectedSong(null)
       await loadEvent()
       router.push(`/lyrics?songId=${selectedSong.id}&eventId=${eventId}&name=${encodeURIComponent(singerName)}`)
+    } else if (res.status === 409 && data.isFull) {
+      // Capacity full — keep selectedSong and show the random pool modal
+      setShowRandomModal(true)
+      // Don't clear selectedSong — we'll offer to register it as random
     } else {
       alert(data.error || 'Error al registrar')
+      setSelectedSong(null)
     }
     setConfirming(false)
+  }
+
+  const handleJoinRandom = async () => {
+    if (!selectedSong || !event) return
+    setJoiningPool(true)
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ eventId: event.id, singerName, songId: selectedSong.id, isRandom: true }),
+    })
+    const data = await res.json()
+    if (res.ok) {
+      setInRandomPool(true)
+      setMyRegistration(data)
+      setPoolJoinMsg('✅ ¡Te anotaste! Te avisamos si sos el elegido.')
+      setTimeout(() => {
+        setShowRandomModal(false)
+        setPoolJoinMsg('')
+        // Redirect to lyrics so they can see their song
+        router.push(`/lyrics?songId=${selectedSong.id}&eventId=${eventId}&name=${encodeURIComponent(singerName)}`)
+      }, 2000)
+    } else {
+      setPoolJoinMsg(data.error || 'No se pudo anotar')
+    }
+    setJoiningPool(false)
   }
 
   const handleWaitlist = async () => {
@@ -269,6 +312,13 @@ function SongsContent() {
             </p>
           </div>
         )}
+        {inRandomPool && !myRegistration && !isChanging && (
+          <div className="glass-card p-4 mb-4 border-yellow-500/40">
+            <p className="text-sm text-yellow-300 font-semibold text-center">
+              🎲 Estás en la lista random — te avisamos si te toca cantar
+            </p>
+          </div>
+        )}
 
         <div className="flex flex-col gap-3">
           {filteredSongs.length === 0 && (
@@ -365,6 +415,57 @@ function SongsContent() {
           </div>
         </div>
       )}
+
+      {/* Random pool modal — shown when capacity is full */}
+      {showRandomModal && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-sm">
+          <div className="glass-card w-full max-w-sm mx-4 mb-8 p-6 slide-up">
+            {poolJoinMsg ? (
+              <p className="text-center text-green-400 text-lg py-4">{poolJoinMsg}</p>
+            ) : (
+              <>
+                <div className="text-center mb-4">
+                  <div className="text-5xl mb-3">🎲</div>
+                  <h2 className="font-display text-2xl neon-text-pink mb-2">El cupo está lleno</h2>
+                  <p className="text-slate-300 text-sm">
+                    Pero no te preocupes, ¡también llamamos cantantes random!
+                  </p>
+                </div>
+                {/* Show the song they chose */}
+                {selectedSong && (
+                  <div className="bg-white/5 rounded-xl p-4 mb-4 border border-purple-500/20">
+                    <p className="text-xs text-slate-500 mb-1">Tu canción elegida</p>
+                    <p className="font-bold text-white">{selectedSong.title}</p>
+                    <p className="text-slate-400 text-sm">{selectedSong.artist}</p>
+                  </div>
+                )}
+                <div className="bg-yellow-500/5 rounded-xl p-3 mb-5 text-xs text-slate-400 leading-relaxed border border-yellow-500/20">
+                  Anotate al pool random con esta canción. Si tenés suerte, el animador te llama y ¡subís a cantarla! 🎤
+                </div>
+                <div className="flex flex-col gap-3">
+                  {inRandomPool ? (
+                    <p className="text-center text-yellow-400 font-semibold text-sm">
+                      ✅ Ya estás anotado en la lista random
+                    </p>
+                  ) : (
+                    <button
+                      className="btn-neon"
+                      onClick={handleJoinRandom}
+                      disabled={joiningPool || !selectedSong}
+                    >
+                      {joiningPool ? 'Anotándote...' : '🎲 ¡Anotarme al random!'}
+                    </button>
+                  )}
+                  <button className="btn-secondary" onClick={() => { setShowRandomModal(false); setSelectedSong(null) }}>
+                    Cancelar
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
     </div>
   )
 }

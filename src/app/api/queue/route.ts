@@ -3,14 +3,15 @@ import { prisma } from '@/lib/prisma'
 import { emitQueueUpdate, emitCallSinger, emitGetReady } from '@/lib/socket'
 
 
-// GET full queue for an event
+// GET full queue for an event (only confirmed, non-random registrations)
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
   const eventId = searchParams.get('eventId')
+  const random = searchParams.get('random') === 'true'
   if (!eventId) return NextResponse.json({ error: 'Missing eventId' }, { status: 400 })
 
   const registrations = await prisma.registration.findMany({
-    where: { eventId },
+    where: { eventId, isRandom: random },
     orderBy: { position: 'asc' },
     include: {
       song: true,
@@ -104,6 +105,29 @@ export async function PATCH(req: Request) {
     ])
     emitQueueUpdate(reg.eventId, { type: 'cancel', registrationId, songId: reg.songId })
     return NextResponse.json({ ok: true })
+  }
+
+  if (action === 'call_random' && eventId) {
+    // Pick from isRandom registrations that are still WAITING
+    const randomRegs = await prisma.registration.findMany({
+      where: { eventId, isRandom: true, status: 'WAITING' },
+      include: { song: true },
+    })
+    if (randomRegs.length === 0) {
+      return NextResponse.json({ error: 'No hay nadie en el pool random' }, { status: 404 })
+    }
+    const chosen = randomRegs[Math.floor(Math.random() * randomRegs.length)]
+
+    // Promote to confirmed: clear isRandom flag and mark as CALLED
+    await prisma.registration.update({
+      where: { id: chosen.id },
+      data: { isRandom: false, status: 'CALLED' },
+    })
+
+    emitCallSinger(eventId, chosen.singerName, chosen.song.title)
+    emitQueueUpdate(eventId, { type: 'random_called', singerName: chosen.singerName })
+
+    return NextResponse.json({ singerName: chosen.singerName, songTitle: chosen.song.title })
   }
 
   return NextResponse.json({ error: 'Unknown action' }, { status: 400 })
