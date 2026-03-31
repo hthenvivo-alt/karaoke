@@ -34,7 +34,7 @@ function LyricsContent() {
   const [cancelling, setCancelling] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
   const [showSingers, setShowSingers] = useState(false)
-  const { youAreUp, resetYouAreUp, on } = useSocket(eventId, singerName)
+  const { youAreUp, resetYouAreUp, youAreNext, resetYouAreNext, on } = useSocket(eventId, singerName)
 
   const loadData = useCallback(async () => {
     const [songRes, queueRes] = await Promise.all([
@@ -85,6 +85,23 @@ function LyricsContent() {
     // Go back to songs list so user can pick another available song.
     // We need to allow re-picking, so we temporarily keep session but remove registration.
     router.push(`/songs?eventId=${eventId}&name=${encodeURIComponent(singerName)}&change=1`)
+  }
+
+  if (youAreNext && !youAreUp) {
+    return (
+      <div className="gradient-bg min-h-dvh flex flex-col items-center justify-center px-6 text-center">
+        <div className="glass-card p-10 w-full max-w-sm slide-up border-yellow-500/40">
+          <div className="text-6xl mb-4 animate-bounce">⚡</div>
+          <h1 className="font-display text-4xl neon-text-pink mb-3">¡Preparate!</h1>
+          <p className="text-xl font-bold text-white mb-2">{singerName}</p>
+          <p className="text-slate-300 mb-1">Después de este cantante</p>
+          <p className="text-yellow-400 font-semibold">¡subís vos! 🎤</p>
+          <button className="btn-secondary mt-8 text-sm" onClick={resetYouAreNext}>
+            Ok, entendido
+          </button>
+        </div>
+      </div>
+    )
   }
 
   if (youAreUp) {

@@ -31,3 +31,11 @@ export function emitCallSinger(eventId: string, singerName: string, songTitle: s
     io.emit(`queue:update:${eventId}`, { type: 'call', singerName, songTitle })
   }
 }
+
+export function emitGetReady(eventId: string, nextSingerName: string) {
+  const io = getSocketServer()
+  if (io) {
+    const room = `singer:${eventId}:${nextSingerName.toLowerCase().trim()}`
+    io.to(room).emit('you_are_next', { singerName: nextSingerName })
+  }
+}

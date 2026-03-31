@@ -8,6 +8,7 @@ let socket: Socket | null = null
 export function useSocket(eventId?: string, singerName?: string) {
   const [isConnected, setIsConnected] = useState(false)
   const [youAreUp, setYouAreUp] = useState(false)
+  const [youAreNext, setYouAreNext] = useState(false)
   const handlers = useRef<Map<string, (data: unknown) => void>>(new Map())
 
   useEffect(() => {
@@ -17,7 +18,11 @@ export function useSocket(eventId?: string, singerName?: string) {
 
     socket.on('connect', () => setIsConnected(true))
     socket.on('disconnect', () => setIsConnected(false))
-    socket.on('you_are_up', () => setYouAreUp(true))
+    socket.on('you_are_up', () => {
+      setYouAreNext(false) // clear the "get ready" state when actually called
+      setYouAreUp(true)
+    })
+    socket.on('you_are_next', () => setYouAreNext(true))
 
     if (socket.connected) setIsConnected(true)
 
@@ -44,6 +49,7 @@ export function useSocket(eventId?: string, singerName?: string) {
   }, [])
 
   const resetYouAreUp = useCallback(() => setYouAreUp(false), [])
+  const resetYouAreNext = useCallback(() => setYouAreNext(false), [])
 
-  return { isConnected, youAreUp, resetYouAreUp, on }
+  return { isConnected, youAreUp, resetYouAreUp, youAreNext, resetYouAreNext, on }
 }

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { emitQueueUpdate, emitCallSinger } from '@/lib/socket'
+import { emitQueueUpdate, emitCallSinger, emitGetReady } from '@/lib/socket'
+
 
 // GET full queue for an event
 export async function GET(req: Request) {
@@ -48,6 +49,16 @@ export async function PATCH(req: Request) {
       include: { song: true },
     })
     emitCallSinger(reg.eventId, reg.singerName, reg.song.title)
+
+    // Notify the next WAITING singer to get ready
+    const allWaiting = await prisma.registration.findMany({
+      where: { eventId: reg.eventId, status: 'WAITING' },
+      orderBy: { position: 'asc' },
+    })
+    if (allWaiting.length > 0) {
+      emitGetReady(reg.eventId, allWaiting[0].singerName)
+    }
+
     return NextResponse.json(reg)
   }
 
