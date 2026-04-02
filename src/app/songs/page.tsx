@@ -67,6 +67,16 @@ function SongsContent() {
       (r: Registration) => r.singerName.toLowerCase() === singerName.toLowerCase()
     )
     setMyRegistration(reg || null)
+    // If server says not registered, clear any stale localStorage
+    if (!reg) {
+      const storedReg = localStorage.getItem('karaoke_registration')
+      if (storedReg) {
+        const stored = JSON.parse(storedReg)
+        if (stored.singerName.toLowerCase() === singerName.toLowerCase()) {
+          localStorage.removeItem('karaoke_registration')
+        }
+      }
+    }
     // Check if already in random pool
     if (!reg) {
       const poolRes = await fetch(`/api/random-pool?eventId=${eventId}`)
@@ -135,6 +145,8 @@ function SongsContent() {
         setConfirming(false)
         return
       }
+      // Clear localStorage so they can re-enter with a new song
+      localStorage.removeItem('karaoke_registration')
     }
     const res = await fetch('/api/register', {
       method: 'POST',
@@ -144,6 +156,8 @@ function SongsContent() {
     const data = await res.json()
     if (res.ok) {
       setMyRegistration(data)
+      // Save to localStorage so they can't re-register from home page
+      localStorage.setItem('karaoke_registration', JSON.stringify({ registrationId: data.id, singerName, eventId }))
       setSelectedSong(null)
       await loadEvent()
       router.push(`/lyrics?songId=${selectedSong.id}&eventId=${eventId}&name=${encodeURIComponent(singerName)}`)
@@ -170,6 +184,8 @@ function SongsContent() {
     if (res.ok) {
       setInRandomPool(true)
       setMyRegistration(data)
+      // Save to localStorage so they can't re-register from home page
+      localStorage.setItem('karaoke_registration', JSON.stringify({ registrationId: data.id, singerName, eventId }))
       setPoolJoinMsg('✅ ¡Te anotaste! Te avisamos si sos el elegido.')
       setTimeout(() => {
         setShowRandomModal(false)

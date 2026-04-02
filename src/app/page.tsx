@@ -18,11 +18,45 @@ export default function HomePage() {
   const [error, setError] = useState('')
 
   useEffect(() => {
-    // Check for stored session
-    const stored = sessionStorage.getItem('karaoke_session')
+    // Check for an existing registration first (strongest guard)
+    const storedReg = localStorage.getItem('karaoke_registration')
+    if (storedReg) {
+      const reg = JSON.parse(storedReg)
+      // Verify the registration still exists on the server before redirecting
+      fetch(`/api/events/active`)
+        .then((r) => r.json())
+        .then((data) => {
+          if (data && data.id === reg.eventId) {
+            // Still the same active event — redirect to songs page
+            router.replace(`/songs?eventId=${reg.eventId}&name=${encodeURIComponent(reg.singerName)}`)
+          } else {
+            // Event changed — clear stale registration
+            localStorage.removeItem('karaoke_registration')
+            localStorage.removeItem('karaoke_session')
+            setEvent(data)
+            setLoading(false)
+          }
+        })
+        .catch(() => setLoading(false))
+      return
+    }
+
+    // Check for stored session (name entered but not yet registered)
+    const stored = localStorage.getItem('karaoke_session')
     if (stored) {
       const session = JSON.parse(stored)
-      router.replace(`/songs?eventId=${session.eventId}&name=${encodeURIComponent(session.singerName)}`)
+      fetch('/api/events/active')
+        .then((r) => r.json())
+        .then((data) => {
+          if (data && data.id === session.eventId) {
+            router.replace(`/songs?eventId=${session.eventId}&name=${encodeURIComponent(session.singerName)}`)
+          } else {
+            localStorage.removeItem('karaoke_session')
+            setEvent(data)
+            setLoading(false)
+          }
+        })
+        .catch(() => setLoading(false))
       return
     }
 
@@ -42,7 +76,7 @@ export default function HomePage() {
     setError('')
 
     // Save session
-    sessionStorage.setItem(
+    localStorage.setItem(
       'karaoke_session',
       JSON.stringify({ singerName: name.trim(), eventId: event.id })
     )
