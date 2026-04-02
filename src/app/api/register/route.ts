@@ -15,6 +15,18 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Event not active' }, { status: 400 })
   }
 
+  // For random pool: if ALL songs are taken, reset them all so the cycle restarts
+  if (isRandom) {
+    const totalSongs = await prisma.eventSong.count({ where: { eventId } })
+    const takenSongs = await prisma.eventSong.count({ where: { eventId, status: 'TAKEN' } })
+    if (totalSongs > 0 && takenSongs >= totalSongs) {
+      await prisma.eventSong.updateMany({
+        where: { eventId },
+        data: { status: 'AVAILABLE' },
+      })
+    }
+  }
+
   // Check if song is still available in this event
   const eventSong = await prisma.eventSong.findUnique({
     where: { eventId_songId: { eventId, songId } },
