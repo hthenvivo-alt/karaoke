@@ -1,12 +1,28 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { emitSongTaken, emitQueueUpdate } from '@/lib/socket'
+import { cookies } from 'next/headers'
 
 export async function POST(req: Request) {
   const { eventId, singerName, songId, isRandom } = await req.json()
 
   if (!eventId || !singerName || !songId) {
     return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
+  }
+
+  // Anti-cheat cookie check
+  const cookieStore = await cookies()
+  const cookieSingerName = cookieStore.get(`karaoke_registered_${eventId}`)?.value
+  if (cookieSingerName) {
+    const existingFromCookie = await prisma.registration.findFirst({
+      where: { eventId, singerName: { equals: cookieSingerName, mode: 'insensitive' } },
+    })
+    if (existingFromCookie) {
+      return NextResponse.json(
+        { error: 'Ya te registraste en este evento', registration: existingFromCookie },
+        { status: 409 }
+      )
+    }
   }
 
   // Check if event exists and is active
@@ -65,6 +81,16 @@ export async function POST(req: Request) {
       data: { status: 'TAKEN' },
     }),
   ])
+
+  // Set anti-cheat cookie
+  cookieStore.set({
+    name: `karaoke_registered_${eventId}`,
+    value: singerName,
+    httpOnly: true,
+    path: '/',
+    sameSite: 'lax',
+    maxAge: 60 * 60 * 24, // 1 day
+  })
 
   // Emit real-time events
   emitSongTaken(eventId, songId, singerName)

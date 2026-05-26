@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { emitQueueUpdate, emitCallSinger, emitGetReady } from '@/lib/socket'
+import { cookies } from 'next/headers'
 
 
 // GET full queue for an event (only confirmed, non-random registrations)
@@ -103,6 +104,11 @@ export async function PATCH(req: Request) {
         data: { status: 'AVAILABLE' },
       }),
     ])
+
+    // Delete anti-cheat cookie
+    const cookieStore = await cookies()
+    cookieStore.delete(`karaoke_registered_${reg.eventId}`)
+
     emitQueueUpdate(reg.eventId, { type: 'cancel', registrationId, songId: reg.songId })
     return NextResponse.json({ ok: true })
   }
