@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useSocket } from '@/hooks/useSocket'
 
 interface Song {
@@ -25,6 +25,12 @@ export default function OperatorPage() {
   const [loading, setLoading] = useState(true)
   const [fontSize, setFontSize] = useState(56) // px
 
+  // Auto-scroll
+  const [autoScroll, setAutoScroll] = useState(false)
+  const [scrollSpeed, setScrollSpeed] = useState(2) // px per tick (1–5)
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const animFrameRef = useRef<number | null>(null)
+
   const { on } = useSocket(eventId ?? undefined)
 
   const loadCurrentSong = useCallback(async (evId: string) => {
@@ -38,6 +44,8 @@ export default function OperatorPage() {
       const songRes = await fetch(`/api/songs/${current.songId}`)
       const songData = await songRes.json()
       setSong(songData)
+      // Reset scroll to top when song changes
+      if (scrollRef.current) scrollRef.current.scrollTop = 0
     } else {
       setSong(null)
     }
@@ -56,15 +64,50 @@ export default function OperatorPage() {
       .catch(() => setLoading(false))
   }, [loadCurrentSong])
 
-  // Auto-reload when queue changes (e.g. admin calls someone)
   useEffect(() => {
     if (!eventId) return
     const unsub = on(`queue:update:${eventId}`, () => loadCurrentSong(eventId))
     return unsub
   }, [eventId, on, loadCurrentSong])
 
+  // Auto-scroll loop using requestAnimationFrame
+  useEffect(() => {
+    if (!autoScroll) {
+      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current)
+      return
+    }
+
+    let lastTime: number | null = null
+    const TICK_MS = 16 // ~60fps
+
+    const step = (now: number) => {
+      if (lastTime === null || now - lastTime >= TICK_MS) {
+        lastTime = now
+        const el = scrollRef.current
+        if (el) {
+          const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 2
+          if (atBottom) {
+            setAutoScroll(false)
+            return
+          }
+          el.scrollTop += scrollSpeed * 0.5
+        }
+      }
+      animFrameRef.current = requestAnimationFrame(step)
+    }
+
+    animFrameRef.current = requestAnimationFrame(step)
+    return () => {
+      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current)
+    }
+  }, [autoScroll, scrollSpeed])
+
   const increaseFontSize = () => setFontSize((f) => Math.min(f + 4, 96))
   const decreaseFontSize = () => setFontSize((f) => Math.max(f - 4, 16))
+
+  const scrollToTop = () => {
+    if (scrollRef.current) scrollRef.current.scrollTop = 0
+  }
 
   return (
     <div
@@ -121,25 +164,63 @@ export default function OperatorPage() {
           )}
         </div>
 
+        {/* Auto-scroll controls */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+          <button onClick={scrollToTop} style={btnStyle} title="Volver al inicio">⬆ Top</button>
+
+          <button
+            onClick={() => setAutoScroll((v) => !v)}
+            style={{
+              ...btnStyle,
+              background: autoScroll ? '#7c3aed' : '#1e293b',
+              borderColor: autoScroll ? '#7c3aed' : '#334155',
+              color: autoScroll ? '#fff' : '#94a3b8',
+              minWidth: 80,
+            }}
+          >
+            {autoScroll ? '⏸ Pausar' : '▶ Auto'}
+          </button>
+
+          <span style={{ color: '#475569', fontSize: 12 }}>Vel.</span>
+          {[1, 2, 3, 4, 5].map((s) => (
+            <button
+              key={s}
+              onClick={() => setScrollSpeed(s)}
+              style={{
+                ...btnStyle,
+                padding: '4px 8px',
+                background: scrollSpeed === s ? '#334155' : '#0f172a',
+                borderColor: scrollSpeed === s ? '#7c3aed' : '#1e293b',
+                color: scrollSpeed === s ? '#c4b5fd' : '#475569',
+              }}
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+
         {/* Font size controls */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
-          <span style={{ color: '#475569', fontSize: 12 }}>Tamaño letra</span>
-          <button
-            onClick={decreaseFontSize}
-            style={btnStyle}
-            title="Reducir"
-          >A−</button>
+          <span style={{ color: '#475569', fontSize: 12 }}>Letra</span>
+          <button onClick={decreaseFontSize} style={btnStyle}>A−</button>
           <span style={{ color: '#94a3b8', fontSize: 14, minWidth: 32, textAlign: 'center' }}>{fontSize}</span>
-          <button
-            onClick={increaseFontSize}
-            style={btnStyle}
-            title="Aumentar"
-          >A+</button>
+          <button onClick={increaseFontSize} style={btnStyle}>A+</button>
         </div>
       </div>
 
       {/* Lyrics area */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '32px 40px 80px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div
+        ref={scrollRef}
+        style={{
+          flex: 1,
+          overflowY: 'auto',
+          padding: '32px 40px 80px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          scrollBehavior: 'smooth',
+        }}
+      >
         {loading ? (
           <p style={{ color: '#475569', textAlign: 'center', marginTop: 80, fontSize: 18 }}>
             Cargando...
