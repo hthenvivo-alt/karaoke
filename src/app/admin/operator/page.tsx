@@ -18,20 +18,46 @@ interface Registration {
   song: { id: string; title: string; artist: string }
 }
 
+type OperatorCommand =
+  | { type: 'play' }
+  | { type: 'pause' }
+  | { type: 'speed'; value: number }
+  | { type: 'font_size'; value: number }
+  | { type: 'scroll_top' }
+
 export default function OperatorPage() {
   const [eventId, setEventId] = useState<string | null>(null)
   const [currentReg, setCurrentReg] = useState<Registration | null>(null)
   const [song, setSong] = useState<Song | null>(null)
   const [loading, setLoading] = useState(true)
-  const [fontSize, setFontSize] = useState(56) // px
-
-  // Auto-scroll
+  const [fontSize, setFontSize] = useState(56)
   const [autoScroll, setAutoScroll] = useState(false)
-  const [scrollSpeed, setScrollSpeed] = useState(2) // px per tick (1–5)
+  const [scrollSpeed, setScrollSpeed] = useState(2)
+
   const scrollRef = useRef<HTMLDivElement>(null)
-  const animFrameRef = useRef<number | null>(null)
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   const { on } = useSocket(eventId ?? undefined)
+
+  // Auto-scroll via setInterval
+  useEffect(() => {
+    if (intervalRef.current) clearInterval(intervalRef.current)
+    if (!autoScroll) return
+
+    intervalRef.current = setInterval(() => {
+      const el = scrollRef.current
+      if (!el) return
+      if (el.scrollTop + el.clientHeight >= el.scrollHeight - 4) {
+        setAutoScroll(false)
+        return
+      }
+      el.scrollTop += scrollSpeed
+    }, 30)
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current)
+    }
+  }, [autoScroll, scrollSpeed])
 
   const loadCurrentSong = useCallback(async (evId: string) => {
     const res = await fetch(`/api/queue?eventId=${evId}`)
@@ -44,7 +70,8 @@ export default function OperatorPage() {
       const songRes = await fetch(`/api/songs/${current.songId}`)
       const songData = await songRes.json()
       setSong(songData)
-      // Reset scroll to top when song changes
+      // Reset scroll and stop auto-scroll when song changes
+      setAutoScroll(false)
       if (scrollRef.current) scrollRef.current.scrollTop = 0
     } else {
       setSong(null)
@@ -70,176 +97,57 @@ export default function OperatorPage() {
     return unsub
   }, [eventId, on, loadCurrentSong])
 
-  // Auto-scroll loop using requestAnimationFrame
+  // Listen for commands from the queue page via BroadcastChannel
   useEffect(() => {
-    if (!autoScroll) {
-      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current)
-      return
-    }
-
-    let lastTime: number | null = null
-    const TICK_MS = 16 // ~60fps
-
-    const step = (now: number) => {
-      if (lastTime === null || now - lastTime >= TICK_MS) {
-        lastTime = now
-        const el = scrollRef.current
-        if (el) {
-          const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 2
-          if (atBottom) {
-            setAutoScroll(false)
-            return
-          }
-          el.scrollTop += scrollSpeed * 0.5
-        }
+    if (typeof window === 'undefined') return
+    const channel = new BroadcastChannel('karaoke_operator')
+    channel.onmessage = (e: MessageEvent<OperatorCommand>) => {
+      const cmd = e.data
+      if (cmd.type === 'play') setAutoScroll(true)
+      if (cmd.type === 'pause') setAutoScroll(false)
+      if (cmd.type === 'speed') setScrollSpeed(cmd.value)
+      if (cmd.type === 'font_size') setFontSize(cmd.value)
+      if (cmd.type === 'scroll_top' && scrollRef.current) {
+        scrollRef.current.scrollTop = 0
+        setAutoScroll(false)
       }
-      animFrameRef.current = requestAnimationFrame(step)
     }
-
-    animFrameRef.current = requestAnimationFrame(step)
-    return () => {
-      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current)
-    }
-  }, [autoScroll, scrollSpeed])
-
-  const increaseFontSize = () => setFontSize((f) => Math.min(f + 4, 96))
-  const decreaseFontSize = () => setFontSize((f) => Math.max(f - 4, 16))
-
-  const scrollToTop = () => {
-    if (scrollRef.current) scrollRef.current.scrollTop = 0
-  }
+    return () => channel.close()
+  }, [])
 
   return (
     <div
       style={{
-        minHeight: '100vh',
+        height: '100vh',
         background: '#000',
         color: '#fff',
         display: 'flex',
         flexDirection: 'column',
         fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif",
+        overflow: 'hidden',
       }}
     >
-      {/* Top bar — operator controls */}
-      <div
-        style={{
-          position: 'sticky',
-          top: 0,
-          zIndex: 10,
-          background: '#111',
-          borderBottom: '1px solid #222',
-          padding: '10px 20px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '16px',
-          flexWrap: 'wrap',
-        }}
-      >
-        {/* Singer + song info */}
-        <div style={{ flex: 1, minWidth: 0 }}>
-          {currentReg ? (
-            <>
-              <span
-                style={{
-                  fontSize: 11,
-                  fontWeight: 700,
-                  letterSpacing: 2,
-                  textTransform: 'uppercase',
-                  color: currentReg.status === 'CALLED' ? '#c084fc' : '#64748b',
-                }}
-              >
-                {currentReg.status === 'CALLED' ? '🎤 CANTANDO AHORA' : '🎵 A CONTINUACIÓN'}
-              </span>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
-                <span style={{ fontWeight: 800, fontSize: 18, color: '#fff', whiteSpace: 'nowrap' }}>
-                  {currentReg.singerName}
-                </span>
-                <span style={{ color: '#94a3b8', fontSize: 14, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                  — {currentReg.song.title} · {currentReg.song.artist}
-                </span>
-              </div>
-            </>
-          ) : (
-            <span style={{ color: '#475569', fontSize: 14 }}>Sin cantante activo</span>
-          )}
-        </div>
-
-        {/* Auto-scroll controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
-          <button onClick={scrollToTop} style={btnStyle} title="Volver al inicio">⬆ Top</button>
-
-          <button
-            onClick={() => setAutoScroll((v) => !v)}
-            style={{
-              ...btnStyle,
-              background: autoScroll ? '#7c3aed' : '#1e293b',
-              borderColor: autoScroll ? '#7c3aed' : '#334155',
-              color: autoScroll ? '#fff' : '#94a3b8',
-              minWidth: 80,
-            }}
-          >
-            {autoScroll ? '⏸ Pausar' : '▶ Auto'}
-          </button>
-
-          <span style={{ color: '#475569', fontSize: 12 }}>Vel.</span>
-          {[1, 2, 3, 4, 5].map((s) => (
-            <button
-              key={s}
-              onClick={() => setScrollSpeed(s)}
-              style={{
-                ...btnStyle,
-                padding: '4px 8px',
-                background: scrollSpeed === s ? '#334155' : '#0f172a',
-                borderColor: scrollSpeed === s ? '#7c3aed' : '#1e293b',
-                color: scrollSpeed === s ? '#c4b5fd' : '#475569',
-              }}
-            >
-              {s}
-            </button>
-          ))}
-        </div>
-
-        {/* Font size controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
-          <span style={{ color: '#475569', fontSize: 12 }}>Letra</span>
-          <button onClick={decreaseFontSize} style={btnStyle}>A−</button>
-          <span style={{ color: '#94a3b8', fontSize: 14, minWidth: 32, textAlign: 'center' }}>{fontSize}</span>
-          <button onClick={increaseFontSize} style={btnStyle}>A+</button>
-        </div>
-      </div>
-
-      {/* Lyrics area */}
+      {/* Lyrics area — full screen, no controls */}
       <div
         ref={scrollRef}
         style={{
           flex: 1,
           overflowY: 'auto',
-          padding: '32px 40px 80px',
+          padding: '60px 80px 120px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          scrollBehavior: 'smooth',
         }}
       >
         {loading ? (
-          <p style={{ color: '#475569', textAlign: 'center', marginTop: 80, fontSize: 18 }}>
+          <p style={{ color: '#1e293b', textAlign: 'center', marginTop: 200, fontSize: 22 }}>
             Cargando...
           </p>
-        ) : !currentReg ? (
-          <div style={{ textAlign: 'center', marginTop: 100 }}>
-            <div style={{ fontSize: 64, marginBottom: 24 }}>🎤</div>
-            <p style={{ color: '#334155', fontSize: 22, fontWeight: 700 }}>
-              Esperando al próximo cantante...
-            </p>
-            <p style={{ color: '#1e293b', fontSize: 14, marginTop: 8 }}>
-              La letra aparece automáticamente cuando el admin llama a alguien
-            </p>
-          </div>
-        ) : !song?.lyrics ? (
-          <div style={{ textAlign: 'center', marginTop: 100 }}>
-            <div style={{ fontSize: 48, marginBottom: 16 }}>📋</div>
-            <p style={{ color: '#334155', fontSize: 20, fontWeight: 700 }}>
-              Letra no disponible para esta canción
+        ) : !currentReg || !song?.lyrics ? (
+          <div style={{ textAlign: 'center', marginTop: 200 }}>
+            <div style={{ fontSize: 80, marginBottom: 32, opacity: 0.15 }}>🎤</div>
+            <p style={{ color: '#1e293b', fontSize: 28, fontWeight: 700 }}>
+              Esperando cantante...
             </p>
           </div>
         ) : (
@@ -247,7 +155,7 @@ export default function OperatorPage() {
             style={{
               fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif",
               fontSize: fontSize,
-              lineHeight: 1.75,
+              lineHeight: 1.8,
               color: '#f8fafc',
               whiteSpace: 'pre-wrap',
               wordBreak: 'break-word',
@@ -263,16 +171,4 @@ export default function OperatorPage() {
       </div>
     </div>
   )
-}
-
-const btnStyle: React.CSSProperties = {
-  background: '#1e293b',
-  border: '1px solid #334155',
-  color: '#94a3b8',
-  borderRadius: 6,
-  padding: '4px 10px',
-  fontSize: 13,
-  fontWeight: 700,
-  cursor: 'pointer',
-  letterSpacing: 0.5,
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSocket } from '@/hooks/useSocket'
 
@@ -113,6 +113,19 @@ export default function AdminQueuePage() {
   const [showSung, setShowSung] = useState(false)
   const [callingRandom, setCallingRandom] = useState(false)
   const [lastCalledRandom, setLastCalledRandom] = useState<string | null>(null)
+
+  // Operator screen controls
+  const [scrolling, setScrolling] = useState(false)
+  const [scrollSpeed, setScrollSpeed] = useState(2)
+  const [fontSize, setFontSize] = useState(56)
+  const channelRef = useRef<BroadcastChannel | null>(null)
+
+  useEffect(() => {
+    channelRef.current = new BroadcastChannel('karaoke_operator')
+    return () => channelRef.current?.close()
+  }, [])
+
+  const sendCmd = (cmd: object) => channelRef.current?.postMessage(cmd)
 
   const { on } = useSocket(activeEvent?.id)
 
@@ -249,6 +262,59 @@ export default function AdminQueuePage() {
               </div>
             )}
           </div>
+        </div>
+
+        {/* Operator screen controls */}
+        <div className="mt-3 pt-3 border-t border-white/5 flex items-center gap-2 flex-wrap">
+          <span className="text-slate-600 text-xs font-semibold tracking-widest uppercase">📺 Pantalla</span>
+          <button
+            onClick={() => window.open('/admin/operator', 'karaoke_operator', 'width=1280,height=800,menubar=no,toolbar=no,location=no,scrollbars=yes,resizable=yes')}
+            className="text-xs px-2 py-1 rounded-lg border border-slate-700 text-slate-400 hover:border-purple-500 hover:text-purple-300 transition-all"
+          >
+            Abrir ↗
+          </button>
+          <div className="w-px h-4 bg-slate-800" />
+          <button
+            onClick={() => { sendCmd({ type: 'scroll_top' }); setScrolling(false) }}
+            className="text-xs px-2 py-1 rounded-lg border border-slate-700 text-slate-400 hover:border-slate-500 transition-all"
+          >⬆ Top</button>
+          <button
+            onClick={() => {
+              const next = !scrolling
+              setScrolling(next)
+              sendCmd({ type: next ? 'play' : 'pause' })
+            }}
+            className={`text-xs px-3 py-1 rounded-lg border font-semibold transition-all ${
+              scrolling
+                ? 'border-purple-500 bg-purple-500/20 text-purple-300'
+                : 'border-slate-700 text-slate-400 hover:border-purple-500'
+            }`}
+          >
+            {scrolling ? '⏸ Pausar' : '▶ Auto-scroll'}
+          </button>
+          <span className="text-slate-700 text-xs">Vel.</span>
+          {[1, 2, 3, 4, 5].map((s) => (
+            <button
+              key={s}
+              onClick={() => { setScrollSpeed(s); sendCmd({ type: 'speed', value: s }) }}
+              className={`w-7 h-7 rounded-lg border text-xs font-bold transition-all ${
+                scrollSpeed === s
+                  ? 'border-purple-500 bg-purple-500/20 text-purple-300'
+                  : 'border-slate-800 text-slate-600 hover:border-slate-600'
+              }`}
+            >{s}</button>
+          ))}
+          <div className="w-px h-4 bg-slate-800" />
+          <span className="text-slate-700 text-xs">Letra</span>
+          <button
+            onClick={() => { const v = Math.max(fontSize - 4, 16); setFontSize(v); sendCmd({ type: 'font_size', value: v }) }}
+            className="text-xs px-2 py-1 rounded-lg border border-slate-700 text-slate-400 hover:border-slate-500 transition-all"
+          >A−</button>
+          <span className="text-slate-600 text-xs w-6 text-center">{fontSize}</span>
+          <button
+            onClick={() => { const v = Math.min(fontSize + 4, 96); setFontSize(v); sendCmd({ type: 'font_size', value: v }) }}
+            className="text-xs px-2 py-1 rounded-lg border border-slate-700 text-slate-400 hover:border-slate-500 transition-all"
+          >A+</button>
         </div>
       </div>
 
