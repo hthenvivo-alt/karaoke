@@ -139,7 +139,7 @@ export default function OperatorPage() {
       </div>
 
       {/* Lyrics area */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '32px 40px 80px' }}>
+      <div style={{ flex: 1, overflowY: 'auto', padding: '32px 40px 80px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         {loading ? (
           <p style={{ color: '#475569', textAlign: 'center', marginTop: 80, fontSize: 18 }}>
             Cargando...
@@ -172,6 +172,8 @@ export default function OperatorPage() {
               wordBreak: 'break-word',
               margin: 0,
               letterSpacing: 0.3,
+              textAlign: 'center',
+              width: '100%',
             }}
           >
             {song.lyrics}
