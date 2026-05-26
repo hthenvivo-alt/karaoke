@@ -23,7 +23,7 @@ export default function OperatorPage() {
   const [currentReg, setCurrentReg] = useState<Registration | null>(null)
   const [song, setSong] = useState<Song | null>(null)
   const [loading, setLoading] = useState(true)
-  const [fontSize, setFontSize] = useState(28) // px
+  const [fontSize, setFontSize] = useState(56) // px
 
   const { on } = useSocket(eventId ?? undefined)
 
@@ -63,7 +63,7 @@ export default function OperatorPage() {
     return unsub
   }, [eventId, on, loadCurrentSong])
 
-  const increaseFontSize = () => setFontSize((f) => Math.min(f + 4, 64))
+  const increaseFontSize = () => setFontSize((f) => Math.min(f + 4, 96))
   const decreaseFontSize = () => setFontSize((f) => Math.max(f - 4, 16))
 
   return (
