@@ -28,11 +28,23 @@ export default function AdminDashboard() {
   }, [router])
 
   const nav = [
-    { label: '🎤 Cola en vivo', path: '/admin/queue', desc: 'Ver y gestionar quién canta' },
-    { label: '📅 Eventos', path: '/admin/events', desc: 'Crear y administrar fechas' },
-    { label: '🎵 Catálogo', path: '/admin/catalog', desc: 'Agregar canciones y letras' },
-    { label: '📺 Pantalla grande', path: '/admin/screen', desc: 'Modo proyector / TV' },
+    { label: '🎤 Cola en vivo', path: '/admin/queue', desc: 'Ver y gestionar quién canta', popup: false },
+    { label: '📅 Eventos', path: '/admin/events', desc: 'Crear y administrar fechas', popup: false },
+    { label: '🎵 Catálogo', path: '/admin/catalog', desc: 'Agregar canciones y letras', popup: false },
+    { label: '📺 Pantalla grande', path: '/admin/operator', desc: 'Letra para el operador', popup: true },
   ]
+
+  const handleNav = (item: typeof nav[0]) => {
+    if (item.popup) {
+      window.open(
+        item.path,
+        'karaoke_operator',
+        'width=1200,height=800,menubar=no,toolbar=no,location=no,status=no,scrollbars=yes,resizable=yes'
+      )
+    } else {
+      router.push(item.path)
+    }
+  }
 
   const activeEvent = events.find(e => e.status === 'ACTIVE')
 
@@ -93,7 +105,7 @@ export default function AdminDashboard() {
         {nav.map(item => (
           <button
             key={item.path}
-            onClick={() => router.push(item.path)}
+            onClick={() => handleNav(item)}
             className="glass-card p-4 text-left hover:border-purple-500/50 transition-all active:scale-95"
           >
             <div className="text-2xl mb-2">{item.label.split(' ')[0]}</div>
