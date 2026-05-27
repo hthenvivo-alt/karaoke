@@ -113,6 +113,31 @@ export async function PATCH(req: Request) {
     return NextResponse.json({ ok: true })
   }
 
+  if (action === 'reset_sung' && eventId) {
+    const sungRegs = await prisma.registration.findMany({
+      where: { eventId, status: 'SUNG' },
+      select: { songId: true },
+    })
+
+    const songIds = sungRegs.map(r => r.songId)
+
+    await prisma.$transaction([
+      prisma.registration.deleteMany({
+        where: { eventId, status: 'SUNG' },
+      }),
+      prisma.eventSong.updateMany({
+        where: {
+          eventId,
+          songId: { in: songIds },
+        },
+        data: { status: 'AVAILABLE' },
+      }),
+    ])
+
+    emitQueueUpdate(eventId, { type: 'reset_sung' })
+    return NextResponse.json({ ok: true })
+  }
+
   if (action === 'call_random' && eventId) {
     // Pick from isRandom registrations that are still WAITING
     const randomRegs = await prisma.registration.findMany({

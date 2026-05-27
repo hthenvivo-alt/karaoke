@@ -261,6 +261,26 @@ export default function AdminQueuePage() {
     }
   }
 
+  const handleResetSung = async () => {
+    if (!activeEvent) return
+    const confirm = window.confirm(
+      '¿Estás seguro de que querés resetear las inscripciones de los que ya cantaron? Esto les permitirá volver a anotarse.'
+    )
+    if (!confirm) return
+
+    const res = await fetch('/api/queue', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'reset_sung', eventId: activeEvent.id }),
+    })
+
+    if (res.ok) {
+      await loadQueue(activeEvent.id)
+    } else {
+      alert('Error al resetear los cantados')
+    }
+  }
+
   const waiting = queue.filter(r => r.status !== 'SUNG')
   const sung = queue.filter(r => r.status === 'SUNG')
 
@@ -460,12 +480,20 @@ export default function AdminQueuePage() {
 
             {sung.length > 0 && (
               <div className="mt-6">
-                <button
-                  onClick={() => setShowSung(!showSung)}
-                  className="btn-secondary text-sm"
-                >
-                  {showSung ? 'Ocultar' : 'Ver'} ya cantaron ({sung.length})
-                </button>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setShowSung(!showSung)}
+                    className="btn-secondary text-sm flex-1"
+                  >
+                    {showSung ? 'Ocultar' : 'Ver'} ya cantaron ({sung.length})
+                  </button>
+                  <button
+                    onClick={handleResetSung}
+                    className="text-xs px-3 py-2.5 rounded-xl border border-red-500/40 bg-red-500/10 text-red-400 hover:bg-red-500/20 font-bold transition-all active:scale-95"
+                  >
+                    🗑️ Resetear cantados
+                  </button>
+                </div>
                 {showSung && (
                   <div className="flex flex-col gap-2 mt-3">
                     {sung.map(reg => (
