@@ -20,6 +20,7 @@ interface RandomPoolEntry {
 interface ActiveEvent {
   id: string
   name: string
+  registrationPaused: boolean
 }
 
 function QueueItem({
@@ -156,7 +157,14 @@ export default function AdminQueuePage() {
 
   useEffect(() => {
     if (!activeEvent?.id) return
-    const unsub = on(`queue:update:${activeEvent.id}`, () => loadQueue(activeEvent.id))
+    const unsub = on(`queue:update:${activeEvent.id}`, () => {
+      loadQueue(activeEvent.id)
+      fetch('/api/events/active')
+        .then(r => r.json())
+        .then(event => {
+          if (event) setActiveEvent(event)
+        })
+    })
     return unsub
   }, [activeEvent?.id, on, loadQueue])
 
@@ -228,6 +236,24 @@ export default function AdminQueuePage() {
       alert(data.error || 'Error al llamar random')
     }
     setCallingRandom(false)
+  }
+
+  const handleTogglePause = async () => {
+    if (!activeEvent) return
+    const newPausedState = !activeEvent.registrationPaused
+
+    setActiveEvent(prev => prev ? { ...prev, registrationPaused: newPausedState } : null)
+
+    const res = await fetch(`/api/events/${activeEvent.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ registrationPaused: newPausedState }),
+    })
+
+    if (!res.ok) {
+      setActiveEvent(prev => prev ? { ...prev, registrationPaused: !newPausedState } : null)
+      alert('Error al cambiar el estado de inscripciones')
+    }
   }
 
   const waiting = queue.filter(r => r.status !== 'SUNG')
@@ -316,6 +342,30 @@ export default function AdminQueuePage() {
             className="text-xs px-2 py-1 rounded-lg border border-slate-700 text-slate-400 hover:border-slate-500 transition-all"
           >A+</button>
         </div>
+
+        {/* Registration status / Pause control */}
+        {activeEvent && (
+          <div className="mt-3 pt-3 border-t border-white/5 flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <span className="text-slate-600 text-xs font-semibold tracking-widest uppercase">📝 Inscripciones</span>
+              {activeEvent.registrationPaused ? (
+                <span className="badge badge-taken px-2 py-0.5 text-[10px] animate-pulse">PAUSADAS</span>
+              ) : (
+                <span className="badge badge-available px-2 py-0.5 text-[10px]">ABIERTAS</span>
+              )}
+            </div>
+            <button
+              onClick={handleTogglePause}
+              className={`text-xs px-3 py-1.5 rounded-lg border font-bold transition-all active:scale-95 ${
+                activeEvent.registrationPaused
+                  ? 'border-green-500 bg-green-500/10 text-green-300 hover:bg-green-500/20'
+                  : 'border-yellow-500 bg-yellow-500/10 text-yellow-300 hover:bg-yellow-500/20'
+              }`}
+            >
+              {activeEvent.registrationPaused ? '▶ Habilitar inscripciones' : '⏸ Pausar inscripciones'}
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="flex-1 overflow-y-auto px-4 py-4 pb-safe">

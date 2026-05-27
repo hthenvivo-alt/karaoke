@@ -24,7 +24,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
 export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const body = await req.json()
-  const { status, name, date } = body
+  const { status, name, date, registrationPaused } = body
 
   const event = await prisma.event.update({
     where: { id },
@@ -32,6 +32,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
       ...(status && { status }),
       ...(name && { name }),
       ...(date && { date: new Date(date) }),
+      ...(registrationPaused !== undefined && { registrationPaused }),
     },
   })
 
@@ -42,6 +43,8 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
       data: { status: 'CLOSED' },
     })
     emitQueueUpdate(id, { type: 'event:activated', eventId: id })
+  } else {
+    emitQueueUpdate(id, { type: 'event:updated', event })
   }
 
   return NextResponse.json(event)

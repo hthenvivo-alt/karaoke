@@ -31,6 +31,7 @@ interface EventData {
   id: string
   name: string
   status: string
+  registrationPaused: boolean
   eventSongs: EventSong[]
   registrations: Registration[]
 }
@@ -97,10 +98,14 @@ function SongsContent() {
     loadEvent()
   }, [eventId, singerName, router, loadEvent])
 
-  // Real-time song updates
+  // Real-time updates (song taken or registration paused/queue updated)
   useEffect(() => {
-    const unsub = on(`song:taken:${eventId}`, () => loadEvent())
-    return unsub
+    const unsubTaken = on(`song:taken:${eventId}`, () => loadEvent())
+    const unsubQueue = on(`queue:update:${eventId}`, () => loadEvent())
+    return () => {
+      unsubTaken?.()
+      unsubQueue?.()
+    }
   }, [eventId, on, loadEvent])
 
   const genres = event
@@ -314,6 +319,17 @@ function SongsContent() {
 
       {/* Songs list */}
       <div className="flex-1 overflow-y-auto px-4 py-4 pb-safe">
+        {event?.registrationPaused && (
+          <div className="glass-card p-5 mb-4 border-yellow-500/40 bg-yellow-500/5 text-center animate-pulse">
+            <div className="text-3xl mb-2">⏳</div>
+            <p className="text-yellow-400 font-bold text-base mb-1">
+              Inscripciones pausadas
+            </p>
+            <p className="text-slate-300 text-sm">
+              En un rato te vas a poder seguir anotando.
+            </p>
+          </div>
+        )}
         {myRegistration && !isChanging && (
           <div className="glass-card p-4 mb-4 border-purple-500/40">
             <p className="text-sm text-purple-300 font-semibold text-center">
@@ -345,7 +361,7 @@ function SongsContent() {
             const isTaken = status === 'TAKEN'
             const isSung = status === 'SUNG'
             // In change mode, only available songs are clickable; existing registration doesn't block
-            const isDisabled = isChanging ? isSung || isTaken : (!!myRegistration || isSung)
+            const isDisabled = !!event?.registrationPaused || (isChanging ? isSung || isTaken : (!!myRegistration || isSung))
 
             return (
               <div

@@ -12,6 +12,7 @@ model Event {
   date            DateTime
   status          EventStatus        @default(UPCOMING)
   maxSingers      Int                @default(0)
+  registrationPaused Boolean           @default(false)
   createdAt       DateTime           @default(now())
   registrations   Registration[]
   eventSongs      EventSong[]

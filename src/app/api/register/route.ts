@@ -31,6 +31,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Event not active' }, { status: 400 })
   }
 
+  if (event.registrationPaused) {
+    return NextResponse.json(
+      { error: 'Las inscripciones están pausadas por el momento. En un rato te vas a poder seguir anotando.' },
+      { status: 403 }
+    )
+  }
+
   // For random pool: if ALL songs are taken, reset them all so the cycle restarts
   if (isRandom) {
     const totalSongs = await prisma.eventSong.count({ where: { eventId } })
