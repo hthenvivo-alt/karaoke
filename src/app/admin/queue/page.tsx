@@ -119,6 +119,7 @@ export default function AdminQueuePage() {
   const [scrolling, setScrolling] = useState(false)
   const [scrollSpeed, setScrollSpeed] = useState(2)
   const [fontSize, setFontSize] = useState(56)
+  const [bigScreenMode, setBigScreenMode] = useState<'lyrics' | 'singer_intro'>('lyrics')
   const channelRef = useRef<BroadcastChannel | null>(null)
 
   useEffect(() => {
@@ -176,6 +177,8 @@ export default function AdminQueuePage() {
       body: JSON.stringify({ action: 'call', registrationId: id, eventId: activeEvent.id }),
     })
     await loadQueue(activeEvent.id)
+    setBigScreenMode('singer_intro')
+    sendCmd({ type: 'set_view_mode', value: 'singer_intro' })
   }
 
   const handleSung = async (id: string) => {
@@ -232,6 +235,8 @@ export default function AdminQueuePage() {
     if (res.ok) {
       setLastCalledRandom(data.singerName)
       await loadQueue(activeEvent.id)
+      setBigScreenMode('singer_intro')
+      sendCmd({ type: 'set_view_mode', value: 'singer_intro' })
     } else {
       alert(data.error || 'Error al llamar random')
     }
@@ -301,13 +306,36 @@ export default function AdminQueuePage() {
           </button>
           <div className="w-px h-4 bg-slate-800" />
           <button
-            onClick={() => { sendCmd({ type: 'scroll_top' }); setScrolling(false) }}
+            onClick={() => { setBigScreenMode('singer_intro'); sendCmd({ type: 'set_view_mode', value: 'singer_intro' }) }}
+            className={`text-xs px-2.5 py-1 rounded-lg border font-semibold transition-all ${
+              bigScreenMode === 'singer_intro'
+                ? 'border-purple-500 bg-purple-500/20 text-purple-300'
+                : 'border-slate-700 text-slate-400 hover:border-purple-500'
+            }`}
+          >
+            👤 Nombre
+          </button>
+          <button
+            onClick={() => { setBigScreenMode('lyrics'); sendCmd({ type: 'set_view_mode', value: 'lyrics' }) }}
+            className={`text-xs px-2.5 py-1 rounded-lg border font-semibold transition-all ${
+              bigScreenMode === 'lyrics'
+                ? 'border-purple-500 bg-purple-500/20 text-purple-300'
+                : 'border-slate-700 text-slate-400 hover:border-purple-500'
+            }`}
+          >
+            🎵 Letra
+          </button>
+          <div className="w-px h-4 bg-slate-800" />
+          <button
+            onClick={() => { sendCmd({ type: 'scroll_top' }); setScrolling(false); setBigScreenMode('lyrics'); sendCmd({ type: 'set_view_mode', value: 'lyrics' }) }}
             className="text-xs px-2 py-1 rounded-lg border border-slate-700 text-slate-400 hover:border-slate-500 transition-all"
           >⬆ Top</button>
           <button
             onClick={() => {
               const next = !scrolling
               setScrolling(next)
+              setBigScreenMode('lyrics')
+              sendCmd({ type: 'set_view_mode', value: 'lyrics' })
               sendCmd({ type: next ? 'play' : 'pause' })
             }}
             className={`text-xs px-3 py-1 rounded-lg border font-semibold transition-all ${
