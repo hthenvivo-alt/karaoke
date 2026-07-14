@@ -6,7 +6,7 @@ export async function GET() {
     orderBy: { date: 'desc' },
     include: {
       _count: {
-        select: { registrations: true },
+        select: { registrations: true, eventSongs: true },
       },
     },
   })
