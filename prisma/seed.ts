@@ -4,7 +4,7 @@ import { PrismaPg } from '@prisma/adapter-pg'
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! })
 const prisma = new PrismaClient({ adapter })
 
-const songs = [
+const songs: any[] = [
   { title: 'Hacelo por mí', artist: 'Attaque 77', genre: 'Rock Nacional' },
   { title: 'Demoliendo hoteles', artist: 'Charly García', genre: 'Rock Nacional' },
   { title: 'Rezo por vos', artist: 'Charly García', genre: 'Rock Nacional' },
@@ -38,7 +38,53 @@ const songs = [
   { title: 'Polaroid de locura ordinaria', artist: 'Fito Páez', genre: 'Rock Nacional' },
   { title: 'Fue amor', artist: 'Fito Páez / Fabi Cantilo', genre: 'Rock Nacional' },
   { title: 'Spaghetti del rock', artist: 'Divididos', genre: 'Rock Nacional' },
-  { title: 'Costumbres argentinas', artist: 'Abuelos de la Nada', genre: 'Rock Nacional' },
+  {
+    title: 'Costumbres argentinas',
+    artist: 'Abuelos de la Nada',
+    genre: 'Rock Nacional',
+    lyrics: `Intro:
+[Em] [A] [Em] [A]
+
+[Em]Muerdo el anzuelo y [A]vuelvo
+[Em]a empezar de [D]nuevo ca[G]da vez[B7]
+[Em]Tengo en la mano la [A]carta
+[Em]para jugar el [D]juego cuan[G]do quie[B7]ras
+
+[C]Caminan[D]do, cami[G]nándote
+[B7]mi ca[C]lle que qui[D]zás yo pueda cam[G]biar
+[C]Esperan[D]do, espe[G]rándote
+[B7]costumbres ar[C]genti[D]nas de decir [Em]no
+
+Y des[C]pués ha[D]cer el a[G]mor
+[B7]Y des[C]pués ha[D]cer el a[Em]mor
+
+[Em]Muerdo el anzuelo y [A]vuelvo
+[Em]a empezar de [D]nuevo ca[G]da vez[B7]
+[Em]Tengo en la mano la [A]carta
+[Em]para jugar el [D]juego cuan[G]do quie[B7]ras
+
+[C]Caminan[D]do, cami[G]nándote
+[B7]mi ca[C]lle que qui[D]zás yo pueda cam[G]biar
+[C]Esperan[D]do, espe[G]rándote
+[B7]costumbres ar[C]genti[D]nas de decir [Em]no
+
+Y des[C]pués ha[D]cer el a[G]mor
+[B7]Y des[C]pués ha[D]cer el a[Em]mor
+
+[Em]Siempre mi[A]rando en la calle
+[Em]quién es el que [D]va a ca[G]er prime[B7]ro
+[Em]Y en el [A]viento que me lleva al des[Em]tino
+yo te en[D]cuentro [G]en una can[B7]ción
+
+[C]Caminan[D]do, cami[G]nándote
+[B7]mi ca[C]lle que qui[D]zás yo pueda cam[G]biar
+[C]Esperan[D]do, espe[G]rándote
+[B7]costumbres ar[C]genti[D]nas de decir [Em]no
+
+Y des[C]pués ha[D]cer el a[G]mor
+[B7]Y des[C]pués ha[D]cer el a[Em]mor
+[B7]Y des[C]pués ha[D]cer el a[Em]mor`
+  },
   { title: 'Desconfío', artist: 'Pappo', genre: 'Rock Nacional' },
   { title: 'Luna de miel en las manos', artist: 'Virus', genre: 'Pop' },
   { title: 'Mr. Jones', artist: 'Sui Generis', genre: 'Rock Nacional' },

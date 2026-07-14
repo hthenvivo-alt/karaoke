@@ -22,6 +22,88 @@ interface Registration {
   songId?: string
 }
 
+interface ChordLyricToken {
+  chord: string | null
+  text: string
+}
+
+function parseLine(line: string): ChordLyricToken[] {
+  const regex = /\[([^\]]+)\]/g
+  const tokens: ChordLyricToken[] = []
+  
+  let match
+  let lastIndex = 0
+  let currentChord: string | null = null
+  
+  while ((match = regex.exec(line)) !== null) {
+    const matchIndex = match.index
+    const textSegment = line.substring(lastIndex, matchIndex)
+    
+    if (textSegment || currentChord) {
+      tokens.push({
+        chord: currentChord,
+        text: textSegment || "",
+      })
+    }
+    
+    currentChord = match[1]
+    lastIndex = regex.lastIndex
+  }
+  
+  const remainingText = line.substring(lastIndex)
+  if (remainingText || currentChord) {
+    tokens.push({
+      chord: currentChord,
+      text: remainingText || "",
+    })
+  }
+  
+  if (tokens.length === 0) {
+    tokens.push({ chord: null, text: "" })
+  }
+  
+  return tokens
+}
+
+function LyricsWithChords({ lyrics }: { lyrics: string }) {
+  const lines = lyrics.split('\n')
+  const hasChords = lyrics.includes('[') && lyrics.includes(']')
+  
+  if (!hasChords) {
+    return <pre className="lyrics-text whitespace-pre-wrap">{lyrics}</pre>
+  }
+
+  return (
+    <div className="lyrics-text font-sans space-y-2 select-none">
+      {lines.map((line, lineIdx) => {
+        const tokens = parseLine(line)
+        const isBlank = tokens.length === 1 && tokens[0].text === "" && !tokens[0].chord
+        
+        if (isBlank) {
+          return <div key={lineIdx} className="h-6" />
+        }
+        
+        const lineHasChords = tokens.some(t => t.chord)
+        
+        return (
+          <div key={lineIdx} className={`flex flex-wrap leading-normal ${lineHasChords ? 'pt-6 pb-1' : 'py-0.5'}`}>
+            {tokens.map((token, tokenIdx) => (
+              <span key={tokenIdx} className="inline-flex flex-col relative align-bottom min-w-[0.5ch]">
+                {token.chord && (
+                  <span className="absolute top-[-1.3rem] left-0 text-sky-400 font-bold text-xs select-none">
+                    {token.chord}
+                  </span>
+                )}
+                <span className="text-white whitespace-pre">{token.text || "\u00A0"}</span>
+              </span>
+            ))}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 function LyricsContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -156,7 +238,7 @@ function LyricsContent() {
       {/* Lyrics */}
       <div className="flex-1 overflow-y-auto px-4 py-6 pb-32">
         {song.lyrics ? (
-          <pre className="lyrics-text">{song.lyrics}</pre>
+          <LyricsWithChords lyrics={song.lyrics} />
         ) : (
           <div className="text-center text-slate-500 mt-20">
             <div className="text-4xl mb-4">📋</div>
