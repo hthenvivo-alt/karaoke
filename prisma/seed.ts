@@ -14,13 +14,13 @@ const songs: any[] = [
     "title": "Demoliendo hoteles",
     "artist": "Charly García",
     "genre": "Rock Nacional",
-    "lyrics": "Yo que nací con Videla\nyo que nací sin poder\nyo que luché por la libertad\ny nunca la pude tener,\nyo que viví entre fachistas\nyo que morí en el altar\nyo que crecí con los que estaban bien\npero a la noche estaba todo mal.\n\nHoy pasó el tiempo,\ndemoliendo hoteles\nmientras los plomos juntan los cables\ncazan rehenes.\n\nHoy pasó el tiempo\ndemoliendo hoteles\nmientras los chicos allá en la esquina\npegan carteles.\n\nYo fui educado con odio\ny odiaba la humanidad\nun día me fui con los hippies y tuve un amor y mucho más.\nAhora no estoy más tranquilo,\ny por qué tendría que estar\ntodos crecimos sin entender\ny todavía me siento un anormal.\n\nHoy pasó el tiempo,\ndemoliendo hoteles\nmientras los plomos juntan los cables\ncazan rehenes.\n\nHoy pasó el tiempo\ndemoliendo hoteles\nmientras los chicos allá en la esquina\npegan carteles."
+    "lyrics": "Intro:\n[C]\n\n[C]Yo que crecí con Videla\nyo que nací sin poder\nyo que luché por la libertad\ny nunca la pude tener,\n[C]yo que viví entre fachistas\nyo que morí en el altar\nyo que crecí con los que estaban bien\npero a la noche estaba todo mal\n\n[Bb]Hoy pa[F]só el [C]tiem[Dm]po,\n[Bb]demoli[F]endo ho[C]te[Dm]les\n[Bb]mientras los plo[F]mos juntan los [C]cables\n[Dm]cazan rehenes\n\n[Bb]Hoy pa[F]só el [C]tiem[Dm]po\n[Bb]demoli[F]endo ho[C]te[Dm]les\n[Bb]mientras los chi[F]cos allá en la [C]esquina\n[F]pegan carteles\n\n[C]Yo fui educado con odio\ny odiaba la humanidad\nun día me fui con los hippies y tuve un amor y mucho más\n[C]Ahora no estoy más tranquilo,\ny por qué tendría que estar\ntodos crecimos sin entender\ny todavía me siento un anormal\n\n[Bb]Hoy pa[F]só el [C]tiem[Dm]po,\n[Bb]demoli[F]endo ho[C]te[Dm]les\n[Bb]mientras los plo[F]mos juntan los [C]cables\n[Dm]cazan rehenes\n\n[Bb]Hoy pa[F]só el [C]tiem[Dm]po\n[Bb]demoli[F]endo ho[C]te[Dm]les\n[Bb]mientras los chi[F]cos allá en la [C]esquina\n[F]pegan carteles"
   },
   {
     "title": "Rezo por vos",
     "artist": "Charly García",
     "genre": "Rock Nacional",
-    "lyrics": "La indómita luz\nse hizo carne en mí\ny lo dejé todo por esta soledad.\ny leo revistas\nen la tempestad\nhice el sacrificio\nabracé la cruz al amanecer.\n\nRezo, rezo, rezo, rezo.\n\nMorí sin morir\ny me abracé al dolor\ny lo dejé todo por esta soledad\nya se hizo de noche\ny ahora estoy aquí\nmi cuerpo se cae\nsólo veo la cruz al amanecer.\n\nRezo, rezo, rezo, rezo por vos.\n\nY curé mis heridas\ny me encendí de amor\nY quemé las cortinas\ny me encendí de amor, de amor sagrado.\nY entonces rezo."
+    "lyrics": "Intro:\n[D] [G] (x4)\n\n[D]La indómita [G]luz\n[D]se hizo carne en [G]mí\n[D]y lo dejé [Em]todo por esta soledad\n[G]y leo re[Am7]vistas\n[Bm7]en la tem[Am7]pes[Bm7]tad\nhice el sacrificio\nabracé la cruz al amanecer\n\n[D]Rezo, [G]rezo, [D]rezo, [G]rezo\n\n[D]Morí sin mo[G]rir\n[D]y me abracé al do[Em]lor\n[D]y lo dejé [Em]todo por esta soledad\n[G]ya se hizo de [Am7]noche\n[Bm7]y ahora es[Am7]toy a[Bm7]quí\nmi cuerpo se cae\nsolo veo la cruz al amanecer\n\n[D]Rezo, [G]rezo, [D]rezo, [G]rezo por vos\n\n[A]Y curé mis he[G]ridas\n[A]y me encendí de a[G]mor\n[A]Y quemé las cor[G]tinas\n[A]y me encendí de a[G]mor\n[A]de amor sa[D]grado\n[D]Y enton[G]ces [D]re[G]zo"
   },
   {
     "title": "No voy en tren",
@@ -43,7 +43,8 @@ const songs: any[] = [
   {
     "title": "Mi enfermedad",
     "artist": "Calamaro / Fabi Cantilo",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[A] [D] [E] (x2)\n\n[A]Estoy venci[D]da porque el mundo me\n[E]hizo así,\n[F#m]no puedo cambiar\n[D]Soy el remedio sin re[E]ceta y tu\n[F#m]amor mi enfermedad\n[D]Estoy venci[E]da porque el cuerpo de\n[F#m]los dos es mi debilidad\n[D]esta vez el [E]dolor va a termi[A]nar\n\n[A]Gente que [D]va gente que viene por\n[E]la calle\n[F#m]perdida entre la gente\n[D]Gente que [E]mira y que no quiere\n[F#m]que la vean\n[D]esta vez el [E]dolor va a termi[A]nar\n\n[D]Parece que la [E]fiesta termi[A]nó,\n[D]perdidos en el [E]túnel del a[A]mor\n[D]Y dicen las [E]hojas del libro que\n[F#m]más leo yo,\n[D]esta vez el es[E]clavo se esca[A]pó"
   },
   {
     "title": "Vasos vacíos",
@@ -72,7 +73,7 @@ const songs: any[] = [
     "title": "Mil horas",
     "artist": "Abuelos de la Nada",
     "genre": "Rock Nacional",
-    "lyrics": "Hace frío y estoy lejos de casa\nHace tiempo que estoy sentado sobre esta piedra\nYo me pregunto para que sirven las guerras\nTengo un cohete en mi pantalón\nVos estás tan fría como la nieve a mi alrededor\nVos estás tan blanca, que yo no sé que hacer\n\nLa otra noche te esperé bajo la lluvia dos horas\nMil horas, como un perro\nY cuando llegaste me miraste y me dijiste\nLoco, estás mojado, ya no te quiero\nEn el circo vos ya sos una estrella\nUna estrella roja que todo se lo imagina\nSi te preguntan, vos no me conocías\nNo, no\n\nTengo un cohete en mi pantalón\nVos estás tan fría como la nieve a mi alrededor\nVos estás tan blanca, que yo no sé que hacer\n\nTe esperé bajo la lluvia, no, no, no, no\n\nLa otra noche te esperé bajo la lluvia dos horas\nMil horas, como un perro\nY cuando llegaste me miraste y me dijiste\nLoco, estás mojado, ya no te quiero\n\nLa otra noche te esperé bajo la lluvia dos horas\nMil horas, como un perro\nY cuando llegaste me miraste y me dijiste\nLoco, estás mojado, ya no te quiero"
+    "lyrics": "Intro:\n[Gm7] [Cm7] [Dm7] [Eb]\n\n[Cm7]Hace frío y es[Dm7]toy lejos de [Gm7]casa,\n[Cm7]hace tiempo que es[Dm7]toy sentado sobre esta [Gm7]piedra,\n[Cm7]yo me pre[Dm7]gunto, ¿para qué sirven las [C7]guerras?\n\n[C7]Tengo un cohete en el pantalón\ny vos estás tan fría como la [Gm7]nieve a mi alrededor,\n[Eb]vos estás tan blanca que ya no sé qué hacer\n\n[Gm7]La otra noche te espe[Cm7]ré bajo la lluvia, dos horas,\n[Dm7]mil horas, [Eb]como un perro\n[Gm7]Y cuando llegaste me mi[Cm7]raste y me dijiste: \"Loco,\n[Dm7]estás moja[Eb]do, ya no te quiero\"\n\n[Cm7]Paso las noches [Dm7]en la tempestad y [Gm7]más,\n[Cm7]paso las noches [Dm7]leyendo y releyendo tus [Gm7]cartas,\n[Cm7]yo me pre[Dm7]gunto, ¿para qué sirven las [C7]guerras?\n\n[C7]Ya ni recuerdo cuál es tu color\nsolo veo rojo, rojo [Gm7]como la sangre que fluye,\n[Eb]cuando te miro de arriba a abajo\n\n[Gm7]La otra noche te espe[Cm7]ré bajo la lluvia, dos horas,\n[Dm7]mil horas, [Eb]como un perro\n[Gm7]Y cuando llegaste me mi[Cm7]raste y me dijiste: \"Loco,\n[Dm7]estás moja[Eb]do, ya no te quiero\""
   },
   {
     "title": "Corazón",
@@ -119,7 +120,7 @@ const songs: any[] = [
     "title": "Juntos a la par",
     "artist": "Pappo",
     "genre": "Rock Nacional",
-    "lyrics": "Le he pedido tanto a Dios,\nque al final oyó mi voz,\npor la noche a más tardar\nyendo juntos a la par.\n\nCartas de amor en el hall,\nse secan con el sol,\nlejos de la gran ciudad, ella es mi felicidad,\nnada como ir juntos a la par.\n\nNada como ir juntos a la par\ny caminos desandar,\nel honor no lo perdí, ese héroe que hay en mí,\nnada como ir juntos a la par.\n\nSé su nombre, sé su edad,\ny sus gustos en la intimidad,\ncuando un corazón se entrega\ny el mañana nunca llega,\nque más puedo hacer.\n\nNada como ir juntos a la par\ny caminos desandar,\nel honor no lo perdí, ese héroe que hay en mí,\nnada como ir juntos a la par."
+    "lyrics": "Intro:\n[C] [G] [Am] [D]\n\n[C]Le he pedido tanto a Dios\n[G]que al final oyó mi voz\n[Am]por la noche a más tardar\n[D]yendo juntos [G]a la [C]par [G]\n\n[C]Cartas de amor en el hall\n[G]se secan con el sol\n[Am]lejos de la gran ciudad\n[D]ella es mi felicidad\n[G]nada como ir [C]juntos a la [G]par\n\n[C]Nada como ir juntos a la par\n[G]y caminos desandar\n[Am]el honor no lo perdí\n[D]es el héroe que hay en mí\n[G]nada como ir [C]juntos a la [G]par\n\n[C]Sé su nombre, sé su edad\n[G]y sus gustos en la intimidad\n[Am]cuando un corazón se entrega\n[D]y el mañana nunca llega\n[G]¿qué más [C]puedo ha[G]cer?\n\n[C]Nada como ir juntos a la par\n[G]y caminos desandar\n[Am]el honor no lo perdí\n[D]es el héroe que hay en mí\n[G]nada como ir [C]juntos a la [G]par"
   },
   {
     "title": "Rock del gato",
@@ -135,13 +136,13 @@ const songs: any[] = [
     "title": "De música ligera",
     "artist": "Soda Stereo",
     "genre": "Rock Nacional",
-    "lyrics": "A ver...\n\nElla durmió al calor de las masas,\ny yo desperté queriendo soñarla.\nAlgún tiempo atrás pensé en escribirle\nque nunca sorteé las trampas del amor.\n\nDe aquel amor de música ligera\nnada nos libra, nada más queda.\n\nElla durmió al calor de las masas,\ny yo desperté queriendo soñarla.\nAlgún tiempo atrás pensé en escribirle\nque nunca sorteé las trampas del amor.\n\nDe aquel amor de música ligera\nnada nos libra, nada más queda.\n\nNo le enviaré cenizas de rosas,\nni pienso evitar un roce secreto.\n\nDe aquel amor de música ligera\nnada nos libra, nada más queda.\n\nDe aquel amor de música ligera\nnada nos libra, nada más queda, nada más.\n\nNada más queda.\nNada más queda.\nNada más queda.\nNada más queda."
+    "lyrics": "Intro:\n[Bm] [G] [D] [A] (x6)\n\n[Bm]Ella dur[G]mió, al ca[D]lor de las [A]masas\n[Bm]y yo desper[G]té, querien[D]do so[A]ñarla\n[Bm]Algún tiem[G]po atrás, pen[D]sé en escri[A]birle\n[Bm]y nunca sor[G]teé, las tram[D]pas del a[A]mor\n\n[Bm]De aquel a[G]mor, de mú[D]sica li[A]gera\n[Bm]nada nos [G]libra, na[D]da más [A]queda\n\n[Bm] [G] [D] [A] (x4)\n\n[Bm]No le envia[G]ré, ceni[D]zas de [A]rosas\n[Bm]ni pienso evi[G]tar, sus ro[D]ces se[A]cretos\n\n[Bm]De aquel a[G]mor, de mú[D]sica li[A]gera\n[Bm]nada nos [G]libra, na[D]da más [A]queda\n\n[Bm]Nada más [G]que[D]da[A]\n[Bm]Nada más [G]que[D]da[A]\n[Bm]Nada más [G]que[D]da[A]\n\n[G] [D]"
   },
   {
     "title": "Seguir viviendo sin tu amor",
     "artist": "Luis Alberto Spinetta",
     "genre": "Rock Nacional",
-    "lyrics": "Si a tu corazón yo llego igual\nTodo siempre se podrá elegir\nNo me escribas la pared\nSólo quiero estar entre tu piel\n\nY si acaso no brillara el sol\nY quedara yo atrapado aquí\nNo veria la razón\nDe seguir viviendo sin tu amor\n\nY hoy que enloquecido vuelvo\nBuscando tu querer\nNo queda más que el viento\nNo queda mas que el viento\n\nY si acaso no brillara el sol\nY quedara yo atrapado aquí\nNo veria la razón\nDe seguir viviendo sin tu amor."
+    "lyrics": "Intro:\n[F#] [Bm] [Em7] [A]\n\n[D]Si a tu corazón yo [Bm]llego igual,\n[G]todo siempre se po[Em7]drá ele[A]gir\n[D]No me escribas la pa[Bm]red,\n[G]solo quiero estar en[Em7]tre tu [A]piel\n\n[D]Y si acaso no bri[Bm]llara el sol,\n[G]y quedara yo a[Em7]trapa[A]do aquí,\n[D]no vería la ra[Bm]zón\n[G]de seguir vi[Em7]viendo sin tu [A]amor\n\n[F#]Y hoy que, enloquecido [Bm]vuelvo\nbuscando tu querer,\n[Em7]no queda más que el [A]viento,\nno queda más que el viento\n\n[D]Si a tu corazón yo [Bm]llego igual,\n[G]todo siempre se po[Em7]drá ele[A]gir\n[D]No me escribas la pa[Bm]red,\n[G]solo quiero estar en[Em7]tre tu [A]piel\n\n[F#]Y hoy que, enloquecido [Bm]vuelvo\nbuscando tu querer,\n[Em7]no queda más que el [A]viento,\nno queda más que el viento"
   },
   {
     "title": "Pasos al costado",
@@ -270,7 +271,7 @@ const songs: any[] = [
     "title": "Seminare",
     "artist": "Serú Girán",
     "genre": "Rock Nacional",
-    "lyrics": "Quiero ver, quiero entrar\nnena nadie te va a hacer mal,\nexcepto amarte.\n\nVas aquí, vas allá\npero nunca te encontrarás\nal escaparte.\n\nNo hay fuerza alrededor\nno hay pociones para el amor\n¿A dónde estás?\n¿Dónde voy?\n\nPorque estamos en la calle de la sensación\nmuy lejos del sol que quema de amor.\n\nTe doy pan, quieres sal\nnena nunca te voy a dar\nlo que me pides.\n\nTe doy Dios, quieres más\nes que nunca comprenderás\na un pobre pibe.\n\nEsas motos que van a mil\nsólo el viento te harán sentir\nnada más, nada más.\n\nSi pudieras olvidar tu mente\nfrente a mí, sé que tu corazón\ndiría que sí."
+    "lyrics": "Intro:\n[G] [C] [G] [C]\n\n[G]Quiero [D]ver, quiero en[Em]trar\n[B7]nena, nadie te va a ha[C]cer mal\n[D7]excepto amarte\n[G]Vas a[D]quí, vas a[Em]llá\n[Bm]pero nunca te encontra[C]rás\n[D7]al escaparte\n\n[Am]No hay fuer[G]za alre[C]dedor\n[D7]no hay pocio[Em]nes para el amor\n[Em7]¿Dónde es[Em6]tás? ¿dón[Cm]de voy?\n[G]Porque estamos [G7]en la calle\n[C]de la sen[B7]sa[Em]ción [A7]\n[D]muy le[D4]jos del [D]sol\n[G]que quema de amor\n\n[G] [C] [G] [C]\n\n[G]Te doy [D]pan, quie[Em]res sal\n[B7]nena, nunca te voy a [C]dar\n[D7]lo que me pides\n[G]Te doy [D]Dios, quie[Em]res más\n[B7]es que nunca compren[C]derás\n[D7]a un pobre pibe\n\n[Am]Esas mo[G]tos que [C]van a mil\n[D7]solo el vien[Em]to te harán sentir\n[Em7]Nada [A7]más, na[Cm]da más\n[G]si pudieras olvi[G7]dar tu mente\n[C]fren[B7]te a [Em]mí [A7]\n[D]sé que tu co[D4]ra[D]zón\n[G]diría que sí"
   },
   {
     "title": "Nos veremos otra vez",
@@ -330,7 +331,7 @@ const songs: any[] = [
     "title": "11 y 6",
     "artist": "Fito Páez",
     "genre": "Rock Nacional",
-    "lyrics": "En un café se vieron por casualidad,\ncansados en el alma de tanto andar,\nella tenia un clavel en la mano,\nel se acerco le pregunto si andaba bien,\nllegaba a la ventana en puntas de pies y la llevo a caminar por corrientes....\n\nMiren todos ellos solos fue de más que el amor\ny son mas fuertes que el olimpo,\nse escondierón en el centro,\ny en el baño de un bar sellaron todo todo con un beso.\n\nDurante un mes vendiron rosas a la paz,\npreciento que no importaba nada más,\ny entre los dos juntaron algo,\nno se porque pero jamas los volvi a ver,\nel carga con 11 y ella con 6,\ny si reia le daba la luna.\n\nMiren todos ellos solos fue de más que el amor\ny son mas fuertes que el olimpo,\nse escondierón en el centro,\ny en el baño de un bar sellaron todo todo todo todo con un beso."
+    "lyrics": "Intro:\n[G] [F#m7] [B7] [Em7] [D4]\n[C#m7] [Cm] [G] [Am7] [D4]\n\n[G]En un café se [F#m7]vieron por ca[B7]sualidad,\n[Em7]cansados en el [D4]alma de tan[C#m7]to andar,\n[Cm]ella tenía un [G]clavel [Am7]en la [D]mano\n[G]Él se acercó y le [F#m7]preguntó si [B7]andaba bien,\n[Em7]llegaba a la ven[D4]tana en pun[C#m7]tas de pie,\n[Am7]y la llevó a cami[D]nar por Corrientes\n\n[C]Miren [Bm7]todos, [Em7]ellos solos,\n[C]pueden [B7]más que el [Em7]amor, [A7]\n[Am7]y son más fuertes que el O[D]limpo\n[C]Se escon[Bm7]dieron [Em7]en el centro,\n[C]y en el [B7]baño de un [Em7]bar, [A7]\n[Am7]sellaron todo con un [D]be[G]so\n\n[G]Durante un mes ven[F#m7]dieron rosas [B7]en La Paz,\n[Em7]presiento que no [D4]importaba na[C#m7]da más,\n[Cm]y entre los [G]dos jun[Am7]taban [D]algo\n[G]No sé por qué pero ja[F#m7]más los vol[B7]ví a ver,\n[Em7]él carga con [D4]once y ella [C#m7]con seis,\n[Am7]y, si reía, él le [D]daba la luna\n\n[C]Miren [Bm7]todos, [Em7]ellos solos,\n[C]pueden [B7]más que el [Em7]amor, [A7]\n[Am7]y son más fuertes que el O[D]limpo\n[C]Se escon[Bm7]dieron [Em7]en el centro,\n[C]y en el [B7]baño de un [Em7]bar, [A7]\n[Am7]sellaron todo con un [D]be[G]so"
   },
   {
     "title": "Ciudad de pobres corazones",
@@ -426,7 +427,7 @@ const songs: any[] = [
     "title": "Crimen",
     "artist": "Gustavo Cerati",
     "genre": "Rock Nacional",
-    "lyrics": "La espera me agotó\nno se nada de vos\ndejaste tanto en mí\nEn llamas me acosté\ny en un lento degradé\nsupe que te perdí\n¿Qué otra cosa puedo hacer?\nsi no olvido, moriré\ny otro crimen quedará\notro crimen quedará\nsin resolver\nUna rápida traición\ny salimos del amor\ntal vez me lo busqué.\nMi ego va a estallar\nahí donde no estás\noh... los celos otra vez\n¿Qué otra cosa puedo hacer?\nsi no olvido moriré\ny otro crimen quedará\notro crimen quedará\nsin resolver.\nNo lo sé\ncuanto falta no lo sé\nsi es muy tarde no lo sé\nsi no olvido, moriré\nque otra cosa puedo hacer?\nque otra cosa puedo hacer?\nAhora sé lo que es perder\nOtro crimen quedará\notro crimen quedará\nsin resolver"
+    "lyrics": "Intro:\n[E]\n\n[E]La espera me ago[C]tó, no sé [D]nada de vos\n[G#m]dejaste tanto [A]en mí\n[F#m]En llamas me acos[B]té, en un len[E]to degradé\n[C]supe que [D]te per[F#m]dí [B]\n\n[F#m]¿Qué otra co[B]sa puedo hacer?\n[C#m]si no olvi[Am]do moriré\n[F#m]y otro cri[G#m]men quedará\n[F#m]otro crimen quedará\n[E]sin resolver\n\n[E]Acecha desde [C]allí, la memo[D]ria es cruel\n[G#m]dice: ven a [A]mí\n[F#m]Todo lo que fue[B], se agigan[E]ta después\n[C]no voy a [D]lamen[F#m]tar [B]\n\n[F#m]¿Qué otra co[B]sa puedo hacer?\n[C#m]si no olvi[Am]do moriré\n[F#m]y otro cri[G#m]men quedará\n[F#m]otro crimen quedará\n[E]sin resolver\n\n[F#m]La espera [B]me agotó\n[C#m]no me [Am]queda corazón\n[F#m]y otro cri[G#m]men quedará\n[F#m]otro crimen quedará\n[E]sin resolver"
   },
   {
     "title": "Adiós",
@@ -515,7 +516,7 @@ const songs: any[] = [
     "title": "Mi enfermedad",
     "artist": "Fabiana Cantilo",
     "genre": "Rock Nacional",
-    "lyrics": "Estoy vencido porque el mundo me hizo así\nno puedo cambiar.\nsoy el remedio sin receta y tu amor: mi enfermedad\nestoy vencido porque el cuerpo de los dos es mi debilidad.\nesta vez el dolor va a terminar.\n\nParece que la fiesta terminó\nperdidos en el tunel del amor\ny dicen las hojas del libro que más leo yo\nesta vez el esclavo se escapó.\n\nMe entrego al vino por que el mundo me hizo así\nno puedo cambiar\nsoy el remedio sin receta y tu amor mi enfermedad\nestoy vencido porque el cuerpo de los dos es mi debilidad.\nesta vez el dolor va a terminar.\n\nDel arbol una hoja seca yo\nen mi boca la manzana se pudrió.\ntendrías que aprender a pedir perdón!\nesta vez la cadena se rompió.\n\nTendrías que aprender a pedir perdón!\nesta vez el esclavo se escapó\nestoy vencido porque el mundo me hizo así\nno puedo cambiar.,\nsoy el remedio sin receta y tu amor mi enfermedad\nestoy vencido porque el cuerpo de los dos es mi debilidad.\nesta vez el dolor va a terminar."
+    "lyrics": "Intro:\n[A] [D] [E] (x2)\n\n[A]Estoy venci[D]da porque el mundo me\n[E]hizo así,\n[F#m]no puedo cambiar\n[D]Soy el remedio sin re[E]ceta y tu\n[F#m]amor mi enfermedad\n[D]Estoy venci[E]da porque el cuerpo de\n[F#m]los dos es mi debilidad\n[D]esta vez el [E]dolor va a termi[A]nar\n\n[A]Gente que [D]va gente que viene por\n[E]la calle\n[F#m]perdida entre la gente\n[D]Gente que [E]mira y que no quiere\n[F#m]que la vean\n[D]esta vez el [E]dolor va a termi[A]nar\n\n[D]Parece que la [E]fiesta termi[A]nó,\n[D]perdidos en el [E]túnel del a[A]mor\n[D]Y dicen las [E]hojas del libro que\n[F#m]más leo yo,\n[D]esta vez el es[E]clavo se esca[A]pó"
   },
   {
     "title": "Una tregua",
@@ -532,7 +533,7 @@ const songs: any[] = [
     "title": "Flaca",
     "artist": "Andrés Calamaro",
     "genre": "Rock Nacional",
-    "lyrics": "Flaca, no me claves tus puñales por la espalda\ntan profundo, no me duelen, no me hacen mal.\n\nLejos en el centro de la tierra las raíces del amor\ndonde estaban quedarán.\n\nEntre \"no me olvides\" me dejé nuestros abriles olvidados\nen el fondo del placar del cuarto de invitados\neran tiempos dorados un pasado mejor.\n\nAunque: casi me equivoco y te digo poco a poco no me mientas\nno me digas la verdad no te quedes callada\nno levantes la voz ni me pidas perdón.\n\nAunque: casi te confieso que también he sido un perro compañero\nun perro ideal que aprendió a ladrar\ny a volver al hogar para poder comer.\n\nFlaca no me claves tus puñales\npor la espalda, tan profundo\nno me duelen no me hacen mal.\n\nLejos en el centro de la tierra las raíces\ndel amor, donde estaban\nquedarán."
+    "lyrics": "Intro:\n[G] [B7] [Em] [C]\n[G] [D] [G] [D]\n\n[G]Flaca, no me [B7]claves\n[Em]tus puñales, [C]por la espalda\n[G]tan profundo, [D]no me duelen,\n[G]no me ha[D]cen mal\n\n[G]Lejos, en el [B7]centro\n[Em]de la tierra, [C]las raíces\n[G]del amor, don[D]de estaban\n[G]queda[D]rán\n\n[G]Entre no me olvides\n[B7]me dejé nuestros abriles\n[Em]olvidados,\n[C]en el fondo del placard,\n[G]del cuarto de invitados\n[D]Eran tiempos dorados\n[G]un pasa[D]do mejor\n\n[G]Aunque casi me equivoco\n[B7]y te digo poco a poco:\n[Em]\"no me mientas,\n[C]no me digas la verdad\"\n[G]No te quedes callada,\n[D]no levantes la voz,\n[G]ni me pi[D]das perdón\n\n[G]Aunque casi te confieso\n[B7]que también he sido un perro,\n[Em]compañero,\n[C]un perro ideal,\n[G]que aprendió a ladrar\n[D]y a volver al hogar\n[G]para po[D]der comer\n\n[G]Flaca, no me [B7]claves\n[Em]tus puñales, [C]por la espalda\n[G]tan profundo, [D]no me duelen,\n[G]no me ha[D]cen mal"
   },
   {
     "title": "Loco",
