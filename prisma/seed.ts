@@ -71,12 +71,14 @@ const songs: any[] = [
   {
     "title": "Mil horas",
     "artist": "Abuelos de la Nada",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Hace frío y estoy lejos de casa\nHace tiempo que estoy sentado sobre esta piedra\nYo me pregunto para que sirven las guerras\nTengo un cohete en mi pantalón\nVos estás tan fría como la nieve a mi alrededor\nVos estás tan blanca, que yo no sé que hacer\n\nLa otra noche te esperé bajo la lluvia dos horas\nMil horas, como un perro\nY cuando llegaste me miraste y me dijiste\nLoco, estás mojado, ya no te quiero\nEn el circo vos ya sos una estrella\nUna estrella roja que todo se lo imagina\nSi te preguntan, vos no me conocías\nNo, no\n\nTengo un cohete en mi pantalón\nVos estás tan fría como la nieve a mi alrededor\nVos estás tan blanca, que yo no sé que hacer\n\nTe esperé bajo la lluvia, no, no, no, no\n\nLa otra noche te esperé bajo la lluvia dos horas\nMil horas, como un perro\nY cuando llegaste me miraste y me dijiste\nLoco, estás mojado, ya no te quiero\n\nLa otra noche te esperé bajo la lluvia dos horas\nMil horas, como un perro\nY cuando llegaste me miraste y me dijiste\nLoco, estás mojado, ya no te quiero"
   },
   {
     "title": "Corazón",
     "artist": "Los Decadentes",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Yo no sé lo que me pasa\ncuando estoy con vos\nme hipnotiza tu sonrisa\nme desarma tu mirada\ny de mi no queda nada\nme derrito\ncomo un hielo al sol\ncuando vamos a algún lado\nnunca elijo yo\nporque lo único que quiero\nes ir contigo\nvivo dando vueltas\na tu alrededor\ncomo un perro abandonado\nque en la calle te siguió\npero yo no soy tu prisionero\ny no tengo alma de robot\nes que hay algo en tu carita\nque me gusta\nque me gusta\ny se llevó mi corazón\noh oh, yo no soy tu prisionero\ny no tengo alma de robot\nes que hay algo en tu carita\nque me gusta\nque me gusta\ny se llevó mi corazón\npuede ser por tu carácter\no mi voluntad\nme hipnotiza tu sonrisa\nme desarma tu mirada\ny de mi no queda nada\nme derrito\ncomo un hielo al sol\ncuando vamos a algún lado\nnunca elijo yo\nporque lo único que quiero\nes ir contigo\nvivo dando vueltas\na tu alrededor\ncomo un perro abandonado\nque en la calle te siguió\npero yo no soy tu prisionero\ny no tengo alma de robot\nes que hay algo en tu carita\nque me gusta\nque me gusta\ny se llevó mi corazón\noh oh,yo no soy tu prisionero\ny no tengo alma de robot\nes que hay algo en tu carita\nque me gusta\nque me gusta\ny se llevó mi corazón\nyo no soy tu prisionero\ny no tengo alma de robot\nes que hay algo en tu carita\nque me gusta\nque me gusta\ny se llevó mi corazón\noh oh, yo no soy tu prisionero\ny no tengo alma de robot\nes que hay algo en tu carita\nque me gusta\nque me gusta\ny se llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón"
   },
   {
     "title": "Avanti Morocha",
@@ -110,7 +112,8 @@ const songs: any[] = [
   {
     "title": "Se me ha perdido",
     "artist": "Gilda",
-    "genre": "Cumbia"
+    "genre": "Cumbia",
+    "lyrics": "Se me ha perdido un corazón\nSi alguien lo tiene por favor\nQue lo devuelva.\n\nYo lo tenía junto a mi\nPero la puerta de su amor\nEstaba abierta.\nSe fue volando detrás de otra ilusión\nDe esas que llevan a perder la razón.\nEste vacío que hay en mi\nHace crecer la soledad\nY siento que me estoy muriendo\nSe me ha perdido un corazón\nPor eso hoy quiero brindar\nPor los fracasos del amor.\n\nTodo lo di sin esperar\nEra feliz pudiendo amar\nComo podré sobrevivir\nSin su calor no se vivir.\nSe me ha perdido un corazón...."
   },
   {
     "title": "Juntos a la par",
@@ -394,7 +397,8 @@ const songs: any[] = [
   {
     "title": "Jugo de tomate frío",
     "artist": "Manal",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "La tierra que te da la vida\nDa un tiempo para decidir\nEligiendo inteligentemente\nTodo el mundo podrá ser feliz\n\nJugo de tomate frío\nJugo de tomate frío\nEn las venas\nEn las venas, deberás tener\n\nSi querés ser un terrible vago\nTodo el día panza arriba y a dormir\nO elegiste ser un tipo capo\nSiempre serio y que da temor\nDeberás tener\n\nJugo de tomate frío\nJugo de tomate frío\nEn las venas\nEn las venas, deberás tener\n\nSi querés triunfar con las mujeres\nTener muchas que lloren por vos\nTendrás que ser muy poco inteligente\nTener dinero y una buena voz\nPero\n\nJugo de tomate frío\nJugo de tomate frío\nEn las venas\nEn las venas, deberás tener\n\nSi querés ser un hombre importante\nQue se hable todo el día de vos\nO querés inmortalizarte como héroe\nAsesino o semidiós\n\nJugo de tomate frío\nJugo de tomate frío\nEn las venas\nEn las venas, deberás tener"
   },
   {
     "title": "Maldición, va a ser un día hermoso",
