@@ -79,6 +79,40 @@ export default function AdminEventsPage() {
     setEvents(prev => prev.filter(e => e.id !== id))
   }
 
+  const handleReplicate = async (event: Event) => {
+    const newName = prompt('Nombre del nuevo evento:', `${event.name} (Copia)`)
+    if (!newName) return
+
+    const todayStr = new Date().toISOString().split('T')[0]
+    const newDate = prompt('Fecha del nuevo evento (AAAA-MM-DD):', todayStr)
+    if (!newDate) return
+
+    setCreating(true)
+    try {
+      const res = await fetch('/api/events', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: newName,
+          date: newDate,
+          maxSingers: event.maxSingers,
+          replicateFromEventId: event.id,
+        }),
+      })
+      if (res.ok) {
+        const newEvent = await res.json()
+        setEvents(prev => [newEvent, ...prev])
+      } else {
+        alert('Error al replicar el evento.')
+      }
+    } catch (err) {
+      console.error(err)
+      alert('Error de red al replicar el evento.')
+    } finally {
+      setCreating(false)
+    }
+  }
+
   const openManageSongs = async (event: Event) => {
     setManagingEvent(event)
     setLoadingEventSongs(true)
@@ -308,6 +342,12 @@ export default function AdminEventsPage() {
                   className="badge cursor-pointer px-3 py-1.5 text-xs text-purple-400 border-purple-400/30 bg-purple-400/10 hover:scale-105 transition-transform"
                 >
                   🎵 Canciones
+                </button>
+                <button
+                  onClick={() => handleReplicate(event)}
+                  className="badge cursor-pointer px-3 py-1.5 text-xs text-emerald-400 border-emerald-400/30 bg-emerald-400/10 hover:scale-105 transition-transform"
+                >
+                  🔄 Replicar
                 </button>
                 <button
                   onClick={() => handleDelete(event.id)}
