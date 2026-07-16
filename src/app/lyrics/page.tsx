@@ -238,7 +238,7 @@ function LyricsContent() {
       {/* Lyrics */}
       <div className="flex-1 overflow-y-auto px-4 py-6 pb-32">
         {song.lyrics ? (
-          <LyricsWithChords lyrics={song.lyrics} />
+          <pre className="lyrics-text whitespace-pre-wrap">{song.lyrics.replace(/\[([^\]]+)\]/g, '')}</pre>
         ) : (
           <div className="text-center text-slate-500 mt-20">
             <div className="text-4xl mb-4">📋</div>

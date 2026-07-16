@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useSocket } from '@/hooks/useSocket'
+import { parseLine } from '@/lib/lyrics-utils'
 
 interface Song {
   id: string
@@ -285,22 +286,74 @@ export default function OperatorPage() {
             </p>
           </div>
         ) : (
-          <pre
-            style={{
-              fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif",
-              fontSize: fontSize,
-              lineHeight: 1.8,
-              color: '#f8fafc',
-              whiteSpace: 'pre-wrap',
-              wordBreak: 'break-word',
-              margin: 0,
-              letterSpacing: 0.3,
-              textAlign: 'center',
-              width: '100%',
-            }}
-          >
-            {song.lyrics}
-          </pre>
+          <div style={{ width: '100%' }}>
+            {song.lyrics.split('\n').map((line, lineIdx) => {
+              const tokens = parseLine(line)
+              const isBlank = tokens.length === 1 && tokens[0].text === '' && !tokens[0].chord
+              const lineHasChords = tokens.some(t => t.chord)
+
+              if (isBlank) {
+                return <div key={lineIdx} style={{ height: fontSize * 0.6 }} />
+              }
+
+              return (
+                <div
+                  key={lineIdx}
+                  style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    justifyContent: 'center',
+                    width: '100%',
+                    position: 'relative',
+                    paddingTop: lineHasChords ? fontSize * 0.75 : 4,
+                    paddingBottom: 6,
+                  }}
+                >
+                  {tokens.map((token, tokenIdx) => (
+                    <span
+                      key={tokenIdx}
+                      style={{
+                        position: 'relative',
+                        display: 'inline-flex',
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                      }}
+                    >
+                      {token.chord && (
+                        <span
+                          style={{
+                            position: 'absolute',
+                            top: -(fontSize * 0.58),
+                            left: 0,
+                            color: '#38bdf8',
+                            fontWeight: 800,
+                            fontSize: fontSize * 0.42,
+                            whiteSpace: 'nowrap',
+                            userSelect: 'none',
+                            letterSpacing: 1,
+                          }}
+                        >
+                          {token.chord}
+                        </span>
+                      )}
+                      <span
+                        style={{
+                          color: '#f8fafc',
+                          fontSize: fontSize,
+                          fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif",
+                          whiteSpace: 'pre',
+                          letterSpacing: 0.3,
+                          lineHeight: 1.4,
+                        }}
+                      >
+                        {token.text || '\u00A0'}
+                      </span>
+                    </span>
+                  ))}
+                </div>
+              )
+            })}
+          </div>
         )}
       </div>
     </div>
