@@ -97,14 +97,36 @@ Y des[C]pués ha[D]cer el a[G]mor
 async function main() {
   console.log(`🌱 Seeding ${songs.length} songs...`)
 
-  // createMany with skipDuplicates is idempotent — safe to re-run
-  await prisma.song.createMany({
-    data: songs,
-    skipDuplicates: false,
-  })
+  let updatedCount = 0
+  let createdCount = 0
+
+  for (const song of songs) {
+    const existing = await prisma.song.findFirst({
+      where: {
+        title: song.title,
+        artist: song.artist,
+      },
+    })
+
+    if (existing) {
+      await prisma.song.update({
+        where: { id: existing.id },
+        data: {
+          genre: song.genre,
+          lyrics: song.lyrics || existing.lyrics,
+        },
+      })
+      updatedCount++
+    } else {
+      await prisma.song.create({
+        data: song,
+      })
+      createdCount++
+    }
+  }
 
   const count = await prisma.song.count()
-  console.log(`✅ Done! ${count} songs in database.`)
+  console.log(`✅ Done! Created: ${createdCount}, Updated: ${updatedCount}. Total in database: ${count}`)
 }
 
 main()
