@@ -105,7 +105,7 @@ const songs: any[] = [
     "title": "Todo un palo",
     "artist": "Los Redondos",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[D] [C] [G] [D] (x2)\n\n[D]Todo un palo es el [C]día de hoy\n[G]todo un palo que no [D]puedo evitar\n[D]el futuro ya [C]llegó\n[G]y vino para que[D]darse\n\n[D]Todo un palo es el [C]día de hoy\n[G]todo un palo que no [D]puedo evitar\n[D]el futuro ya [C]llegó\n[G]y vino para que[D]darse"
+    "lyrics": "Intro:\n[C] [G] [Am] [F] (x2)\n\n[C]El futuro ya [G]llegó, [Am]llegó como tres [F]tiros\n[C]que te dan en el [G]pecho, [Am]y no te de[F]jan respirar\n[C]No me digas que no [G]querés, [Am]no me digas que no [F]podés\n[C]todo un palo es el [G]día de hoy, [Am]todo un palo en la [F]ciudad\n\n[C]Yo no sé si [G]es en vano [Am]este dolor [F]\n[C]yo no sé si [G]es en vano [Am]este dolor [F]\n[C]yo no sé si [G]es en vano [Am]este dolor [F]\n[C]yo no sé si [G]es en vano [Am]este dolor [F]\n\n[C]El futuro ya [G]llegó, [Am]yo sé que vos no lo [F]crees\n[C]pero está gol[G]peando tu [Am]puerta de ver[F]dad\n[C]No me digas que no [G]querés, [Am]no me digas que no [F]podés\n[C]todo un palo es el [G]día de hoy, [Am]todo un palo en la [F]ciudad\n\n[C]Yo no sé si [G]es en vano [Am]este dolor [F]\n[C]yo no sé si [G]es en vano [Am]este dolor [F]\n[C]yo no sé si [G]es en vano [Am]este dolor [F]\n[C]yo no sé si [G]es en vano [Am]este dolor [F]"
   },
   {
     "title": "Ahora te puedes marchar",
@@ -129,13 +129,13 @@ const songs: any[] = [
     "title": "Rock del gato",
     "artist": "Ratones Paranoicos",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[A] [D] [E] [A] (x2)\n\n[A]Quiero tocar el [D]rock del gato\n[E]y divertirme un [A]buen rato\n[A]quiero tocar el [D]rock del gato\n[E]y divertirme un [A]buen rato\n\n[D]Porque la noche es [E]larga\n[A]y no quiero [F#m]esperar\n[D]quiero tocar el [E]rock del gato\n[A]hasta que salga el sol"
+    "lyrics": "Intro:\n[A] [D] [E] [A] (x2)\n\n[A]Yo te vi en la ca[D]rre, vos no me di[E]jiste nada [A]\n[A]estabas con tu [D]novio y estabas [E]muy enoja[A]da\n[A]Te acordás del [D]gato que te re[E]galé una [A]vez\n[A]era negro y [D]lindo, y se llamaba [E]Gardel [A]\n\n[A]Quiero tocar el [D]rock del gato [E]y divertirme un [A]buen rato\n[A]quiero tocar el [D]rock del gato [E]y divertirme un [A]buen rato\n\n[A]Yo te vi en la ca[D]rre, vos no me di[E]jiste nada [A]\n[A]estabas con tu [D]novio y estabas [E]muy enoja[A]da\n[A]Te acordás del [D]gato que te re[E]galé una [A]vez\n[A]era negro y [D]lindo, y se llamaba [E]Gardel [A]\n\n[A]Quiero tocar el [D]rock del gato [E]y divertirme un [A]buen rato\n[A]quiero tocar el [D]rock del gato [E]y divertirme un [A]buen rato"
   },
   {
     "title": "Te quiero tanto",
     "artist": "Sergio Dennis",
     "genre": "Balada",
-    "lyrics": "Intro:\n[G] [D] [Em] [C] (x2)\n\n[G]Te quiero tanto, mi a[D]mor\n[Em]te quiero tanto, mi a[C]mor\n[G]no puedo vivir sin [D]vos\n[Em]sos mi única ilu[C]sión\n\n[G]Te quiero tanto, mi a[D]mor\n[Em]te quiero tanto, mi a[C]mor\n[G]no puedo vivir sin [D]vos\n[Em]sos mi única ilu[C]sión"
+    "lyrics": "Intro:\n[G] [D] [Em] [C] (x2)\n\n[G]Cuanta verdad en tus [D]ojos, cuanta dul[Em]zura en tu [C]piel\n[G]cuantas mañanas dis[D]tintas al ama[Em]necer [C]\n[G]Te quiero tanto, mi [D]vida, no puedo vi[Em]vir sin tu a[C]mor\n[G]sos la luz que ilu[D]mina mi co[Em]razón [C]\n\n[G]Te quiero tanto, [D]tanto, [Em]tanto, tanto, mi a[C]mor\n[G]que ya no puedo [D]más si no es[Em]tás con[C]migo\n[G]Te quiero tanto, [D]tanto, [Em]tanto, tanto, mi a[C]mor\n[G]que ya no puedo [D]más si no es[Em]tás con[C]igo\n\n[G]Cuanta verdad en tus [D]ojos, cuanta dul[Em]zura en tu [C]piel\n[G]cuantas mañanas dis[D]tintas al ama[Em]necer [C]\n[G]Te quiero tanto, mi [D]vida, no puedo vi[Em]vir sin tu a[C]mor\n[G]sos la luz que ilu[D]mina mi co[Em]razón [C]\n\n[G]Te quiero tanto, [D]tanto, [Em]tanto, tanto, mi a[C]mor\n[G]que ya no puedo [D]más si no es[Em]tás con[C]migo\n[G]Te quiero tanto, [D]tanto, [Em]tanto, tanto, mi a[C]mor\n[G]que ya no puedo [D]más si no es[Em]tás con[C]igo"
   },
   {
     "title": "De música ligera",
@@ -153,13 +153,13 @@ const songs: any[] = [
     "title": "Pasos al costado",
     "artist": "Turf",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[A] [E] [F#m] [D] (x2)\n\n[A]Doy unos pasos al co[E]stado\n[F#m]para dejarte pa[D]sar\n[A]no quiero más pe[E]leas\n[F#m]solo quiero un poco de [D]paz\n\n[A]Doy unos pasos al co[E]stado\n[F#m]para dejarte pa[D]sar\n[A]no quiero más pe[E]leas\n[F#m]solo quiero un poco de [D]paz"
+    "lyrics": "Intro:\n[A] [E] [F#m] [D] (x2)\n\n[A]A mí me gusta el rock and [E]roll, me gusta la ciu[F#m]dad [D]\n[A]me gusta ver el sol na[E]cer, y ver la gen[F#m]te andar [D]\n[A]Pero a veces me can[E]so, me canso de ve[F#m]ra[D]dad\n[A]de correr atrás de a[E]lgo que no voy a [F#m]alcan[D]zar\n\n[A]Y doy unos pasos al co[E]stado para de[F#m]jarte pa[D]sar\n[A]no quiero más pe[E]leas, solo un po[F#m]co de [D]paz\n[A]Y doy unos pasos al co[E]stado para de[F#m]jarte pa[D]sar\n[A]no quiero más pe[E]leas, solo un po[F#m]co de [D]paz\n\n[A]Y doy unos pasos al co[E]stado para de[F#m]jarte pa[D]sar\n[A]no quiero más pe[E]leas, solo un po[F#m]co de [D]paz"
   },
   {
     "title": "Yo no me quiero casar",
     "artist": "Turf",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[G] [C] [D] [G] (x2)\n\n[G]Yo no me quiero ca[C]sar,\n[D]¿y usted? [G]\n[G]yo no me quiero ca[C]sar,\n[D]¿y usted? [G]\n\n[C]Quiero vivir mi [D]vida\n[Bm]libre como el [Em]viento\n[C]yo no me quiero ca[D]sar,\n[G]¿y usted?"
+    "lyrics": "Intro:\n[G] [C] [D] [G] (x2)\n\n[G]Mírenme, ya no [C]tengo dieciocho [D]años\n[G]mírenme, sigo es[C]tando igual de [D]soltero\n[G]no tengo auto, no [C]tengo propie[D]dades\n[G]solo tengo mis can[C]ciones y mi pe[D]rro\n\n[G]Yo no me quiero ca[C]sar, ¿y u[D]sted? [G]\n[G]yo no me quiero ca[C]sar, ¿y u[D]sted? [G]\n[C]Quiero vivir mi [D]vida libre [Bm]como el [Em]viento\n[C]yo no me quiero ca[D]sar, ¿y u[G]sted?\n\n[G]Yo no me quiero ca[C]sar, ¿y u[D]sted? [G]\n[G]yo no me quiero ca[C]sar, ¿y u[D]sted? [G]\n[C]Quiero vivir mi [D]vida libre [Bm]como el [Em]viento\n[C]yo no me quiero ca[D]sar, ¿y u[G]sted?"
   },
   {
     "title": "Corazón mentiroso",
@@ -171,19 +171,19 @@ const songs: any[] = [
     "title": "Tu misterioso alguien",
     "artist": "Miranda!",
     "genre": "Pop",
-    "lyrics": "Intro:\n[A] [F#m] [Bm] [E] (x2)\n\n[A]Sos tu misterioso al[F#m]guien\n[Bm]que me roba el co[E]razón\n[A]sos tu misterioso al[F#m]guien\n[Bm]que me llena de pa[E]sión\n\n[A]Sos tu misterioso al[F#m]guien\n[Bm]que me roba el co[E]razón\n[A]sos tu misterioso al[F#m]guien\n[Bm]que me llena de pa[E]sión"
+    "lyrics": "Intro:\n[A] [F#m] [Bm] [E] (x2)\n\n[A]Me pregunto quién se[F#m]rá\n[Bm]el que te roba el [E]corazón\n[A]me pregunto quién se[F#m]rá\n[Bm]el dueño de tu pa[E]sión\n[A]Tengo celos de pensar [F#m]\n[Bm]que alguien te pueda to[E]car\n[A]tengo miedo de sa[F#m]ber\n[Bm]que te podés ale[E]jar\n\n[A]Sos tu misterioso al[F#m]guien que me [Bm]roba el co[E]razón\n[A]sos tu misterioso al[F#m]guien que me [Bm]llena de pa[E]sión\n[A]Sos tu misterioso al[F#m]guien que me [Bm]roba el co[E]razón\n[A]sos tu misterioso al[F#m]guien que me [Bm]llena de pa[E]sión"
   },
   {
     "title": "Dejaría todo",
     "artist": "Chayanne",
     "genre": "Balada",
-    "lyrics": "Intro:\n[Am] [Dm] [G] [C] (x2)\n\n[Am]Dejaría todo por tu a[Dm]mor\n[G]dejaría todo por tu a[C]mor\n[Am]no me importa el do[Dm]lor\n[G]si estoy cerca de [C]vos\n\n[Am]Dejaría todo por tu a[Dm]mor\n[G]dejaría todo por tu a[C]mor\n[Am]no me importa el do[Dm]lor\n[G]si estoy cerca de [C]vos"
+    "lyrics": "Intro:\n[Am] [Dm] [G] [C] (x2)\n\n[Am]He intentado casi [Dm]todo para con[G]vencerte [C]\n[Am]he intentado dejar [Dm]atrás todo mi pa[G]sado [C]\n[Am]pero nada es sufici[Dm]ente, nada te [G]conforma [C]\n[Am]ya no sé qué más ha[Dm]cer para tener[G]te [C]\n\n[Am]Dejaría todo por tu a[Dm]mor, mi vida,\n[G]dejaría todo por un [C]beso tuyo\n[Am]no me importa el do[Dm]lor ni el orgullo\n[G]si estoy cerca de [C]vos\n\n[Am]Dejaría todo por tu a[Dm]mor, mi vida,\n[G]dejaría todo por un [C]beso tuyo\n[Am]no me importa el do[Dm]lor ni el orgullo\n[G]si estoy cerca de [C]vos"
   },
   {
     "title": "Azul",
     "artist": "Cristian Castro",
     "genre": "Balada",
-    "lyrics": "Intro:\n[A] [E] [D] [A] (x2)\n\n[A]Azul, como el cielo a[E]zul\n[D]azul, como el mar a[A]zul\n[A]sos la luz de mi [E]vida\n[D]mi camino a se[A]guir\n\n[A]Azul, como el cielo a[E]zul\n[D]azul, como el mar a[A]zul\n[A]sos la luz de mi [E]vida\n[D]mi camino a se[A]guir"
+    "lyrics": "Intro:\n[A] [E] [D] [A] (x2)\n\n[A]Fue una mirada que cam[E]bió mi destino\n[D]fue un encuentro en medio [A]del camino\n[A]y de pronto todo se vol[E]vió tan claro\n[D]me enamoré de vos en un [A]segundo\n\n[A]Azul, como el cielo a[E]zul\n[D]azul, como el mar a[A]zul\n[A]sos la luz de mi [E]vida\n[D]mi camino a se[A]guir\n\n[A]Azul, como el cielo a[E]zul\n[D]azul, como el mar a[A]zul\n[A]sos la luz de mi [E]vida\n[D]mi camino a se[A]guir"
   },
   {
     "title": "Polaroid de locura ordinaria",
@@ -201,7 +201,7 @@ const songs: any[] = [
     "title": "Spaghetti del rock",
     "artist": "Divididos",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[E] [Bm] [A] [E] (x2)\n\n[E]Spaghetti del rock pa[Bm]ra cenar\n[A]en esta mesa del des[E]tino\n[E]no quiero más que po[Bm]der hablar\n[A]con vos de nuestro ca[E]mino\n\n[E]Spaghetti del rock pa[Bm]ra cenar\n[A]en esta mesa del des[E]tino\n[E]no quiero más que po[Bm]der hablar\n[A]con vos de nuestro ca[E]mino"
+    "lyrics": "Intro:\n[E] [Bm] [A] [E] (x2)\n\n[E]Pistones de un cu[Bm]rioso motor de [A]humedad [E]\n[E]depósito de [Bm]barras de mi[A]rar [E]\n[E]un spaghetti del [Bm]rock para ce[A]nar [E]\n[E]un spaghetti del [Bm]rock para ce[A]nar\n\n[E]No quiero más que po[Bm]der hablar [A]con vos [E]\n[E]no quiero más que po[Bm]der hablar [A]con vos [E]\n\n[E]Pistones de un cu[Bm]rioso motor de [A]humedad [E]\n[E]depósito de [Bm]barras de mi[A]rar [E]\n[E]un spaghetti del [Bm]rock para ce[A]nar [E]\n[E]un spaghetti del [Bm]rock para ce[A]nar"
   },
   {
     "title": "Costumbres argentinas",
@@ -213,25 +213,25 @@ const songs: any[] = [
     "title": "Desconfío",
     "artist": "Pappo",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[G] [C] [D7] (x2)\n\n[G]No sé por qué, [C]no sé por qué [D7]\n[G]desconfío de tu a[C]mor [D7]\n[G]no sé por qué, [C]no sé por qué [D7]\n[G]desconfío de tu a[C]mor [D7]\n\n[G]No sé por qué, [C]no sé por qué [D7]\n[G]desconfío de tu a[C]mor [D7]\n[G]no sé por qué, [C]no sé por qué [D7]\n[G]desconfío de tu a[C]mor [D7]"
+    "lyrics": "Intro:\n[G] [C] [D7] (x2)\n\n[G]No sé por qué ima[C]gino\n[G]que la gente me mira [C]mal\n[G]será porque me [C]siento un poco [D7]viejo\n[G]o será por descon[C]fianza de tu a[D7]mor\n\n[G]No sé por qué, [C]no sé por qué [D7]\n[G]desconfío de tu a[C]mor [D7]\n[G]no sé por qué, [C]no sé por qué [D7]\n[G]desconfío de tu a[C]mor [D7]\n\n[G]No sé por qué ima[C]gino\n[G]que la gente me mira [C]mal\n[G]será porque me [C]siento un poco [D7]viejo\n[G]o será por descon[C]fianza de tu a[D7]mor\n\n[G]No sé por qué, [C]no sé por qué [D7]\n[G]desconfío de tu a[C]mor [D7]\n[G]no sé por qué, [C]no sé por qué [D7]\n[G]desconfío de tu a[C]mor [D7]"
   },
   {
     "title": "Luna de miel en las manos",
     "artist": "Virus",
     "genre": "Pop",
-    "lyrics": "Intro:\n[G] [B7] [Em] [C] (x2)\n\n[G]Una luna de miel en la [B7]mano\n[Em]para gozar de tu a[C]mor\n[G]una luna de miel en la [B7]mano\n[Em]para gozar de tu a[C]mor\n\n[G]Una luna de miel en la [B7]mano\n[Em]para gozar de tu a[C]mor\n[G]una luna de miel en la [B7]mano\n[Em]para gozar de tu a[C]mor"
+    "lyrics": "Intro:\n[G] [B7] [Em] [C] (x2)\n\n[G]Tu cuerpo es un e[B7]fecto especial\n[Em]que me hace delirar [C]de placer\n[G]no puedo evitar que [B7]mi mano\n[Em]te busque una y [C]otra vez\n\n[G]Una luna de miel en la [B7]mano\n[Em]para gozar de tu a[C]mor\n[G]una luna de miel en la [B7]mano\n[Em]para gozar de tu a[C]mor\n\n[G]Tu cuerpo es un e[B7]fecto especial\n[Em]que me hace delirar [C]de placer\n[G]no puedo evitar que [B7]mi mano\n[Em]te busque una y [C]otra vez\n\n[G]Una luna de miel en la [B7]mano\n[Em]para gozar de tu a[C]mor\n[G]una luna de miel en la [B7]mano\n[Em]para gozar de tu a[C]mor"
   },
   {
     "title": "Mr. Jones",
     "artist": "Sui Generis",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[C] [G] [F] [G] (x2)\n\n[C]Mr. Jones, Mr. [G]Jones,\n[F]no te dejes ca[G]er\n[C]Mr. Jones, Mr. [G]Jones,\n[F]no te dejes ca[G]er\n\n[C]Mr. Jones, Mr. [G]Jones,\n[F]no te dejes ca[G]er\n[C]Mr. Jones, Mr. [G]Jones,\n[F]no te dejes ca[G]er"
+    "lyrics": "Intro:\n[C] [G] [F] [G] (x2)\n\n[C]Mr. Jones era un [G]hombre bueno\n[F]tenía una esposa y un [G]granero\n[C]limpiaba su auto el [G]fin de semana\n[F]y cantaba en la [G]iglesia mañana\n\n[C]Mr. Jones, Mr. [G]Jones, [F]no te dejes ca[G]er\n[C]Mr. Jones, Mr. [G]Jones, [F]no te dejes ca[G]er\n\n[C]Mr. Jones era un [G]hombre bueno\n[F]tenía una esposa y un [G]granero\n[C]limpiaba su auto el [G]fin de semana\n[F]y cantaba en la [G]iglesia mañana\n\n[C]Mr. Jones, Mr. [G]Jones, [F]no te dejes ca[G]er\n[C]Mr. Jones, Mr. [G]Jones, [F]no te dejes ca[G]er"
   },
   {
     "title": "Cartas sin marcar",
     "artist": "Andrés Calamaro",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[G] [D] [C] [D] (x2)\n\n[G]Tengo cartas sin mar[D]car\n[C]para jugar en el [D]juego\n[G]tengo cartas sin mar[D]car\n[C]para jugar en el [D]juego\n\n[C]Y no sé qué pa[G]sará\n[D]cuando las ponga en la [Em]mesa\n[C]tengo cartas sin mar[D]car\n[G]para jugar en el juego"
+    "lyrics": "Intro:\n[G] [D] [C] [D] (x2)\n\n[G]Tengo cartas sin mar[D]car\n[C]para jugar en el [D]juego\n[G]tengo cartas sin mar[D]car\n[C]para jugar en el [D]juego\n\n[C]Y no sé qué pa[G]sará\n[D]cuando las ponga en la [Em]mesa\n[C]tengo cartas sin mar[D]car\n[G]para jugar en el juego\n\n[G]Tengo cartas sin mar[D]car\n[C]para jugar en el [D]juego\n[G]tengo cartas sin mar[D]car\n[C]para jugar en el [D]juego\n\n[C]Y no sé qué pa[G]sará\n[D]cuando las ponga en la [Em]mesa\n[C]tengo cartas sin mar[D]car\n[G]para jugar en el juego"
   },
   {
     "title": "Me siento mucho mejor",
@@ -243,13 +243,13 @@ const songs: any[] = [
     "title": "Buscando un símbolo de paz",
     "artist": "Charly García",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[C] [F] [G] [F] (x2)\n\n[C]Buscando un símbolo de [F]paz,\n[G]buscando un símbolo de [F]paz\n[C]en este mundo tan lo[F]co,\n[G]buscando un símbolo de [F]paz\n\n[C]Buscando un símbolo de [F]paz,\n[G]buscando un símbolo de [F]paz\n[C]en este mundo tan lo[F]co,\n[G]buscando un símbolo de [F]paz"
+    "lyrics": "Intro:\n[C] [F] [G] [F] (x2)\n\n[C]Corriendo por las calles [F]de la gran ciudad\n[G]buscando un poco de tran[F]quilidad\n[C]pero no hay nada que me [F]pueda calmar\n[G]solo quiero un símbolo de [F]paz\n\n[C]Buscando un símbolo de [F]paz,\n[G]buscando un símbolo de [F]paz\n[C]en este mundo tan lo[F]co,\n[G]buscando un símbolo de [F]paz\n\n[C]Corriendo por las calles [F]de la gran ciudad\n[G]buscando un poco de tran[F]quilidad\n[C]pero no hay nada que me [F]pueda calmar\n[G]solo quiero un símbolo de [F]paz\n\n[C]Buscando un símbolo de [F]paz,\n[G]buscando un símbolo de [F]paz\n[C]en este mundo tan lo[F]co,\n[G]buscando un símbolo de [F]paz"
   },
   {
     "title": "Todavía una canción de amor",
     "artist": "Los Rodríguez",
     "genre": "Rock",
-    "lyrics": "Intro:\n[C] [G] [Am] [F] (x2)\n\n[C]Todavía una can[G]ción de amor\n[Am]suena en mi cora[F]zón\n[C]todavía una can[G]ción de amor\n[Am]suena en mi cora[F]zón\n\n[F]Y no puedo de[G]jar de pensar\n[C]en lo que pudo ha[Am]ber sido\n[F]todavía una can[G]ción de amor\n[C]suena en mi corazón"
+    "lyrics": "Intro:\n[C] [G] [Am] [F] (x2)\n\n[C]Tengo guardada en mi [G]mente\n[Am]tu risa y tu [F]mirar\n[C]y sé que de alguna [G]forma\n[Am]te volveré a encon[F]trar\n\n[C]Todavía una can[G]ción de amor\n[Am]suena en mi cora[F]zón\n[C]todavía una can[G]ción de amor\n[Am]suena en mi cora[F]zón\n\n[F]Y no puedo de[G]jar de pensar\n[C]en lo que pudo ha[Am]ber sido\n[F]todavía una can[G]ción de amor\n[C]suena en mi corazón"
   },
   {
     "title": "Raros peinados nuevos",
@@ -273,7 +273,7 @@ const songs: any[] = [
     "title": "Rap de las hormigas",
     "artist": "Charly García",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[C] [G] [Am] [F] (x2)\n\n[C]Las hormigas corren [G]de acá para allá\n[Am]las hormigas corren [F]de acá para allá\n[C]y yo me pregunto qué [G]es lo que buscarán\n[Am]siempre apuradas [F]por trabajar\n\n[C]Rap de las hor[G]migas,\n[Am]rap de las hor[F]migas\n[C]rap de las hor[G]migas,\n[Am]rap de las hor[F]migas"
+    "lyrics": "Intro:\n[C] [G] [Am] [F] (x2)\n\n[C]Las hormigas corren [G]de acá para allá\n[Am]las hormigas corren [F]de acá para allá\n[C]y yo me pregunto qué [G]es lo que buscarán\n[Am]siempre apuradas [F]por trabajar\n\n[C]Rap de las hor[G]migas, [Am]rap de las hor[F]migas\n[C]rap de las hor[G]migas, [Am]rap de las hor[F]migas\n\n[C]Las hormigas corren [G]de acá para allá\n[Am]las hormigas corren [F]de acá para allá\n[C]y yo me pregunto qué [G]es lo que buscarán\n[Am]siempre apuradas [F]por trabajar\n\n[C]Rap de las hor[G]migas, [Am]rap de las hor[F]migas\n[C]rap de las hor[G]migas, [Am]rap de las hor[F]migas"
   },
   {
     "title": "Seminare",
@@ -291,7 +291,7 @@ const songs: any[] = [
     "title": "Nos siguen pegando abajo",
     "artist": "Charly García",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[G] [C] [D] [C] (x2)\n\n[G]Nos siguen pegando a[C]bajo,\n[D]nos siguen pegando a[C]bajo\n[G]y la gente corre y no [C]sabe qué hacer\n[D]solo quieren po[C]der correr\n\n[G]Nos siguen pegando a[C]bajo,\n[D]nos siguen pegando a[C]bajo\n[G]y la gente corre y no [C]sabe qué hacer\n[D]solo quieren po[C]der correr"
+    "lyrics": "Intro:\n[G] [C] [D] [C] (x2)\n\n[G]Mírenlo, se está cayen[C]do en la calle\n[D]mírenlo, nadie lo [C]quiere ayudar\n[G]es un juego de locos [C]en el que nos tocó [D]estar\n[G]y nos siguen pegando a[C]bajo,\n[D]nos siguen pegando a[C]bajo\n\n[G]Y nos siguen pegando a[C]bajo,\n[D]nos siguen pegando a[C]bajo\n[G]y la gente corre y no [C]sabe qué hacer\n[D]solo quieren po[C]der correr\n\n[G]Mírenlo, se está cayen[C]do en la calle\n[D]mírenlo, nadie lo [C]quiere ayudar\n[G]es un juego de locos [C]en el que nos tocó [D]estar\n[G]y nos siguen pegando a[C]bajo,\n[D]nos siguen pegando a[C]bajo\n\n[G]Y nos siguen pegando a[C]bajo,\n[D]nos siguen pegando a[C]bajo\n[G]y la gente corre y no [C]sabe qué hacer\n[D]solo quieren po[C]der correr"
   },
   {
     "title": "Cerca de la revolución",
@@ -333,7 +333,7 @@ const songs: any[] = [
     "title": "No te alejes tanto de mí",
     "artist": "Luis Alberto Spinetta",
     "genre": "Rock Nacional",
-    "lyrics": "[G]No te a[Bm7]lejes tanto de [C]mí, [D]\n[G]no te a[Bm7]lejes tanto de [C]mí [D]\n\n[G]El amor [Bm7]tiene que ser as[C]í, [D]\n[G]el amor [Bm7]tiene que ser as[C]í [D]\n\n[C]Porque el tiempo se [D]va,\n[Bm7]porque el tiempo se [Em]va\n[C]no te alejes [D]tanto de [G]mí\n\n[G]No te a[Bm7]lejes tanto de [C]mí, [D]\n[G]no te a[Bm7]lejes tanto de [C]mí [D]"
+    "lyrics": "[G]No te a[Bm7]lejes tanto de [C]mí, [D]\n[G]no te a[Bm7]lejes tanto de [C]mí [D]\n\n[G]Sé que hay un ca[Bm7]mino que de[C]bemos se[D]guir\n[G]sé que hay un es[Bm7]pacio que de[C]bemos com[D]partir\n[G]El amor [Bm7]tiene que ser as[C]í, [D]\n[G]el amor [Bm7]tiene que ser as[C]í [D]\n\n[C]Porque el tiempo se [D]va,\n[Bm7]porque el tiempo se [Em]va\n[C]no te alejes [D]tanto de [G]mí\n\n[G]No te a[Bm7]lejes tanto de [C]mí, [D]\n[G]no te a[Bm7]lejes tanto de [C]mí [D]"
   },
   {
     "title": "Cheques",
@@ -357,7 +357,7 @@ const songs: any[] = [
     "title": "El chico de la tapa",
     "artist": "Fito Páez",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[C] [G] [Am] [F] (x2)\n\n[C]El chico de la [G]tapa\n[Am]salió en el dia[F]rio hoy\n[C]el chico de la [G]tapa\n[Am]salió en el dia[F]rio hoy\n\n[C]Y todos lo mi[G]raban\n[Am]como a una gran atrac[F]ción\n[C]el chico de la [G]tapa\n[Am]salió en el dia[F]rio hoy"
+    "lyrics": "Intro:\n[C] [G] [Am] [F] (x2)\n\n[C]El chico de la [G]tapa salió en el [Am]diario hoy [F]\n[C]estaba en la es[G]quina con un [Am]arma en la [F]mano\n[C]no tenía des[G]tino, no tenía a [Am]dónde ir [F]\n[C]y la policía [G]lo fue a bus[Am]car de ver[F]dad\n\n[C]El chico de la [G]tapa [Am]salió en el dia[F]rio hoy\n[C]el chico de la [G]tapa [Am]salió en el dia[F]rio hoy\n[C]Y todos lo mi[G]raban [Am]como a una gran atrac[F]ción\n[C]el chico de la [G]tapa [Am]salió en el dia[F]rio hoy"
   },
   {
     "title": "Fue amor",
@@ -387,25 +387,25 @@ const songs: any[] = [
     "title": "Cowboy",
     "artist": "Ratones Paranoicos",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[A] [D] [E] [A] (x2)\n\n[A]Soy un cowboy de la [D]ciudad\n[E]y me gusta diver[A]tirme\n[A]soy un cowboy de la [D]ciudad\n[E]y me gusta diver[A]tirme\n\n[D]Tengo mis botas [E]listas\n[A]y mi sombrero [F#m]bien puesto\n[A]soy un cowboy de la [D]ciudad\n[E]y me gusta diver[A]tirme"
+    "lyrics": "Intro:\n[A] [D] [E] [A] (x2)\n\n[A]Soy un cowboy de la [D]ciudad, voy pa[E]sando por la [A]calle\n[A]con mis botas de [D]cuero y mi som[E]brero bien [A]puesto\n[A]no me importa el des[D]tino, solo [E]quiero cami[A]nar\n[A]y buscar una [D]chica que me [E]quiera de ver[A]dad\n\n[A]Soy un cowboy de la [D]ciudad [E]y me gusta diver[A]tirme\n[A]soy un cowboy de la [D]ciudad [E]y me gusta diver[A]tirme\n[D]Tengo mis botas [E]listas [A]y mi sombrero [F#m]bien puesto\n[A]soy un cowboy de la [D]ciudad [E]y me gusta diver[A]tirme"
   },
   {
     "title": "Enlace",
     "artist": "Ratones Paranoicos",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[G] [C] [D] [C] (x2)\n\n[G]Buscando un en[C]lace\n[D]en la oscuri[C]dad\n[G]buscando un en[C]lace\n[D]para conec[C]tar\n\n[G]Buscando un en[C]lace\n[D]en la oscuri[C]dad\n[G]buscando un en[C]lace\n[D]para conec[C]tar"
+    "lyrics": "Intro:\n[G] [C] [D] [C] (x2)\n\n[G]Buscando un en[C]lace en la oscuri[D]dad de la [C]noche\n[G]buscando un en[C]lace para po[D]der conec[C]tar\n[G]los cables se cru[C]zan, la luz se [D]empieza a a[C]pagar\n[G]pero sé que al fi[C]nal te voy a encon[D]trar [C]\n\n[G]Buscando un en[C]lace [D]en la oscuri[C]dad\n[G]buscando un en[C]lace [D]para conec[C]tar\n[G]Buscando un en[C]lace [D]en la oscuri[C]dad\n[G]buscando un en[C]lace [D]para conec[C]tar"
   },
   {
     "title": "Estrella",
     "artist": "Ratones Paranoicos",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[G] [D] [Em] [C] (x2)\n\n[G]Sos mi estrella de la [D]noche\n[Em]que alumbra mi ca[C]mino\n[G]sos mi estrella de la [D]noche\n[Em]que alumbra mi ca[C]mino\n\n[G]Sos mi estrella de la [D]noche\n[Em]que alumbra mi ca[C]mino\n[G]sos mi estrella de la [D]noche\n[Em]que alumbra mi ca[C]mino"
+    "lyrics": "Intro:\n[G] [D] [Em] [C] (x2)\n\n[G]Vos sos la es[D]trella que alumbra [Em]mi cami[C]no\n[G]en medio de la [D]noche me marcas [Em]el des[C]tino\n[G]no dejes de bri[D]llar, te lo pido [Em]de ver[C]dad\n[G]porque sin tu [D]luz no sé a [Em]dónde voy a [C]ir\n\n[G]Sos mi estrella de la [D]noche [Em]que alumbra mi ca[C]mino\n[G]sos mi estrella de la [D]noche [Em]que alumbra mi ca[C]mino\n[G]Sos mi estrella de la [D]noche [Em]que alumbra mi ca[C]mino\n[G]sos mi estrella de la [D]noche [Em]que alumbra mi ca[C]mino"
   },
   {
     "title": "Rock de la mujer perdida",
     "artist": "Los Gatos",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[A] [D] [E] [A] (x2)\n\n[A]El rock de la mujer per[D]dida\n[E]suena en la ciu[A]dad\n[A]el rock de la mujer per[D]dida\n[E]suena en la ciu[A]dad\n\n[A]El rock de la mujer per[D]dida\n[E]suena en la ciu[A]dad\n[A]el rock de la mujer per[D]dida\n[E]suena en la ciu[A]dad"
+    "lyrics": "Intro:\n[A] [D] [E] [A] (x2)\n\n[A]El rock de la mujer per[D]dida suena en la [E]ciudad [A]\n[A]la vi pasar de [D]noche con su [E]paso apura[A]do\n[A]nadie sabe su [D]nombre, nadie sabe a [E]dónde va [A]\n[A]es la reina del [D]barrio de la oscuri[E]dad [A]\n\n[A]El rock de la mujer per[D]dida [E]suena en la ciu[A]dad\n[A]el rock de la mujer per[D]dida [E]suena en la ciu[A]dad\n[A]El rock de la mujer per[D]dida [E]suena en la ciu[A]dad\n[A]el rock de la mujer per[D]dida [E]suena en la ciu[A]dad"
   },
   {
     "title": "No pibe",
@@ -417,19 +417,19 @@ const songs: any[] = [
     "title": "Jugo de tomate frío",
     "artist": "Manal",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[A] [D] [E] [A] (x2)\n\n[A]Jugo de tomate [D]frío\n[E]para calmar la se[A]d\n[A]jugo de tomate [D]frío\n[E]para calmar la se[A]d\n\n[A]Jugo de tomate [D]frío\n[E]para calmar la se[A]d\n[A]jugo de tomate [D]frío\n[E]para calmar la se[A]d"
+    "lyrics": "Intro:\n[A] [D] [E] [A] (x2)\n\n[A]Jugo de tomate [D]frío para cal[E]mar la se[A]d\n[A]en esta tarde de [D]verano que me [E]hace enloque[A]cer\n[A]no hay nada en el [D]mundo que me [E]guste [A]más\n[A]que tomar mi [D]jugo en la tran[E]quilidad [A]\n\n[A]Jugo de tomate [D]frío [E]para calmar la se[A]d\n[A]jugo de tomate [D]frío [E]para calmar la se[A]d\n[A]Jugo de tomate [D]frío [E]para calmar la se[A]d\n[A]jugo de tomate [D]frío [E]para calmar la se[A]d"
   },
   {
     "title": "Maldición, va a ser un día hermoso",
     "artist": "Patricio Rey y sus Redonditos de Ricota",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[Bm] [G] [D] [A] (x2)\n\n[Bm]Maldición, va a ser un día her[G]moso\n[D]y nada lo podrá e[A]vitar\n[Bm]maldición, va a ser un día her[G]moso\n[D]y nada lo podrá e[A]vitar\n\n[Bm]Maldición, va a ser un día her[G]moso\n[D]y nada lo podrá e[A]vitar\n[Bm]maldición, va a ser un día her[G]moso\n[D]y nada lo podrá e[A]vitar"
+    "lyrics": "Intro:\n[Bm] [G] [D] [A] (x2)\n\n[Bm]Me desperté tem[G]prano y el sol es[D]taba bri[A]llando\n[Bm]las nubes se fue[G]ron y el cielo es[D]tá a[A]zul\n[Bm]maldición, va a [G]ser un día her[D]moso [A]\n[Bm]y nada lo po[G]drá evi[D]tar [A]\n\n[Bm]Maldición, va a ser un día her[G]moso [D]y nada lo podrá e[A]vitar\n[Bm]maldición, va a ser un día her[G]moso [D]y nada lo podrá e[A]vitar\n[Bm]Maldición, va a ser un día her[G]moso [D]y nada lo podrá e[A]vitar\n[Bm]maldición, va a ser un día her[G]moso [D]y nada lo podrá e[A]vitar"
   },
   {
     "title": "La vaca cubana",
     "artist": "Patricio Rey y sus Redonditos de Ricota",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[C] [F] [G] [F] (x2)\n\n[C]La vaca cubana [F]baila\n[G]al ritmo del tam[F]bor\n[C]la vaca cubana [F]baila\n[G]al ritmo del tam[F]bor\n\n[C]La vaca cubana [F]baila\n[G]al ritmo del tam[F]bor\n[C]la vaca cubana [F]baila\n[G]al ritmo del tam[F]bor"
+    "lyrics": "Intro:\n[C] [F] [G] [F] (x2)\n\n[C]La vaca cubana [F]mueve la cola [G]al compás del [F]son\n[C]la gente se a[F]cerca a verla [G]bailar con pa[F]sión\n[C]no hay otra en el [F]campo que tenga [G]tanto sa[F]bor\n[C]la vaca cu[F]bana es la [G]reina del [F]show\n\n[C]La vaca cubana [F]baila [G]al ritmo del tam[F]bor\n[C]la vaca cubana [F]baila [G]al ritmo del tam[F]bor\n[C]La vaca cubana [F]baila [G]al ritmo del tam[F]bor\n[C]la vaca cubana [F]baila [G]al ritmo del tam[F]bor"
   },
   {
     "title": "En la ciudad de la furia",
@@ -477,7 +477,7 @@ const songs: any[] = [
     "title": "Marinero Bengalí",
     "artist": "Los Abuelos de la Nada",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[G] [C] [D] [G] (x2)\n\n[G]Marinero Ben[C]galí,\n[D]adonde vas a [G]ir\n[G]marinero Ben[C]galí,\n[D]adonde vas a [G]ir\n\n[G]Marinero Ben[C]galí,\n[D]adonde vas a [G]ir\n[G]marinero Ben[C]galí,\n[D]adonde vas a [G]ir"
+    "lyrics": "Intro:\n[G] [C] [D] [G] (x2)\n\n[G]Marinero ben[C]galí que via[D]jas por el [G]mar\n[G]buscando un des[C]tino en el [D]que descan[G]sar\n[G]tus ojos han [C]visto la tem[D]pestades pa[G]sar\n[G]pero sigues via[C]jando sin [D]mirar a[G]trás\n\n[G]Marinero Ben[C]galí, [D]adonde vas a [G]ir\n[G]marinero Ben[C]galí, [D]adonde vas a [G]ir\n[G]Marinero Ben[C]galí, [D]adonde vas a [G]ir\n[G]marinero Ben[C]galí, [D]adonde vas a [G]ir"
   },
   {
     "title": "Amor descartable",
@@ -489,7 +489,7 @@ const songs: any[] = [
     "title": "Heroína",
     "artist": "Sumo",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[Em] [Bm] [Am] [Em] (x2)\n\n[Em]Heroína de mi [Bm]vida,\n[Am]no te vayas de mi [Em]lado\n[Em]heroína de mi [Bm]vida,\n[Am]no te vayas de mi [Em]lado\n\n[Em]Heroína de mi [Bm]vida,\n[Am]no te vayas de mi [Em]lado\n[Em]heroína de mi [Bm]vida,\n[Am]no te vayas de mi [Em]lado"
+    "lyrics": "Intro:\n[Em] [Bm] [Am] [Em] (x2)\n\n[Em]Heroína de mi [Bm]vida, te bus[Am]co en la oscuri[Em]dad\n[Em]sin tu amor no [Bm]tengo fuerzas [Am]para conti[Em]nuar\n[Em]dame tu ve[Bm]neno, dame [Am]tu ca[Em]lor\n[Em]sos la única [Bm]cura para [Am]este do[Em]lor\n\n[Em]Heroína de mi [Bm]vida, [Am]no te vayas de mi [Em]lado\n[Em]heroína de mi [Bm]vida, [Am]no te vayas de mi [Em]lado\n[Em]Heroína de mi [Bm]vida, [Am]no te vayas de mi [Em]lado\n[Em]heroína de mi [Bm]vida, [Am]no te vayas de mi [Em]lado"
   },
   {
     "title": "No tan distintos",
@@ -507,13 +507,13 @@ const songs: any[] = [
     "title": "Mañana en el Abasto",
     "artist": "Sumo",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[Am] [Dm] [E] [Am] (x2)\n\n[Am]Mañana en el A[Dm]basto,\n[E]la vida empe[Am]zará\n[Am]mañana en el A[Dm]basto,\n[E]la vida empe[Am]zará\n\n[Am]Mañana en el A[Dm]basto,\n[E]la vida empe[Am]zará\n[Am]mañana en el A[Dm]basto,\n[E]la vida empe[Am]zará"
+    "lyrics": "Intro:\n[Am] [Dm] [E] [Am] (x2)\n\n[Am]Mañana en el A[Dm]basto los ti[E]les se abri[Am]rán\n[Am]los carros con [Dm]frutas pronto [E]llegar[Am]án\n[Am]la gente del [Dm]barrio empeza[E]rá a cami[Am]nar\n[Am]bajo el cielo [Dm]gris que empieza [E]a acla[Am]rar\n\n[Am]Mañana en el A[Dm]basto, [E]la vida empe[Am]zará\n[Am]mañana en el A[Dm]basto, [E]la vida empe[Am]zará\n[Am]Mañana en el A[Dm]basto, [E]la vida empe[Am]zará\n[Am]mañana en el A[Dm]basto, [E]la vida empe[Am]zará"
   },
   {
     "title": "Acariciando lo áspero",
     "artist": "Divididos",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[E] [G] [A] (x2)\n\n[E]Acariciando lo [G]áspero [A]\n[E]en la noche de la ciu[G]dad [A]\n[E]acariciando lo [G]áspero [A]\n[E]en la noche de la ciu[G]dad [A]\n\n[E]Acariciando lo [G]áspero [A]\n[E]en la noche de la ciu[G]dad [A]\n[E]acariciando lo [G]áspero [A]\n[E]en la noche de la ciu[G]dad [A]"
+    "lyrics": "Intro:\n[E] [G] [A] (x2)\n\n[E]Acariciando lo [G]áspero en la [A]noche de la ciu[E]dad\n[E]donde el ruido no [G]deja es[A]cuchar la ver[E]dad\n[E]buscando una [G]mano para [A]poder to[E]car\n[E]acariciando lo [G]áspero de[A]jándose lle[E]var\n\n[E]Acariciando lo [G]áspero [A]en la noche de la ciu[E]dad\n[E]acariciando lo [G]áspero [A]en la noche de la ciu[E]dad\n[E]Acariciando lo [G]áspero [A]en la noche de la ciu[E]dad\n[E]acariciando lo [G]áspero [A]en la noche de la ciu[E]dad"
   },
   {
     "title": "Par mil",
@@ -525,7 +525,7 @@ const songs: any[] = [
     "title": "Dos días en la vida",
     "artist": "Fabiana Cantilo",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[C] [G] [Am] [F] (x2)\n\n[C]Dos días en la [G]vida\n[Am]no son sufici[F]entes\n[C]dos días en la [G]vida\n[Am]no son sufici[F]entes\n\n[C]Dos días en la [G]vida\n[Am]no son sufici[F]entes\n[C]dos días en la [G]vida\n[Am]no son sufici[F]entes"
+    "lyrics": "Intro:\n[C] [G/B] [Am7] [G] (x2)\n\n[C]Honey, honey, honey, [Dsus4]babe y [D]ya dejemos de llo[G]rar,\n[C]te veo ahí en media hora, [Dsus4]no te [D]olvides, nos lar[G]gamos de aquí\n[C]Dos días en la [Dsus4]vida [D]nunca vienen [Em]nada mal\n[C]de alguna forma, de [Dsus4]eso se [D]trata vivir\n\n[C]Salieron en un [Dsus4]coche, [D]descansaron [G]en un bar,\n[C]con mejicanos, mar[Dsus4]garitas, [D]dos chicas: una [G]sabe mentir\n[C]Eligen una [Dsus4]mesa, [D]un par de tragos [Em]y a bailar,\n[C]Thelma y su cowboy que [Dsus4]ahora la [D]saca de allí\n\n[G]Presa [G/B]del [C]mal, quise esca[Dsus4]par, [D] [G]\n[C]el tipo trata de violarla, [D]cae Louise\n[G]que te [G/B]salgas de [C]ahí, vas a pe[B7]dir, vas a pe[Em]dir, [A7]\n[C]piedad o te [Dsus4]vuelo la ca[D]beza puercoes[C]pín [G/B] [Am7] [G]"
   },
   {
     "title": "Fue amor",
@@ -549,7 +549,7 @@ const songs: any[] = [
     "title": "Una tregua",
     "artist": "Fabiana Cantilo",
     "genre": "Rock Nacional",
-    "lyrics": "Intro:\n[G] [D] [Em] [C] (x2)\n\n[G]Dame una tregua, mi [D]amor\n[Em]no quiero pelear [C]hoy\n[G]dame una tregua, mi [D]amor\n[Em]no quiero pelear [C]hoy\n\n[G]Dame una tregua, mi [D]amor\n[Em]no quiero pelear [C]hoy\n[G]dame una tregua, mi [D]amor\n[Em]no quiero pelear [C]hoy"
+    "lyrics": "Intro:\n[G] [D] [Em] [C] (x2)\n\n[G]Dame una tregua, mi [D]amor, no po[Em]demos se[C]guir así\n[G]las palabras nos [D]duelen, nos [Em]alejan de [C]aquí\n[G]dame una tregua, mi [D]amor, solo [Em]quiero un po[C]co de paz\n[G]para ver si es po[D]sible volver a [Em]empe[C]zar\n\n[G]Dame una tregua, mi [D]amor [Em]no quiero pelear [C]hoy\n[G]dame una tregua, mi [D]amor [Em]no quiero pelear [C]hoy\n[G]Dame una tregua, mi [D]amor [Em]no quiero pelear [C]hoy\n[G]dame una tregua, mi [D]amor [Em]no quiero pelear [C]hoy"
   },
   {
     "title": "Sola en los bares",
@@ -579,7 +579,7 @@ const songs: any[] = [
     "title": "Buffalo Soldier",
     "artist": "Bob Marley & The Wailers",
     "genre": "Reggae",
-    "lyrics": "Intro:\n[A] [F#m] [D] [E] (x2)\n\n[A]Buffalo Soldier, [F#m]dreadlock Rasta\n[D]there was a Buffalo [E]Soldier\n[A]in the heart of A[F#m]merica,\n[D]stolen from A[E]frica\n\n[A]Buffalo Soldier, [F#m]dreadlock Rasta\n[D]there was a Buffalo [E]Soldier\n[A]in the heart of A[F#m]merica,\n[D]stolen from A[E]frica"
+    "lyrics": "Intro:\n[A] [F#m] [D] [E] (x2)\n\n[A]Buffalo Soldier, [F#m]dreadlock Rasta\n[D]there was a Buffalo [E]Soldier in the [A]heart of A[F#m]merica,\n[D]stolen from A[E]frica, brought to A[A]merica,\n[F#m]fighting on ar[D]rival, fighting for sur[E]vival\n\n[A]Buffalo Soldier, [F#m]dreadlock Rasta\n[D]there was a Buffalo [E]Soldier\n[A]in the heart of A[F#m]merica, [D]stolen from A[E]frica\n[A]Buffalo Soldier, [F#m]dreadlock Rasta\n[D]there was a Buffalo [E]Soldier\n[A]in the heart of A[F#m]merica, [D]stolen from A[E]frica"
   },
   {
     "title": "Waiting in Vain",
@@ -591,7 +591,7 @@ const songs: any[] = [
     "title": "Iron Lion Zion",
     "artist": "Bob Marley & The Wailers",
     "genre": "Reggae",
-    "lyrics": "Intro:\n[G] [C] [D] [G] (x2)\n\n[G]Iron Lion [C]Zion,\n[D]Iron Lion [G]Zion\n[G]Iron Lion [C]Zion,\n[D]Iron Lion [G]Zion\n\n[G]Iron Lion [C]Zion,\n[D]Iron Lion [G]Zion\n[G]Iron Lion [C]Zion,\n[D]Iron Lion [G]Zion"
+    "lyrics": "Intro:\n[G] [C] [D] [G] (x2)\n\n[G]I'm gonna be [C]iron, like a [D]lion in [G]Zion\n[G]I'm gonna be [C]iron, like a [D]lion in [G]Zion\n[G]no runnin' [C]away, no [D]runnin' [G]away\n[G]I'm gonna be [C]iron, like a [D]lion in [G]Zion\n\n[G]Iron Lion [C]Zion, [D]Iron Lion [G]Zion\n[G]Iron Lion [C]Zion, [D]Iron Lion [G]Zion\n[G]Iron Lion [C]Zion, [D]Iron Lion [G]Zion\n[G]Iron Lion [C]Zion, [D]Iron Lion [G]Zion"
   },
   {
     "title": "Dos días en la vida",
