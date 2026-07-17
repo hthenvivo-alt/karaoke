@@ -592,6 +592,48 @@ const songs: any[] = [
     "artist": "Bob Marley & The Wailers",
     "genre": "Reggae",
     "lyrics": "Intro:\n[G] [C] [D] [G] (x2)\n\n[G]Iron Lion [C]Zion,\n[D]Iron Lion [G]Zion\n[G]Iron Lion [C]Zion,\n[D]Iron Lion [G]Zion\n\n[G]Iron Lion [C]Zion,\n[D]Iron Lion [G]Zion\n[G]Iron Lion [C]Zion,\n[D]Iron Lion [G]Zion"
+  },
+  {
+    "title": "Dos días en la vida",
+    "artist": "Fito Paez",
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[C] [G/B] [Am7] [G] (x2)\n\n[C]Honey, honey, honey, [Dsus4]babe y [D]ya dejemos de llo[G]rar,\n[C]te veo ahí en media hora, [Dsus4]no te [D]olvides, nos lar[G]gamos de aquí\n[C]Dos días en la [Dsus4]vida [D]nunca vienen [Em]nada mal\n[C]de alguna forma, de [Dsus4]eso se [D]trata vivir\n\n[C]Salieron en un [Dsus4]coche, [D]descansaron [G]en un bar,\n[C]con mejicanos, mar[Dsus4]garitas, [D]dos chicas: una [G]sabe mentir\n[C]Eligen una [Dsus4]mesa, [D]un par de tragos [Em]y a bailar,\n[C]Thelma y su cowboy que [Dsus4]ahora la [D]saca de allí\n\n[G]Presa [G/B]del [C]mal, quise esca[Dsus4]par, [D] [G]\n[C]el tipo trata de violarla, [D]cae Louise\n[G]que te [G/B]salgas de [C]ahí, vas a pe[B7]dir, vas a pe[Em]dir, [A7]\n[C]piedad o te [Dsus4]vuelo la ca[D]beza puercoes[C]pín [G/B] [Am7] [G]"
+  },
+  {
+    "title": "ADIÓS",
+    "artist": "GUSTAVO CERATTI",
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[C] [G] [D] [Em] (x2)\n\n[C]Suspiraban lo [G]mismo los [D]dos\ny hoy son [Em]parte de una lluvia [C]lejos\nNo te con[G]fundas, no sirve el [D]rencor\nson es[Em]pasmos después del a[C]díos\n\n[C]Pones can[G]ciones [D]tristes\npara sen[Em]tirte me[C]jor\nTu es[G]encia es más vi[D]sible\nDel mismo do[Em]lor\nvendrá un nuevo ama[C]necer\nUh-uh-uh-uh-[G]uh [D] [Em]\n\n[C]Tal vez col[G]maban la [D]necesidad\npero hay va[Em]cíos que no pueden lle[C]nar\nNo cono[G]cían la profundi[D]dad\nhasta que un [Em]día no dio para [C]más\n\n[C]Quedabas espe[G]rando\n[D]ecos que no [Em]volverán\n[C]Flotando en[G]tre re[D]chazos\nDel mismo do[Em]lor\nvendrá un nuevo ama[C]necer\nUh-uh-uh-uh-[G]uh [D] [Em]\n\n[C]Separarse de la [G]especie por algo supe[D]rior\nno es so[Em]berbia, es a[C]mor\nno es so[G]berbia, es a[D]mor [Em]\n[C]Poder decir a[G]diós, es cre[D]cer [Em]\n[C]Poder decir a[G]diós, es cre[D]cer [Em] [C] [G] [D] [Em]"
+  },
+  {
+    "title": "Carnaval de Brasil",
+    "artist": "Andrés Calamaro",
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[C] [C/E] [F] [G/B] (x2)\n[C] [C/E] [F] [G#dim] [Bdim]\n\n[C]La musa es una [C/E]sola musa o [F]es una serpiente de [G#dim]muchas ca[Bdim]bezas,\n[Am]los busca[G]dores de pro[F]mesas la tientan con cerveza\n[C]Si se va puede [C/E]volver, el [F]día menos pen[G#dim]sa[Bdim]do,\n[Am]para darle su con[G]suelo al [F]poeta mal ha[F/G]blado\n\n[C]No son mu[Gsus]jeres au[Am]sentes, no son cu[F]chillos en los dientes,\n[C]no son [Gsus]martes de carna[Am]val de Bra[F]sil\n[C]no son can[Gsus]ciones ur[Am]gentes, no son a[F]suntos pendientes,\n[C]no son [Gsus]martes de carna[Am]val de Bra[F]sil\n\n[C]Habrá que desenvai[C/E]nar las [F]espadas del [G#dim]texto\n[Am]y escribir una can[G]ción aunque [F]no haya algún pretexto\n[G]Y dedicár[C]sela al [C/E]primero que [F]pase cami[G#dim]nando,\n[Am]al que se que[G]dó pensando, al [F]que no quiere pen[F/G]sar\n\n[C]Al olvido selec[C/E]tivo, a la [F]memoria per[G#dim]di[Bdim]da,\n[Am]a los pe[Em/G]dazos de [F]vida que no [G]vamos a perder jamás\n\n[C]No son mu[Gsus]jeres au[Am]sentes, no son cu[F]chillos en los dientes,\n[C]no son [Gsus]martes de carna[Am]val de Bra[F]sil\n[C]no son can[Gsus]ciones ur[Am]gentes, no son a[F]suntos pendientes,\n[C]no son [Gsus]martes de carna[Am]val de Bra[F]sil"
+  },
+  {
+    "title": "Me haces bien",
+    "artist": "Jorge Drexler",
+    "genre": "Pop",
+    "lyrics": "Intro:\n[A] [A11] [A] [Amaj7] [A7] [D9/F#] [E7] (x2)\n\n[A]Para con[A11]tarte, [A]canto\n[Amaj7]quiero que [Amaj7/11]sepas [A7]cuánto\n[D9/F#]me haces bien, [E7]me haces bien\n[A]me haces [A11]bien [A]\n\n[A]Te quiero [A11]de mil [A]modos\n[Amaj7]te quiero [Amaj7/11]y sobre [A7]todo\n[D9/F#]me haces bien, [E7]me haces bien\n[A]me haces bien\n\n[Bm7]Basta ver el re[E7]flejo de tus [Amaj7]ojos en los [F#7]míos\n[Bm7]como se lleva el [E7]frío [Amaj7]para enten[A7]der\n[D]que el corazón no [Dm]miente, [C#m7]que afortunada[F#7]mente\n[Bm7]me haces bien, [E7]me haces bien\n\n[A]Para con[A11]tarte, [A]canto\n[Amaj7]quiero que [Amaj7/11]sepas [A7]cuánto\n[D9/F#]me haces bien, [E7]me haces bien\n[A]me haces [A11]bien [A]"
+  },
+  {
+    "title": "Pensé que se trataba de cieguitos",
+    "artist": "Los Twist",
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[A] (x4)\n\n[A]Era un sábado a la noche, tenía plata y hacía calor\n[D]me dije, viejo, aprovechá, sos joven\n[A]y me fui al cine a ver una de terror\n[E]salí a la calle, paré un [D]taxi, y me fui, [A]por ahí... [E]\n\n[A]Bajé en Sarmiento y Esmeralda\ncompré un paquete de pastillas Renomé\nen eso siento que un señor me llama\nal darme vuelta me di cuenta que eran tres\n[D]muy bien peinados, muy bien vestidos\n[A]y con un Ford verde.\n[E]Pensé que se trataba de [D]cieguitos,\n[A]anteojos negros usaban los [E]tres.\n\n[A]Me preguntaron la hora y al instante me subieron\nme preguntaron por gente que no vi jamás\nme preguntaron qué hacía yo en la calle\ny por el nombre de mi tío carnal\n[D]muy bien peinados, muy bien vestidos\n[A]y con un Ford verde.\n[E]Pensé que se trataba de [D]cieguitos,\n[A]anteojos negros usaban los [E]tres."
+  },
+  {
+    "title": "Promesas sobre el bidet",
+    "artist": "Charly García",
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[Dm7] [Gm7] [Am7] (x2)\n\n[Gm7]Por favor, [Am7]no hagas pro[Dm7]mesas sobre el bidet.\n[Gm7]Por favor, [Am7]no me abras [Dm7]más los sobres.\n[Gm7]Por favor, [Am7]yo te pro[Dm7]meto, te esperaré,\n[Bbmaj7]si es que paro [Csus4]de correr.\n\n[Gm7]Por favor, [Am7]sigue la [Dm7]sombra de mi bebé.\n[Gm7]Por favor, [Am7]no bebas [Dm7]más, no llores.\n[Gm7]Por favor, [Am7]yo te pro[Dm7]meto, te escribiré,\n[Bbmaj7]si es que para [Csus4]de llover.\n\n[F]Porque me [Fm]tratas tan [Dm7]bien, me tratas tan mal.\n[Bbmaj7]¿Sabés que no aprendí a vivir?\n[F]A veces es[Fm]toy tan bien, es[Dm7]toy tan down,\n[Ebmaj7]calambres en el alma.\n[Dm7]Cada cual [A/C#]tiene un [Am/C]trip en el [Bø]bocho,\n[Bbmaj7]difícil que lle[Am7]guemos a po[Csus4]nernos de a[Dm7]cuerdo."
+  },
+  {
+    "title": "Qué Ves",
+    "artist": "Divididos",
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[Am] [G] [D/F#] [F] (x4)\n\n[Am]El wawa de [G]Troilo no [D/F#]quiere arran[F]car\n[Am]falta en[G]vido y truco, [D/F#]chiste nacio[F]nal\n[Am]\"Estamos en [G]vena\" grita el [D/F#]mayo[F]ral\n[Am]y pagás el [G]vale un [D/F#]día des[F]pués\n\n[Am]¿Qué [G]ves?\n[Am]¿Qué ves [G]cuando me ves?\n[Am]Cuando la [G]mentira es la [D/F#]ver[F]dad\n\n[Am]La prensa de [G]dios lleva [D/F#]póster cen[F]tral\n[Am]el bien y el [G]mal de[D/F#]finen por pe[F]nal\n[Am]fía la cha[G]pita, porrón [D/F#]en Palo[F]mar\n[Am]cruzando la [G]vía pa' [D/F#]poderla pa[F]sar\n\n[Am]¿Qué [G]ves?\n[Am]¿Qué ves [G]cuando me ves?\n[Am]Cuando la [G]mentira es la [D/F#]ver[F]dad\n\n[Am]Mentira [G]es la [Am]últi[G]ma ver[Am]dad"
   }
 ];
 
