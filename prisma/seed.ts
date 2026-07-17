@@ -628,6 +628,22 @@ async function main() {
 
   const count = await prisma.song.count()
   console.log(`✅ Done! Created: ${createdCount}, Updated: ${updatedCount}. Total in database: ${count}`)
+
+  try {
+    const seedKeys = new Set(songs.map(s => `${s.title.toLowerCase().trim()}::${s.artist.toLowerCase().trim()}`));
+    const dbSongs = await prisma.song.findMany({ select: { title: true, artist: true } });
+    const extraSongs = dbSongs.filter(s => !seedKeys.has(`${s.title.toLowerCase().trim()}::${s.artist.toLowerCase().trim()}`));
+
+    if (extraSongs.length > 0) {
+      console.log(`\n⚠️ Se encontraron ${extraSongs.length} canciones en la base de datos que NO están en seed.ts:`);
+      extraSongs.forEach((s, idx) => {
+        console.log(`   ${idx + 1}. "${s.title}" - ${s.artist}`);
+      });
+      console.log(`\nCopiá esta lista de la consola de Render y pegámela en el chat, así les busco los acordes!\n`);
+    }
+  } catch (err) {
+    console.error("Error al buscar canciones extra:", err);
+  }
 }
 
 main()
