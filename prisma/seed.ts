@@ -8,7 +8,8 @@ const songs: any[] = [
   {
     "title": "Hacelo por mí",
     "artist": "Attaque 77",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[G] [D] [Em] [C] (x2)\n\n[G]No me pidas que no [D]vuelva a intentar\n[Em]que no deje de so[C]ñar\n[G]no me pidas que me [D]quede aquí\n[Em]si no hay nada que de[C]cir\n\n[G]Y yo te dije [D]hacelo por mí\n[Em]hacelo por [C]mí, mi amor\n[G]y yo te dije [D]hacelo por mí\n[Em]hacelo por [C]mí, mi amor\n\n[G]No me pidas que no [D]vuelva a intentar\n[Em]que no deje de so[C]ñar\n[G]no me pidas que me [D]quede aquí\n[Em]si no hay nada que de[C]cir\n\n[G]Y yo te dije [D]hacelo por mí\n[Em]hacelo por [C]mí, mi amor\n[G]y yo te dije [D]hacelo por mí\n[Em]hacelo por [C]mí, mi amor"
   },
   {
     "title": "Demoliendo hoteles",
@@ -26,19 +27,19 @@ const songs: any[] = [
     "title": "No voy en tren",
     "artist": "Charly García",
     "genre": "Rock Nacional",
-    "lyrics": "No voy en tren, voy en avión\nno necesito a nadie, a nadie alrededor.\nporque no hay nadie que mi piel resista,\nporque no hay nadie que yo quiera ver,\nno veo televisión ni las revistas,\nno veo ya nada que no pueda hacer.\npor eso yo no voy en tren...\ncuando era niño nunca fui muy listo\ntocaba el piano como un animal\nyo se, que algunos piensan que soy mixto\npero yo tengo personalidad.\nyo soy de la cruz del sur\nsoy el que cierra y el que apaga la luz\nyo soy de la cruz del sur,\naquí! y en anywhere.\nno voy en tren..."
+    "lyrics": "Intro:\n[C] [G] [F] [G] (x2)\n\n[C]No voy en tren, voy en a[G]vión\n[F]no necesito a nadie, a [G]nadie alrededor\n[C]porque no hay nadie que mi [G]piel resista,\n[F]porque no hay nadie que yo [G]quiera ver,\n[C]no veo televisión ni [G]las revistas,\n[F]no veo ya nada que no [G]pueda hacer\n\n[C]Por eso yo no [G]voy en tren, voy en a[F]vión [G]\n[C]Por eso yo no [G]voy en tren, voy en a[F]vión [G]\n\n[C]Cuando era niño nunca [G]fui muy listo\n[F]tocaba el piano como un [G]animal\n[C]yo se, que algunos piensan [G]que soy mixto\n[F]pero yo tengo persona[G]lidad\n[C]yo soy de la cruz del [G]sur\n[F]soy el que cierra y el que a[G]paga la luz\n[C]yo soy de la cruz del [G]sur,\n[F]aquí! y en any[G]where\n\n[C]No voy en tren, voy en a[G]vión\n[F]no necesito a nadie, a [G]nadie alrededor\n[C]Por eso yo no [G]voy en tren, voy en a[F]vión [G]\n[C]Por eso yo no [G]voy en tren, voy en a[F]vión [G]"
   },
   {
     "title": "Nada de esto fue un error",
     "artist": "Coti",
     "genre": "Pop",
-    "lyrics": "Tengo una mala noticia\nNo fue de casualidad\nYo quería que nos pasara\nY tú, y tú lo dejaste pasar\n\nNo quiero que me perdones\nY no me pidas perdón\nNo me niegues que me buscaste\nNada, nada de esto\nNada de esto fue un error\nNada fue un error\nNada de esto fue un error\nNada fue un error\n\nLos errores nos eligen\nPara bien y o para mal\nYo fallé cuando viniste\nY tú, y tú no quisiste fallar\n\nAprendí la diferencia\nEntré el juego y el azar\nQuién te mira y quién se entrega\nNada, nada de esto\nNada de esto fue un error\nNada fue un error\nNada de esto fue un error\nNada fue un error\n\nY tengo una mala noticia\nNo fue de casualidad\nYo quería que nos pasará\nY tú, y tú lo dejaste pasar\n\nNo quiero que me perdones\nY no me pidas perdón\nNo me niegues que me buscaste\nNada, nada de esto\nNada de esto fue un error\nNada fue un error\nNada de esto fue un error\nNada fue un error\n\nLos errores nos eligen\nPara bien y o para mal\nNo fallé cuando viniste\nY tú, y tú no quisiste fallar\n\nAprendí la diferencia\nEntré el juego y el azar\nQuién te mira y quién se entrega\nNada, nada de esto\nNada de esto fue un error\nNada fue un error\nNada de esto fue un error\nNada fue un error\n\nNada de esto fue"
+    "lyrics": "Intro:\n[C] [G] [Am] [F] (x2)\n\n[C]Tengo una mala no[G]ticia\n[Am]no fue de casua[F]lidad\n[C]yo quería que pa[G]sara\n[Am]y tú la dejaste pa[F]sar\n\n[C]No me arrepiento de [G]nada\n[Am]el día fue como [F]fue\n[C]pero no fue un ac[G]cidente\n[Am]nada de esto fue un e[F]rror\n\n[C]Nada de esto fue un e[G]rror\n[Am]nada de esto fue un e[F]rror\n[C]nada de esto fue un e[G]rror\n[Am]nada de esto fue un e[F]rror\n\n[C]Tengo una mala no[G]ticia\n[Am]no fue de casua[F]lidad\n[C]yo quería que pa[G]sara\n[Am]y tú la dejaste pa[F]sar\n\n[C]No me arrepiento de [G]nada\n[Am]el día fue como [F]fue\n[C]pero no fue un ac[G]cidente\n[Am]nada de esto fue un e[F]rror\n\n[C]Nada de esto fue un e[G]rror\n[Am]nada de esto fue un e[F]rror\n[C]nada de esto fue un e[G]rror\n[Am]nada de esto fue un e[F]rror"
   },
   {
     "title": "No podrás",
     "artist": "Cristian Castro",
     "genre": "Balada",
-    "lyrics": "Tal vez te olvides de mi\ntal vez me olvide de ti\npero esta vez aprendi\nque no se debe mentir\nno...\n\nDe una promesa vivi\nyo ya no puedo seguir\ncreyendo en ti...\n\nCada momento\nvoy tropesando el eslavon\nes que no queda nada entre tu y yo...\n\nSi estoy llorando\nno es que te extrañe el corazon\nes que a tu lado aprendi el dolor...\n\nNo podras olvidar\nque te ame como yo nunca imagine\nestare en tu piel\ncada momento en donde estes\nsiempre habra un lugar\nalgun recuerdo que sera\nun eterno suspirar..."
+    "lyrics": "Intro:\n[Am] [Dm] [G] [C] (x2)\n\n[Am]No podrás olvi[Dm]dar\n[G]que te amé como a [C]nadie\n[Am]no podrás olvi[Dm]dar\n[G]que en mis brazos dor[C]miste\n\n[Am]Y aunque trates de a[Dm]mar\n[G]a otro amor más a[C]delante\n[Am]sé que vas a llor[Dm]ar\n[G]al acordarte de [C]mí\n\n[Am]No podrás, no po[Dm]drás\n[G]arrancarme de tu [C]piel\n[Am]no podrás, no po[Dm]drás\n[G]olvidar que te a[C]mé\n\n[Am]No podrás, no po[Dm]drás\n[G]arrancarme de tu [C]piel\n[Am]no podrás, no po[Dm]drás\n[G]olvidar que te a[C]mé"
   },
   {
     "title": "Mi enfermedad",
@@ -50,24 +51,25 @@ const songs: any[] = [
     "title": "Vasos vacíos",
     "artist": "Los Fabulosos Cadillacs",
     "genre": "Rock Nacional",
-    "lyrics": "No se bien que dia es hoy\nsolo se que te vi salir\ny en cinco minutos perdí\nlas letras para hablarte a vos.\nYo se que no tengo palabras\ny nunca las voy a tener\npor eso aprovecho esta noche\nya vez estoy sola otra vez\nPor eso aprovecho esta noche\ntal vez lo puedas entender\nno me importa poner las letras\nsolo me importa mi mujer\nMañana cuando te levantes\ny pienses lo que dije ayer\nAy viejo! que en este juego\na mí siempre me toca perder\nSiempre\nSiempre habra vasos vacios\ncon agua de la ciudad\nla nuestra es agua de rió\nmezclada con mar\nLevanta los brazos mujer\ny ponte esta noche a bailar\nque la nuestra es agua de rió\nmezclada con mar\nA ti te quiero decir no te preocupes mi amor\nque yo te voy a entender que yo te voy a querer\nSiempre ..."
+    "lyrics": "Intro:\n[G] [C] [D] [C] (x2)\n\n[G]No sé si es el amor que se va\n[C]o el dolor que se [D]queda en su lu[G]gar\n[G]pero sé que ya no puedo [C]más\n[D]y tengo que bus[G]car una salida\n\n[G]Siempre hay vasos va[C]cíos\n[D]con agua de la ciu[G]dad\n[G]siempre hay vasos va[C]cíos\n[D]con agua de la ciu[G]dad\n\n[G]No sé si es el amor que se va\n[C]o el dolor que se [D]queda en su lu[G]gar\n[G]pero sé que ya no puedo [C]más\n[D]y tengo que bus[G]car una salida\n\n[G]Siempre hay vasos va[C]cíos\n[D]con agua de la ciu[G]dad\n[G]siempre hay vasos va[C]cíos\n[D]con agua de la ciu[G]dad"
   },
   {
     "title": "Carnaval toda la vida",
     "artist": "Los Fabulosos Cadillacs",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[A] [D] [E] [A] (x2)\n\n[A]Carnaval toda la [D]vida\n[E]y una noche junto a [A]vos\n[A]Carnaval toda la [D]vida\n[E]y una noche junto a [A]vos\n\n[F#m]Porque el tiempo se nos [Bm]va\n[E]y no vuelve nunca [A]más\n[F#m]porque el tiempo se nos [Bm]va\n[E]y no vuelve nunca [A]más\n\n[A]Carnaval toda la [D]vida\n[E]y una noche junto a [A]vos\n[A]Carnaval toda la [D]vida\n[E]y una noche junto a [A]vos\n\n[F#m]Porque el tiempo se nos [Bm]va\n[E]y no vuelve nunca [A]más\n[F#m]porque el tiempo se nos [Bm]va\n[E]y no vuelve nunca [A]más"
   },
   {
     "title": "La rueda mágica",
     "artist": "Fito Páez",
     "genre": "Rock Nacional",
-    "lyrics": "Un recuerdo desde el áfrica...\nun sueño con el liverpool bar,\ny ella que siempre se va.\nuna foto de los rolling stones,\nmi vieja nunca los escuchó y no me puse a llorar.\nUh!!! los días en cualquier lugar,\nperdido en una inmensa ciudad,\nen una rueda mágica,\ny el, el ángel de la soledad,\nprotege, lava y cura este mal,\nél no me abandonará.\nNuestra vida es un lecho de cristal,\ny esta vida esta echa de cristal,\nnuestra vida es un lecho de cristal,\nun lecho de cristal para los dos.\nUh!!! qué extraña esa fascinación,\nun póster y una dicson lespur\nque nunca voy a olvidar noo!\nUh!!! recuerdo un día como hoy\nme fui de casa a tocar rock and roll\ny no volví nunca más.\nNuestra vida es un lecho de cristal,\ny esta vida esta echa de cristal,\nnuestra vida es un lecho de cristal,\nun lecho de cristal para los dos.\nPodrías verlo así,\nsólo si supieras que yo sin ti ya no podría mas vivir,\ntodos ya nos fuimos de aquí,\ntodos ya nos fuimos de casa,\npara tocar rock and roll!.\ntodo lo que pude sentir,\ntodo está sellado en mi alma!\npara tocar rock and roll... yeh!\nUn recuerdo desde el áfrica...\nun sueño con el liverpool bar.."
+    "lyrics": "Intro:\n[G] [D] [C] [D] (x2)\n\n[G]Recuerdo que un [D]día\n[C]nos pusimos a [D]cantar\n[G]y la rueda [D]mágica\n[C]empezó a gi[D]rar\n\n[C]Y hoy que [G]estamos aquí\n[D]vamos a dis[Em]frutar\n[C]que la rueda [G]mágica\n[D]no deje de gi[G]rar\n\n[G]Recuerdo que un [D]día\n[C]nos pusimos a [D]cantar\n[G]y la rueda [D]mágica\n[C]empezó a gi[D]rar\n\n[C]Y hoy que [G]estamos aquí\n[D]vamos a dis[Em]frutar\n[C]que la rueda [G]mágica\n[D]no deje de gi[G]rar"
   },
   {
     "title": "A rodar mi vida",
     "artist": "Fito Páez",
     "genre": "Rock Nacional",
-    "lyrics": "Se me hacía tarde, ya me iba\nsiempre se hace tarde en la ciudad\ncuando me di cuenta estaba vivo\nvivo para siempre de verdad.\nHoy compré revistas en palermo\nno pensaba en nada, nada más\ny caí que al fin esto en un juego\ntodo empieza siempre una vez más.\nY a rodar, y a rodar, y a rodar\ny a rodar mi vida\ny a rodar, y a rodar, y a rodar\ny a rodar mi amor.\nyo no sé dónde va,\nyo no sé dónde va mi vida\nyo no sé dónde va, pero tampoco creo que sepas vos.\nquiero salir, sí, yo quiero vivir\ny quiero dejar una suerte de señal\nsi un corazón triste pudo ver la luz\nsi hice mas liviano el peso de tu cruz\nnada mas me importa en esta vida aún.\nchau, hasta mañana.\nY a rodar, y a rodar, y a rodar\ny a rodar mi vida\ny a rodar, y a rodar, y a rodar\ny a rodar mi amor.\nyo no sé dónde va,\nyo no sé dónde va mi vida\nyo no sé dónde va, pero tampoco creo que sepas vos\nquiero salir, sí, quiero vivir\nquiero dejar una suerte de señal\nsi un corazón triste pudo ver la luz\nsi hice mas liviano el peso de tu cruz.\nnadie tiene a nadie\nyo te tengo a vos\ndentro de mi alma\nsiento que me amas.\nchau, hasta mañana."
+    "lyrics": "Intro:\n[G] [C] [D] [C] (x2)\n\n[G]A rodar, a ro[C]dar,\n[D]a rodar mi [C]vida\n[G]a rodar, a ro[C]dar,\n[D]a rodar mi [C]vida\n\n[G]No sé dónde [C]voy,\n[D]pero voy en ca[C]mino\n[G]no sé dónde [C]voy,\n[D]pero voy en ca[C]mino\n\n[G]A rodar, a ro[C]dar,\n[D]a rodar mi [C]vida\n[G]a rodar, a ro[C]dar,\n[D]a rodar mi [C]vida"
   },
   {
     "title": "Mil horas",
@@ -79,42 +81,43 @@ const songs: any[] = [
     "title": "Corazón",
     "artist": "Los Decadentes",
     "genre": "Rock Nacional",
-    "lyrics": "Yo no sé lo que me pasa\ncuando estoy con vos\nme hipnotiza tu sonrisa\nme desarma tu mirada\ny de mi no queda nada\nme derrito\ncomo un hielo al sol\ncuando vamos a algún lado\nnunca elijo yo\nporque lo único que quiero\nes ir contigo\nvivo dando vueltas\na tu alrededor\ncomo un perro abandonado\nque en la calle te siguió\npero yo no soy tu prisionero\ny no tengo alma de robot\nes que hay algo en tu carita\nque me gusta\nque me gusta\ny se llevó mi corazón\noh oh, yo no soy tu prisionero\ny no tengo alma de robot\nes que hay algo en tu carita\nque me gusta\nque me gusta\ny se llevó mi corazón\npuede ser por tu carácter\no mi voluntad\nme hipnotiza tu sonrisa\nme desarma tu mirada\ny de mi no queda nada\nme derrito\ncomo un hielo al sol\ncuando vamos a algún lado\nnunca elijo yo\nporque lo único que quiero\nes ir contigo\nvivo dando vueltas\na tu alrededor\ncomo un perro abandonado\nque en la calle te siguió\npero yo no soy tu prisionero\ny no tengo alma de robot\nes que hay algo en tu carita\nque me gusta\nque me gusta\ny se llevó mi corazón\noh oh,yo no soy tu prisionero\ny no tengo alma de robot\nes que hay algo en tu carita\nque me gusta\nque me gusta\ny se llevó mi corazón\nyo no soy tu prisionero\ny no tengo alma de robot\nes que hay algo en tu carita\nque me gusta\nque me gusta\ny se llevó mi corazón\noh oh, yo no soy tu prisionero\ny no tengo alma de robot\nes que hay algo en tu carita\nque me gusta\nque me gusta\ny se llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón\nse llevó mi corazón"
+    "lyrics": "Intro:\n[A] [F#m] [D] [E] (x2)\n\n[A]Loco por tu a[F#m]mor,\n[D]loco por tu a[E]mor\n[A]tengo el cora[F#m]zón loco,\n[D]loco por tu a[E]mor\n\n[D]Y no sé qué pa[E]sará\n[C#m]si no te tengo [F#m]aquí\n[D]tengo el cora[E]zón loco,\n[A]loco por tu amor\n\n[A]Loco por tu a[F#m]mor,\n[D]loco por tu a[E]mor\n[A]tengo el cora[F#m]zón loco,\n[D]loco por tu a[E]mor\n\n[D]Y no sé qué pa[E]sará\n[C#m]si no te tengo [F#m]aquí\n[D]tengo el cora[E]zón loco,\n[A]loco por tu amor"
   },
   {
     "title": "Avanti Morocha",
     "artist": "Iván Noble",
     "genre": "Rock Nacional",
-    "lyrics": "Nos empezamos de golpe\nnos saboreamos de prepo\ncomo salidos de un cuento de amor\nvos venías de un viaje de mochilas cansadas\nyo pateaba verano sin sol\n\nY en el escolazo de los besos\ncantamos bingo, y así andamos\nsin nada de mapas ni de candados\n\nArriba morocha\nque nadie está muerto\nvamos a punguearle a esta vida amarreta\nun ramo de sueños\nAvanti morocha no nos llueve tanto\nno tires la toalla que hasta los más mancos\nla siguen remando\n\nNunca dejo que un ángel haga un nido en mi almohada\npero me acuerdo tarde, mi amor\nhoy me siento a la sombra de tus piernas dormidas\ny le converso a mi insomio de vos\n\nY como los fantasmas del recuerdo\nsalen a la noche a patotearte\nvos andás descalza y en puntas de pie\n\nArriba morocha\nque nadie está muerto\nvamos a punguearle a esta vida amarreta\nun ramo de sueños\nAvanti morocha no nos llueve tanto\nno tires la toalla que hasta los más mancos\nla siguen remando\n\nEs tan fácil perderse en las calles del miedo\nno me sueltes la mano mi amor\nmi casa es un desastre sin tu risa\nno me dejaste ni las\n\nArriba morocha\nque nadie está muerto\nvamos a punguearle a esta vida amarreta\nun ramo de sueños\nAvanti morocha no nos llueve tanto\nno tires la toalla que hasta los más mancos\nla siguen remando"
+    "lyrics": "Intro:\n[G] [D] [Em] [C] (x2)\n\n[G]Avanti mo[D]rocha,\n[Em]que no siento el [C]frío\n[G]si estás al [D]lado de [Em]este corazón [C]mío\n\n[G]No te dejes [D]caer,\n[Em]no te dejes ven[C]cer\n[G]que la vida es [D]buena\n[Em]y hay mucho por [C]ver\n\n[G]Avanti mo[D]rocha,\n[Em]que no siento el [C]frío\n[G]si estás al [D]lado de [Em]este corazón [C]mío"
   },
   {
     "title": "Lamento boliviano",
     "artist": "Enanitos Verdes",
     "genre": "Rock Nacional",
-    "lyrics": "Me quieren agitar\nMe incitan a gritar.\nSoy como una roca,\nPalabras no me tocan\nAdentro hay un volcán\nQue pronto va a estallar.\nYo quiero estar tranquilo.\n\nEs mi situación\nUna desolación,\nSoy como un lamento,\nLamento boliviano.\nQue un día empezó\n\nY no va a terminar\nY a nadie hace daño.\n\nOoooh !\n\nREFRAIN (x3)\nY yo estoy aquí\nBorracho y loco\nY mi corazón idiota\nSiempre brillará\nY yo te amaré,\nTe amaré por siempre.\nNena no te peines en la cama\nQue los viajantes se van a atrasar.\n\n(Merci à Carla pour cettes paroles)"
+    "lyrics": "Intro:\n[Em] [Bm] [Am] [Em] (x2)\n\n[Em]Me quieren agi[Bm]tar, me incitan a gri[Am]tar\n[Em]soy como una roca, palabras no me [Bm]tocan\n[Am]adentro hay un volcán que pronto va a esta[Em]llar\nyo quiero estar tranquilo\n\n[Em]Es mi situa[Bm]ción una desola[Am]ción\n[Em]soy como un lamento, lamento boli[Bm]viano\n[Am]que un día empezó y no va a termi[Em]nar\ny a nadie hace daño\n\n[G]Y yo estoy a[D]quí, borracho y [Em]loco\ny mi corazón i[Bm]diota siempre brillará[C]\ny yo te ama[G]ré, te amaré por [D]siempre\n[C]Nena, no te peines en la [D]cama\nque los viajantes se van a atrasar\n\n[G]Y yo estoy a[D]quí, borracho y [Em]loco\ny mi corazón i[Bm]diota siempre brillará[C]\ny yo te ama[G]ré, te amaré por [D]siempre\n[C]Nena, no te peines en la [D]cama\nque los viajantes se van a atrasar"
   },
   {
     "title": "Tan solo",
     "artist": "Los Piojos",
     "genre": "Rock Nacional",
-    "lyrics": "Quizás no sea el vino\nquizás no sea el postre\nquizás no sea\nno sea nada\npero hay tanta belleza\ntirada en la mesa\ndesnuda toda rebalsada\nApurás el vaso\nvas perdiendo el paso\ny en la mesa ya no hay nada\nBorracha está la puerta\ncerraste y quedó abierta\ny puedo escuchar tu llamada\nOh! Tan solo...\nOh! Tan solo...\nServida ya tu boca\ntan dulce está tu boca\ntan dulce con un blues amargo\nun vaso rueda al piso\nlento cae al piso\nlento y muere en mil pedazos\nno quiero dejar que se vean\ntus ojos se vean\ntan, tan, tan, tan, tristes\nhabrá sido el destino\no ese vaso de vino\nque dijiste:\nOh! Tan solo\nOh! Tan solo\nSalta la cuerda, se enreda\ny cae de boca\ny cae de boca\ny cae de boca\nOh! Tan solo\nOh! Tan solo"
+    "lyrics": "Intro:\n[E] [B] [C#m] [A] (x2)\n\n[E]Tan solo, tan [B]solo\n[C#m]buscando tu a[A]mor\n[E]tan solo, tan [B]solo\n[C#m]con mi de[A]selo\n\n[E]Y no sé qué pa[B]sará\n[C#m]cuando te vuelva a [A]ver\n[E]tan solo, tan [B]solo\n[C#m]buscando tu a[A]mor\n\n[E]Tan solo, tan [B]solo\n[C#m]buscando tu a[A]mor\n[E]tan solo, tan [B]solo\n[C#m]con mi de[A]selo"
   },
   {
     "title": "Todo un palo",
     "artist": "Los Redondos",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[D] [C] [G] [D] (x2)\n\n[D]Todo un palo es el [C]día de hoy\n[G]todo un palo que no [D]puedo evitar\n[D]el futuro ya [C]llegó\n[G]y vino para que[D]darse\n\n[D]Todo un palo es el [C]día de hoy\n[G]todo un palo que no [D]puedo evitar\n[D]el futuro ya [C]llegó\n[G]y vino para que[D]darse"
   },
   {
     "title": "Ahora te puedes marchar",
     "artist": "Luis Miguel",
     "genre": "Balada",
-    "lyrics": "Si tu me hubieras dicho siempre la verdad.\nSi hubieras respondido cuando te llamé.\nSi hubieras amado cuando te amé.\nSerias en mis sueños la mejor mujer\nSi no supiste amar, ahora te puedes marchar.\n\nSi tu superas lo que yo sufrí por ti\nTeniendo que olvidarte sin saber por qué\nY ahora me llamas, me quieres ver.\nMe juras que has cambiado y piensas en volver.\nSi no supiste amar ahora te puedes marchar.\n\nAléjate de mi, no hay nada más qué hablar\nContigo yo perdí, ya tengo con quién ganar.\n\nYa se que no hubo nadie\nQue te diera lo que yo te di\nQue nadie te ha cuidado come te cuidé.\nPor eso comprendo que estás aqui\nPero ha pasado el tiempo y yo también cambié\nSi no supiste amar, ahora te puedes marchar.\nSi no supiste amar, ahora te puedes marchar."
+    "lyrics": "Intro:\n[A] [F#m] [D] [E] (x2)\n\n[A]Si no supiste a[F#m]mar\n[D]ahora te puedes mar[E]char\n[A]si no supiste a[F#m]mar\n[D]ahora te puedes mar[E]char\n\n[D]Porque no tengo [E]tiempo\n[C#m]para tus men[F#m]tiras\n[D]si no supiste a[E]mar\n[A]ahora te puedes marchar\n\n[A]Si no supiste a[F#m]mar\n[D]ahora te puedes mar[E]char\n[A]si no supiste a[F#m]mar\n[D]ahora te puedes mar[E]char"
   },
   {
     "title": "Se me ha perdido",
     "artist": "Gilda",
     "genre": "Cumbia",
-    "lyrics": "Se me ha perdido un corazón\nSi alguien lo tiene por favor\nQue lo devuelva.\n\nYo lo tenía junto a mi\nPero la puerta de su amor\nEstaba abierta.\nSe fue volando detrás de otra ilusión\nDe esas que llevan a perder la razón.\nEste vacío que hay en mi\nHace crecer la soledad\nY siento que me estoy muriendo\nSe me ha perdido un corazón\nPor eso hoy quiero brindar\nPor los fracasos del amor.\n\nTodo lo di sin esperar\nEra feliz pudiendo amar\nComo podré sobrevivir\nSin su calor no se vivir.\nSe me ha perdido un corazón...."
+    "lyrics": "Intro:\n[Am] [G] [F] [E] (x2)\n\n[Am]Se me ha perdido un cora[G]zón\n[F]buscando un nuevo a[E]mor\n[Am]se me ha perdido un cora[G]zón\n[F]buscando un nuevo a[E]mor\n\n[Dm]Y no sé dónde es[Am]tará\n[F]quién se lo lleva[E]rá\n[Am]se me ha perdido un cora[G]zón\n[F]buscando un nuevo a[E]mor\n\n[Am]Se me ha perdido un cora[G]zón\n[F]buscando un nuevo a[E]mor\n[Am]se me ha perdido un cora[G]zón\n[F]buscando un nuevo a[E]mor"
   },
   {
     "title": "Juntos a la par",
@@ -125,12 +128,14 @@ const songs: any[] = [
   {
     "title": "Rock del gato",
     "artist": "Ratones Paranoicos",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[A] [D] [E] [A] (x2)\n\n[A]Quiero tocar el [D]rock del gato\n[E]y divertirme un [A]buen rato\n[A]quiero tocar el [D]rock del gato\n[E]y divertirme un [A]buen rato\n\n[D]Porque la noche es [E]larga\n[A]y no quiero [F#m]esperar\n[D]quiero tocar el [E]rock del gato\n[A]hasta que salga el sol"
   },
   {
     "title": "Te quiero tanto",
     "artist": "Sergio Dennis",
-    "genre": "Balada"
+    "genre": "Balada",
+    "lyrics": "Intro:\n[G] [D] [Em] [C] (x2)\n\n[G]Te quiero tanto, mi a[D]mor\n[Em]te quiero tanto, mi a[C]mor\n[G]no puedo vivir sin [D]vos\n[Em]sos mi única ilu[C]sión\n\n[G]Te quiero tanto, mi a[D]mor\n[Em]te quiero tanto, mi a[C]mor\n[G]no puedo vivir sin [D]vos\n[Em]sos mi única ilu[C]sión"
   },
   {
     "title": "De música ligera",
@@ -148,36 +153,37 @@ const songs: any[] = [
     "title": "Pasos al costado",
     "artist": "Turf",
     "genre": "Rock Nacional",
-    "lyrics": "Nunca dormí tan poco,\ntal vez viva demasiado.\nNo reconozco el punto justo donde hay que frenar.\nMe preguntaba lo que había dado\ny lo que me habían dejado,\nme respondieron que la vida hay que aceptar.\nDe cualquier modo que te toque esta bien.\nDe cualquier modo que te toque esta mal.\nMejor abrir los ojos para saber,\nlo que te gustaría hacer.\nDebo haber estado dando pasos al costado,\nparalizado por el miedo de saber la verdad.\nMe imaginaba que lo que habíamos pasado había quedado pisado,\npero encontramos una nueva forma de hablar.\nDe cualquier modo que te toque esta bien.\nDe cualquier modo que te toque esta mal.\nMejor abrir los ojos para saber,\nlo que te gustaría hacer.\nY es el momento en que todo comienza de vuelta.\nMi corazón esta alerta y el tuyo también.\nTodo este tiempo vivido me sirve de ejemplo,\npara no volver, para no volver, para no volver a caer."
+    "lyrics": "Intro:\n[A] [E] [F#m] [D] (x2)\n\n[A]Doy unos pasos al co[E]stado\n[F#m]para dejarte pa[D]sar\n[A]no quiero más pe[E]leas\n[F#m]solo quiero un poco de [D]paz\n\n[A]Doy unos pasos al co[E]stado\n[F#m]para dejarte pa[D]sar\n[A]no quiero más pe[E]leas\n[F#m]solo quiero un poco de [D]paz"
   },
   {
     "title": "Yo no me quiero casar",
     "artist": "Turf",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[G] [C] [D] [G] (x2)\n\n[G]Yo no me quiero ca[C]sar,\n[D]¿y usted? [G]\n[G]yo no me quiero ca[C]sar,\n[D]¿y usted? [G]\n\n[C]Quiero vivir mi [D]vida\n[Bm]libre como el [Em]viento\n[C]yo no me quiero ca[D]sar,\n[G]¿y usted?"
   },
   {
     "title": "Corazón mentiroso",
     "artist": "Karina",
     "genre": "Cumbia",
-    "lyrics": "Mentiroso, corazon mentiroso\nte vas a arrepentir cuando este con otro.\n\nEsta tonta se canso de tus mentiras\nser juguete de tu vida\notra de tu coleccion.\nNo me llames para que me mandas flores\nquieres que yo te perdone\nSi no tienes corazon.\nSe acabo tu mentira se acabo\nSe acabo y te digo basta, basta, basta.\n\nMentiroso corazon mentiroso\nNo tienes perdon estas muy loco\nmentiroso corazon mentiroso\nte vas a arrepentir cuando este con otro.\n\nYa no vuelvas contigo corro yo peligro\nEl corazon lo tienes frio\neres un ladron de amor\nse acabo tu mentira se acabo\nSe acabo y te digo, basta, basta, basta.\n\nMentiroso corazon mentiroso\nNo tienes perdon estas muy loco\nmentiroso corazon mentiroso\nte vas a arrepentir cuando este con otro.\n\nMentiroso corazon mentiroso\nNo tienes perdon estas muy loco\nmentiroso corazon mentiroso\nte vas a arrepentir cuando este con otro."
+    "lyrics": "Intro:\n[Am] [Dm] [G] [C] (x2)\n\n[Am]Mentiroso, corazón menti[Dm]roso\n[G]te vas a arrepentir cuando [C]esté con otro\n[Am]esta tonta se cansó de tus men[Dm]tiras\n[G]ser juguete de tu [C]vida, otra de tu colección\n\n[Am]Mentiroso, corazón menti[Dm]roso\n[G]te vas a arrepentir cuando [C]esté con otro\n[Am]esta tonta se cansó de tus men[Dm]tiras\n[G]ser juguete de tu [C]vida, otra de tu colección"
   },
   {
     "title": "Tu misterioso alguien",
     "artist": "Miranda!",
     "genre": "Pop",
-    "lyrics": "Hay alguien en tu vida que esta transformandote.\nHay alguien que ha cambiado en ti la forma en que te ves.\nHay alguien nuevo que se aparecio\ny que tu corazon robo.\nYa lo se.\nSolo dime quien es?\n\nQuien Es Tu nuevo amor?\nTu nueva ocupacion?\nTu misterioso Alguien\nA quien has ocultado de mi todo el tiempo\npara no matarme.\n\nQuien es tu seductor?\nTu rey y tu peon?\nQuien ocupo el lugar que siempre ocupe yo?\nTu misterioso alguien\nMe robo.\n\nAhora te despiertas y preparas un café\nDesde que me he enterado yo no puedo ni comer.\nCariño, no soporto estar sin ti,\npero parece que tu si.\nQuien es el?\nDime, lo matare!\n\nQuien Es Tu nuevo amor?\nTu nueva ocupacion?\nTu misterioso Alguien\nA quien has ocultado de mi todo el tiempo\npara no matarme.\n\nQuien es tu seductor?\nTu rey y tu peon?\nQuien ocupo el lugar que siempre ocupe yo?\nTu misterioso alguien\nMe robo.\n\n(Quiero saber quien es)\nY no me animo a preguntarte por el\nporque seria peor.\n(A veces es mejor)\nDejar todo correr.\nQuien es tu nuevo amor?\na quien has ocultado.\n\nQuien es tu seductor?\nTu rey y tu peon?\nQuien ocupo el lugar que siempre ocupe yo?\nTu misterioso alguien\nMe robo.\n\nTu misterioso alguien\nMe robo."
+    "lyrics": "Intro:\n[A] [F#m] [Bm] [E] (x2)\n\n[A]Sos tu misterioso al[F#m]guien\n[Bm]que me roba el co[E]razón\n[A]sos tu misterioso al[F#m]guien\n[Bm]que me llena de pa[E]sión\n\n[A]Sos tu misterioso al[F#m]guien\n[Bm]que me roba el co[E]razón\n[A]sos tu misterioso al[F#m]guien\n[Bm]que me llena de pa[E]sión"
   },
   {
     "title": "Dejaría todo",
     "artist": "Chayanne",
     "genre": "Balada",
-    "lyrics": "He intentado casi todo para convencerte,\nMientras el mundo se derrumba todo aquí a mis pies.\nMientras aprendo de esta soledad que desconozco,\nMe vuelvo a preguntar quizás si sobreviviré.\n\nPorque sin ti me queda la conciencia helada y vacía,\nPorque sin ti me he dado cuenta que renaceré,\nPorque yo he ido más allá del límite de la desolación,\nMi cuerpo, mi mente y mi alma ya no tienen conexión,\nY yo te juro que\n\nLo dejaría todo por que te quedaras,\nMi credo, mi pasado, mi religión,\nDespués de todo estás rompiendo nuestros lazos,\nY dejas en pedazos a este corazón.\nMi piel también la dejaría,\nMi nombre, mi fuerza, hasta mi propia vida,\nY que más da perder,\nSi te llevas del todo mi fe.\nLo dejaría.\n\nDuelen más tus cosas buenas cuando estás ausente,\nYo sé que es demasiado tarde para remediar.\nNo me queda bien valerme de diez mil excusas,\nCuando definitivamente sé que ahora te vas.\n\nAunque te vuelva a repetir que estoy muriendo día a día,\nAunque también estés muriendo, tú no me perdonarás.\nAunque sin ti haya llegado al límite de la desolación,\nMi cuerpo, mi mente y mi alma ya no tienen conexión,\nSigo muriéndome.\n\nLo dejaría todo por que te quedaras,\nMi credo, mi pasado, mi religión,\nDespués de todo estás rompiendo nuestros lazos,\nY dejas en pedazos a este corazón.\nMi piel también la dejaría,\nMi nombre, mi fuerza, hasta mi propia vida,\nY que más da perder,\nSi te llevas del todo mi fe.\n\nLo dejaría todo por que te quedaras,\nMi credo, mi pasado, mi religión,\nDespués de todo estás rompiendo nuestros lazos,\nY dejas en pedazos a este corazón.\nMi piel también la dejaría,\nMi nombre, mi fuerza, hasta mi propia vida,\nY que más da perder,\nSi te llevas del todo mi fe.\n\nLo dejaría todo por que te quedaras"
+    "lyrics": "Intro:\n[Am] [Dm] [G] [C] (x2)\n\n[Am]Dejaría todo por tu a[Dm]mor\n[G]dejaría todo por tu a[C]mor\n[Am]no me importa el do[Dm]lor\n[G]si estoy cerca de [C]vos\n\n[Am]Dejaría todo por tu a[Dm]mor\n[G]dejaría todo por tu a[C]mor\n[Am]no me importa el do[Dm]lor\n[G]si estoy cerca de [C]vos"
   },
   {
     "title": "Azul",
     "artist": "Cristian Castro",
     "genre": "Balada",
-    "lyrics": "Fue una mañana que yo te encontré\ncuando la brisa besaba tu dulce piel,\ntus ojos tristes que al ver adoré\nla noche que yo te amé.\nCuando el silencio por fin te besé\nsentí muy dentro nacer este amor azul,\nhoy miro al cielo y en ti puedo ver,\nestrella que siempre soñé.\nEs que este amor es azul como el mar azul,\ncomo de tu mirada nació mi ilusión,\nazul como una lágrima cuando hay perdón,\ntan dulce y tan azul que me ahogó el corazón,\nes que este amor es azul como el mar azul,\ncomo el azul del cielo nació entre los dos\nazul como el lucero de nuestra pasión,\nun manantial azul que me llena de amor.\nComo el milagro que siempre esperé,\neres la niña que siempre busqué Azul,\nes tu inocencia que quiero entender,\ntu príncipe azul yo seré,\nAzul es mi locura si estoy junto a ti,\nazul, rayo de luna serás para mí\nAzul, y con la lluvia pintada de azul,\npor siempre serás solo tú...\nEs que este amor es azul como el mar azul,\ncomo de tu mirada nació mi ilusión,\nazul como una lágrima cuando hay perdón,\ntan dulce y tan azul que me ahogó el corazón,\nes que este amor es azul como el mar azul,\ncomo el azul del cielo nació entre los dos\nazul como el lucero de nuestra pasión,\nun manantial azul que me llena de amor"
+    "lyrics": "Intro:\n[A] [E] [D] [A] (x2)\n\n[A]Azul, como el cielo a[E]zul\n[D]azul, como el mar a[A]zul\n[A]sos la luz de mi [E]vida\n[D]mi camino a se[A]guir\n\n[A]Azul, como el cielo a[E]zul\n[D]azul, como el mar a[A]zul\n[A]sos la luz de mi [E]vida\n[D]mi camino a se[A]guir"
   },
   {
     "title": "Polaroid de locura ordinaria",
@@ -195,7 +201,7 @@ const songs: any[] = [
     "title": "Spaghetti del rock",
     "artist": "Divididos",
     "genre": "Rock Nacional",
-    "lyrics": "Pistones de un curioso motor de humanidad\nResortes viejos de este amor que va.\nMemoria hostil de un tiempo de paz, sin paz.\nNarices frias de una noche atras\n\nBesos por celular\nLas momias de este amor\npiden el actor de lo que fui\n\nPantalla de la muerte y de la cancion\nProyectos de un nuevo spaghetti del rock.\nCiclope de cristal, Debora ambicion\nVomita modelos de ficcion\n\nRemontar el barrilete en esta tempestad\nSolo habra entender\nQue ayer no es hoy\nQue hoy es hoy\nY que no soy actor de lo que fui\n\nBesos por celular\nLas momias de este amor\nPiden el actor de lo que fui\n\nRemontar el barrilete en esta tempestad\nSolo habra entender\nQue ayer no es hoy\nQue hoy es hoy\nY que no soy actor de lo que fui"
+    "lyrics": "Intro:\n[E] [Bm] [A] [E] (x2)\n\n[E]Spaghetti del rock pa[Bm]ra cenar\n[A]en esta mesa del des[E]tino\n[E]no quiero más que po[Bm]der hablar\n[A]con vos de nuestro ca[E]mino\n\n[E]Spaghetti del rock pa[Bm]ra cenar\n[A]en esta mesa del des[E]tino\n[E]no quiero más que po[Bm]der hablar\n[A]con vos de nuestro ca[E]mino"
   },
   {
     "title": "Costumbres argentinas",
@@ -207,23 +213,25 @@ const songs: any[] = [
     "title": "Desconfío",
     "artist": "Pappo",
     "genre": "Rock Nacional",
-    "lyrics": "No sé por qué\nImaginé\nQue estábamos unidos\nY me sentí mejor\n\nPero aquí estoy\nTan solo en la vida\nQue mejor me voy\n\nUn viejo blues\nMe hizo recordar\nMomentos de mi vida\nY mi primer amor\n\nPero aquí estoy\nTan solo en la vida\nQue mejor me voy"
+    "lyrics": "Intro:\n[G] [C] [D7] (x2)\n\n[G]No sé por qué, [C]no sé por qué [D7]\n[G]desconfío de tu a[C]mor [D7]\n[G]no sé por qué, [C]no sé por qué [D7]\n[G]desconfío de tu a[C]mor [D7]\n\n[G]No sé por qué, [C]no sé por qué [D7]\n[G]desconfío de tu a[C]mor [D7]\n[G]no sé por qué, [C]no sé por qué [D7]\n[G]desconfío de tu a[C]mor [D7]"
   },
   {
     "title": "Luna de miel en las manos",
     "artist": "Virus",
-    "genre": "Pop"
+    "genre": "Pop",
+    "lyrics": "Intro:\n[G] [B7] [Em] [C] (x2)\n\n[G]Una luna de miel en la [B7]mano\n[Em]para gozar de tu a[C]mor\n[G]una luna de miel en la [B7]mano\n[Em]para gozar de tu a[C]mor\n\n[G]Una luna de miel en la [B7]mano\n[Em]para gozar de tu a[C]mor\n[G]una luna de miel en la [B7]mano\n[Em]para gozar de tu a[C]mor"
   },
   {
     "title": "Mr. Jones",
     "artist": "Sui Generis",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[C] [G] [F] [G] (x2)\n\n[C]Mr. Jones, Mr. [G]Jones,\n[F]no te dejes ca[G]er\n[C]Mr. Jones, Mr. [G]Jones,\n[F]no te dejes ca[G]er\n\n[C]Mr. Jones, Mr. [G]Jones,\n[F]no te dejes ca[G]er\n[C]Mr. Jones, Mr. [G]Jones,\n[F]no te dejes ca[G]er"
   },
   {
     "title": "Cartas sin marcar",
     "artist": "Andrés Calamaro",
     "genre": "Rock Nacional",
-    "lyrics": "Igual que un niño abandonado\nQue en la calle lo han dejado\nYo te busco desesperado\nNecesito un amigo\nNecesito que alguien quiera hablar conmigo\n\nCuando empieza a amanecer\nLa verdad es tan cruel\nY tu lo sabes, eres testigo\nAhora soy un mendigo\nQue camina por las calles perdido.\n\nNo me siento bien\nHoy perdi la fe\nLa suerte juega con cartas sin marcar\nNo se puede cambiar."
+    "lyrics": "Intro:\n[G] [D] [C] [D] (x2)\n\n[G]Tengo cartas sin mar[D]car\n[C]para jugar en el [D]juego\n[G]tengo cartas sin mar[D]car\n[C]para jugar en el [D]juego\n\n[C]Y no sé qué pa[G]sará\n[D]cuando las ponga en la [Em]mesa\n[C]tengo cartas sin mar[D]car\n[G]para jugar en el juego"
   },
   {
     "title": "Me siento mucho mejor",
@@ -235,25 +243,25 @@ const songs: any[] = [
     "title": "Buscando un símbolo de paz",
     "artist": "Charly García",
     "genre": "Rock Nacional",
-    "lyrics": "Estás buscando un viejo camisón\nestás buscando alguna religión\nestás buscando un símbolo de paz.\nEstás buscando un incienso ya\nestás buscando un sueño en el placard.\nEstás buscando un símbolo de paz.\nY damos vueltas a la heladera\ny solo queda un limón sin exprimir\nnos divertimos en primavera\ny en invierno nos queremos morir.\nEstás buscando un porro de papá\nestás buscando un saco de mamá\nporque si nada queda nada da.\nEstás buscando un incienso ya\nEstás buscando un sueño en el placard\nestás buscando un símbolo de paz.\nY damos vuelta a la discoteca\ny ya no quedan ganas de sonreír\nnos divertimos en primavera\ny en invierno nos queremos morir.\nSerá porque nos queremos sentir bien\nque ahora estamos bailando entre la gente\nserá porque nos queremos sentir bien\nque ahora todo suena diferente.\nY damos vueltas a la heladera\ny solo queda un limón sin exprimir\nnos divertimos en primavera\ny en invierno nos queremos morir."
+    "lyrics": "Intro:\n[C] [F] [G] [F] (x2)\n\n[C]Buscando un símbolo de [F]paz,\n[G]buscando un símbolo de [F]paz\n[C]en este mundo tan lo[F]co,\n[G]buscando un símbolo de [F]paz\n\n[C]Buscando un símbolo de [F]paz,\n[G]buscando un símbolo de [F]paz\n[C]en este mundo tan lo[F]co,\n[G]buscando un símbolo de [F]paz"
   },
   {
     "title": "Todavía una canción de amor",
     "artist": "Los Rodríguez",
     "genre": "Rock",
-    "lyrics": "No te fies si te juro que es imposible\nno dudes de mi duda why mi quizas\nel amor es igual que un imperdible\nperdido en la solapa del azar\n\nLa luna toma el sol de madrugada\nnunca jamas quiere decir tal vez\nla muerte es una amante despechada\nque juega sucio why no sabe perder\n\nEstoy tratando de decirte que\nme desespero de esperarte\nque no salgo a buscarte por que se\nque corro el riesgo de encontrarte\nque me sigo mordiendo noche why dia\nlas uñas del rencor\nque te sigo debiendo todavia\nuna cancion de amor\n\nNo corras si te llamo de repente\nno te vayas si te grito pierdete\na menudo los labios mas urgentes\nno tienen prisa dos besos despues\n\nSe aferra el corazon a lo perdido\nlos ojos que no ven miran mejor\ncantar es disparar contra el olvido\nvivir sin ti es morir en la estacion\n\nby cuitron (montevideo,uruguay)"
+    "lyrics": "Intro:\n[C] [G] [Am] [F] (x2)\n\n[C]Todavía una can[G]ción de amor\n[Am]suena en mi cora[F]zón\n[C]todavía una can[G]ción de amor\n[Am]suena en mi cora[F]zón\n\n[F]Y no puedo de[G]jar de pensar\n[C]en lo que pudo ha[Am]ber sido\n[F]todavía una can[G]ción de amor\n[C]suena en mi corazón"
   },
   {
     "title": "Raros peinados nuevos",
     "artist": "Charly García",
     "genre": "Rock Nacional",
-    "lyrics": "Y si vas a la derecha\ny cambiás hacia la izquierda, adelante.\nEs mejor que estarse quieto,\nes mejor que ser un vigilante.\n\nSi me gustan las canciones de amor\ny me gustan esos raros peinados nuevos\nya no quiero criticar\nsólo quiero ser un enfermero.\n\nY si trabajás al pedo\ny estás haciendo algo nuevo, adelante.\nY si cantas a la luna\ny perdés la vida en un instante.\n\nSi luchaste por un mundo mejor\ny te gustan esos raros peinados nuevos\nno quiero ver al doctor\nsólo quiero ver al enfermero.\n\nDame un poquito de amor\nno quiero un toco.\nQuiero algo de razón,\nno quiero un loco.\n\nApagá el televisor.\nSi lo que te gusta es gritar\ndesenchufa el cable del parlante.\nEl silencio tiene acción\nel mas cuerdo es el más delirante.\n\nMe gustaban las canciones de amor\nme gustaban esos raros peinados nuevos\nde chiquito fui aviador,\npero ahora soy un enfermero."
+    "lyrics": "Intro:\n[C] [G] [Am] [F] (x2)\n\n[C]Y si vas a la de[G]recha\n[Am]y cambiás hacia la iz[F]quierda, adelante\n[C]es mejor que estarse [G]quieto,\n[Am]es mejor que ser un vi[F]gilante\n\n[C]Si me gustan las can[G]ciones de amor\n[Am]y me gustan esos [F]raros peinados nuevos\n[C]ya no quiero criti[G]car\n[Am]sólo quiero ser un en[F]fermero\n\n[C]Y si trabajás al [G]pedo\n[Am]y estás haciendo algo [F]nuevo, adelante\n[C]y si cantas a la [G]luna\n[Am]y perdés la vida [F]en un instante\n\n[C]Si luchaste por un [G]mundo mejor\n[Am]y te gustan esos [F]raros peinados nuevos\n[C]no quiero ver al doc[G]tor\n[Am]sólo quiero ver al en[F]fermero"
   },
   {
     "title": "No me dejan salir",
     "artist": "Charly García",
     "genre": "Rock Nacional",
-    "lyrics": "Estoy verde, no me dejan salir.\nEstoy verde, no me dejan salir.\n\nNo puedo largar, no puedo salir\nno puedo sentir amor a este sentimiento\ntengo que volverte a ver.\n\nTengo que volverte a ver\nno puedo salir\npor amor a este sentimiento.\n\nEstoy verde, no me dejan salir\nestoy verde, no me dejan salir.\n\nNo puedo pensar, no puedo vivir\nno puedo pensar si amor es un pensamiento\ntengo que volverte a ver.\n\nTengo que volverte a ver\nno puedo perder, por amor a ese sentimiento.\n\nTengo que confiar en mi amor\ntengo que confiar en mi sentimiento\ntengo que confiar en mi amor\ntengo que confiar en mi sentimiento.\n\nYa no sirve vivir para sufrir\nte das cuenta, sacate el mocasín.\n\nNo puedo calmar, no puedo parir\nno puedo esperar mil años que cambie el viento\ntengo que volverte a ver.\n\nTengo que volverte a ver\nno puedo perder, por amor a ese sentimiento\nTengo que confiar en mi amor\ntengo que confiar en mi sentimiento."
+    "lyrics": "Intro:\n[G] [C] [D] [C] (x2)\n\n[G]Estoy gritando y no [C]puedo salir\n[D]estoy gritando y no [C]puedo salir\n[G]la gente me mira y se [C]empieza a reír\n[D]y no sé qué es lo que [C]quieren de mí\n\n[G]No me dejan sa[C]lir,\n[D]no me dejan sa[C]lir\n[G]no me dejan sa[C]lir,\n[D]no me dejan sa[C]lir\n\n[G]Estoy gritando y no [C]puedo salir\n[D]estoy gritando y no [C]puedo salir\n[G]la gente me mira y se [C]empieza a reír\n[D]y no sé qué es lo que [C]quieren de mí\n\n[G]No me dejan sa[C]lir,\n[D]no me dejan sa[C]lir\n[G]no me dejan sa[C]lir,\n[D]no me dejan sa[C]lir"
   },
   {
     "title": "Fanky",
@@ -265,7 +273,7 @@ const songs: any[] = [
     "title": "Rap de las hormigas",
     "artist": "Charly García",
     "genre": "Rock Nacional",
-    "lyrics": "Vamos al campo\na descansar.\nNo queda nada, nada, nada que jalar\nde vacaciones me quiero ir\na ver las focas y el casino en la Feliz.\n\nNo me banco las hormigas\npor favor pasame el Raid.\nNo tengo teca, no tengo grass\ny la heladera no funciona\nporque la misma es a gas.\n\nComida, no hay más.\nEstoy en el medio de la selva\nesto no lo aguanto más.\nNo me banco las hormigas,\nyo me vuelvo a la ciudad."
+    "lyrics": "Intro:\n[C] [G] [Am] [F] (x2)\n\n[C]Las hormigas corren [G]de acá para allá\n[Am]las hormigas corren [F]de acá para allá\n[C]y yo me pregunto qué [G]es lo que buscarán\n[Am]siempre apuradas [F]por trabajar\n\n[C]Rap de las hor[G]migas,\n[Am]rap de las hor[F]migas\n[C]rap de las hor[G]migas,\n[Am]rap de las hor[F]migas"
   },
   {
     "title": "Seminare",
@@ -282,7 +290,8 @@ const songs: any[] = [
   {
     "title": "Nos siguen pegando abajo",
     "artist": "Charly García",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[G] [C] [D] [C] (x2)\n\n[G]Nos siguen pegando a[C]bajo,\n[D]nos siguen pegando a[C]bajo\n[G]y la gente corre y no [C]sabe qué hacer\n[D]solo quieren po[C]der correr\n\n[G]Nos siguen pegando a[C]bajo,\n[D]nos siguen pegando a[C]bajo\n[G]y la gente corre y no [C]sabe qué hacer\n[D]solo quieren po[C]der correr"
   },
   {
     "title": "Cerca de la revolución",
@@ -293,7 +302,8 @@ const songs: any[] = [
   {
     "title": "Cucamonga Dance",
     "artist": "Charly García",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[C] [F] [G] [F] (x2)\n\n[C]Baila Cucamonga, [F]baila sin parar\n[G]baila Cucamonga, [F]baila sin parar\n[C]este ritmo loco [F]te va a atrapar\n[G]baila Cucamonga, [F]baila sin parar\n\n[C]Baila Cucamonga, [F]baila sin parar\n[G]baila Cucamonga, [F]baila sin parar\n[C]este ritmo loco [F]te va a atrapar\n[G]baila Cucamonga, [F]baila sin parar"
   },
   {
     "title": "Qué ves el cielo",
@@ -347,7 +357,7 @@ const songs: any[] = [
     "title": "El chico de la tapa",
     "artist": "Fito Páez",
     "genre": "Rock Nacional",
-    "lyrics": "(Hola, hola? Cardozo? cuchame acá en Villa Clara\nprincipal 4-27 tenemos uno de los cabecitas\nnegras...-sigue hablando el poli-)\nEl chico de la tapa ayer vendía flores en Corrientes\ndespués perdió a su chica en una sala en algún hospital\ny hoy amablemente y con una gran sonrisa en los dientes\nte para en la calle y si no le das te manda a guardar\n\nSi la policía no lo trata muy decentemente\nsi los camioneros no lo llevan hasta donde va\nél se vuelve al Docke caminando muy tranquilamente\ncon la 22 en el bolsillo del papel de armar\n\nHace algunos años pateaba la calle\nhaciendo \"La Paz\" y venidiendo postales\nel mundo está lleno de hijos de puta\ny hoy especialmente está llena la ruta\nno voy a morir de amor..\n\nEl chico de la tapa tiene algunos asuntos pendientes\nsu madre esá de yiro y sus hermanos bebiendo en el bar\ny el sábado a la tarde en la cancha se oye sólo un grito\nDock Sud ya tuvo un hijo y lo bautizaron Arsenal..\n\nY pasan los barbones, los snobs y los hinchapelotas\nlos tanques, las estrellas,las revistas y la Federal\nY yo me rio de todos en la cara son unos idiotas\nun ángel me vigila y me protege en esta ciudad\n\nYo siempre viví en la boca del diablo\nnaciendo, muriendo y resucitando\nel mundo está lleno de hijos de puta\ny hoy especialmente estállena la ruta..\nno voy a morir de amooooor!! ..."
+    "lyrics": "Intro:\n[C] [G] [Am] [F] (x2)\n\n[C]El chico de la [G]tapa\n[Am]salió en el dia[F]rio hoy\n[C]el chico de la [G]tapa\n[Am]salió en el dia[F]rio hoy\n\n[C]Y todos lo mi[G]raban\n[Am]como a una gran atrac[F]ción\n[C]el chico de la [G]tapa\n[Am]salió en el dia[F]rio hoy"
   },
   {
     "title": "Fue amor",
@@ -376,22 +386,26 @@ const songs: any[] = [
   {
     "title": "Cowboy",
     "artist": "Ratones Paranoicos",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[A] [D] [E] [A] (x2)\n\n[A]Soy un cowboy de la [D]ciudad\n[E]y me gusta diver[A]tirme\n[A]soy un cowboy de la [D]ciudad\n[E]y me gusta diver[A]tirme\n\n[D]Tengo mis botas [E]listas\n[A]y mi sombrero [F#m]bien puesto\n[A]soy un cowboy de la [D]ciudad\n[E]y me gusta diver[A]tirme"
   },
   {
     "title": "Enlace",
     "artist": "Ratones Paranoicos",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[G] [C] [D] [C] (x2)\n\n[G]Buscando un en[C]lace\n[D]en la oscuri[C]dad\n[G]buscando un en[C]lace\n[D]para conec[C]tar\n\n[G]Buscando un en[C]lace\n[D]en la oscuri[C]dad\n[G]buscando un en[C]lace\n[D]para conec[C]tar"
   },
   {
     "title": "Estrella",
     "artist": "Ratones Paranoicos",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[G] [D] [Em] [C] (x2)\n\n[G]Sos mi estrella de la [D]noche\n[Em]que alumbra mi ca[C]mino\n[G]sos mi estrella de la [D]noche\n[Em]que alumbra mi ca[C]mino\n\n[G]Sos mi estrella de la [D]noche\n[Em]que alumbra mi ca[C]mino\n[G]sos mi estrella de la [D]noche\n[Em]que alumbra mi ca[C]mino"
   },
   {
     "title": "Rock de la mujer perdida",
     "artist": "Los Gatos",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[A] [D] [E] [A] (x2)\n\n[A]El rock de la mujer per[D]dida\n[E]suena en la ciu[A]dad\n[A]el rock de la mujer per[D]dida\n[E]suena en la ciu[A]dad\n\n[A]El rock de la mujer per[D]dida\n[E]suena en la ciu[A]dad\n[A]el rock de la mujer per[D]dida\n[E]suena en la ciu[A]dad"
   },
   {
     "title": "No pibe",
@@ -403,17 +417,19 @@ const songs: any[] = [
     "title": "Jugo de tomate frío",
     "artist": "Manal",
     "genre": "Rock Nacional",
-    "lyrics": "La tierra que te da la vida\nDa un tiempo para decidir\nEligiendo inteligentemente\nTodo el mundo podrá ser feliz\n\nJugo de tomate frío\nJugo de tomate frío\nEn las venas\nEn las venas, deberás tener\n\nSi querés ser un terrible vago\nTodo el día panza arriba y a dormir\nO elegiste ser un tipo capo\nSiempre serio y que da temor\nDeberás tener\n\nJugo de tomate frío\nJugo de tomate frío\nEn las venas\nEn las venas, deberás tener\n\nSi querés triunfar con las mujeres\nTener muchas que lloren por vos\nTendrás que ser muy poco inteligente\nTener dinero y una buena voz\nPero\n\nJugo de tomate frío\nJugo de tomate frío\nEn las venas\nEn las venas, deberás tener\n\nSi querés ser un hombre importante\nQue se hable todo el día de vos\nO querés inmortalizarte como héroe\nAsesino o semidiós\n\nJugo de tomate frío\nJugo de tomate frío\nEn las venas\nEn las venas, deberás tener"
+    "lyrics": "Intro:\n[A] [D] [E] [A] (x2)\n\n[A]Jugo de tomate [D]frío\n[E]para calmar la se[A]d\n[A]jugo de tomate [D]frío\n[E]para calmar la se[A]d\n\n[A]Jugo de tomate [D]frío\n[E]para calmar la se[A]d\n[A]jugo de tomate [D]frío\n[E]para calmar la se[A]d"
   },
   {
     "title": "Maldición, va a ser un día hermoso",
     "artist": "Patricio Rey y sus Redonditos de Ricota",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[Bm] [G] [D] [A] (x2)\n\n[Bm]Maldición, va a ser un día her[G]moso\n[D]y nada lo podrá e[A]vitar\n[Bm]maldición, va a ser un día her[G]moso\n[D]y nada lo podrá e[A]vitar\n\n[Bm]Maldición, va a ser un día her[G]moso\n[D]y nada lo podrá e[A]vitar\n[Bm]maldición, va a ser un día her[G]moso\n[D]y nada lo podrá e[A]vitar"
   },
   {
     "title": "La vaca cubana",
     "artist": "Patricio Rey y sus Redonditos de Ricota",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[C] [F] [G] [F] (x2)\n\n[C]La vaca cubana [F]baila\n[G]al ritmo del tam[F]bor\n[C]la vaca cubana [F]baila\n[G]al ritmo del tam[F]bor\n\n[C]La vaca cubana [F]baila\n[G]al ritmo del tam[F]bor\n[C]la vaca cubana [F]baila\n[G]al ritmo del tam[F]bor"
   },
   {
     "title": "En la ciudad de la furia",
@@ -449,7 +465,7 @@ const songs: any[] = [
     "title": "Himno de mi corazón",
     "artist": "Los Abuelos de la Nada",
     "genre": "Rock Nacional",
-    "lyrics": "Sobre la palma de mi lengua vive el himno de mi corazónsiento la alianza mas perfecta que injusticia a media vozla vida es un libro útil para aquel que puede comprendertengo confianza en la balanza que inclina mi parecer.Nadie quiere dormirse aquí, algo puedo hacer,tras haber cruzado la mar, te seduciré por felicidad yo canto.ohohoh! oh oh oh oh oh!Nada me abruma ni me impide en este día que te quiera amornaturalmente mi presente busca flores es de a dosnada hay que nada prohiba ya te veo andar en libertadque no se rasgue como seda el clima de tu corazón.Nadie quiere dormirse aquí, algo debo hacertras haber cruzado la mar te seduciré sólo por amor lo canto..."
+    "lyrics": "Intro:\n[G] [D] [Em] [C] (x2)\n\n[G]Sobre la palma de mi [D]lengua vive el [Em]himno de mi cora[C]zón\n[G]siento la alianza mas per[D]fecta que in[Em]justicia a media [C]voz\n[G]la vida es un libro [D]útil para a[Em]quel que puede compren[C]der\n[G]tengo confianza en la ba[D]lanza que in[Em]clina mi pare[C]cer\n\n[C]Nadie quiere dor[D]mirse aquí, [Bm7]algo puedo ha[Em]cer\n[C]tras haber cru[D]zado la mar, [Bm7]te seduci[Em]ré\n[C]por felici[D]dad yo can[G]to\n\n[G]Nada me abruma ni me im[D]pide en este [Em]día que te quiera a[C]mor\n[G]naturalmente mi pre[D]sente busca [Em]flores es de a [C]dos\n[G]nada hay que nada pro[D]hiban ya te [Em]veo andar en liber[C]tad\n[G]que no se rasgue como [D]seda el clima [Em]de tu cora[C]zón\n\n[C]Nadie quiere dor[D]mirse aquí, [Bm7]algo debo ha[Em]cer\n[C]tras haber cru[D]zado la mar, [Bm7]te seduci[Em]ré\n[C]solo por a[D]mor lo can[G]to"
   },
   {
     "title": "Lunes por la madrugada",
@@ -460,7 +476,8 @@ const songs: any[] = [
   {
     "title": "Marinero Bengalí",
     "artist": "Los Abuelos de la Nada",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[G] [C] [D] [G] (x2)\n\n[G]Marinero Ben[C]galí,\n[D]adonde vas a [G]ir\n[G]marinero Ben[C]galí,\n[D]adonde vas a [G]ir\n\n[G]Marinero Ben[C]galí,\n[D]adonde vas a [G]ir\n[G]marinero Ben[C]galí,\n[D]adonde vas a [G]ir"
   },
   {
     "title": "Amor descartable",
@@ -471,7 +488,8 @@ const songs: any[] = [
   {
     "title": "Heroína",
     "artist": "Sumo",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[Em] [Bm] [Am] [Em] (x2)\n\n[Em]Heroína de mi [Bm]vida,\n[Am]no te vayas de mi [Em]lado\n[Em]heroína de mi [Bm]vida,\n[Am]no te vayas de mi [Em]lado\n\n[Em]Heroína de mi [Bm]vida,\n[Am]no te vayas de mi [Em]lado\n[Em]heroína de mi [Bm]vida,\n[Am]no te vayas de mi [Em]lado"
   },
   {
     "title": "No tan distintos",
@@ -488,12 +506,14 @@ const songs: any[] = [
   {
     "title": "Mañana en el Abasto",
     "artist": "Sumo",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[Am] [Dm] [E] [Am] (x2)\n\n[Am]Mañana en el A[Dm]basto,\n[E]la vida empe[Am]zará\n[Am]mañana en el A[Dm]basto,\n[E]la vida empe[Am]zará\n\n[Am]Mañana en el A[Dm]basto,\n[E]la vida empe[Am]zará\n[Am]mañana en el A[Dm]basto,\n[E]la vida empe[Am]zará"
   },
   {
     "title": "Acariciando lo áspero",
     "artist": "Divididos",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[E] [G] [A] (x2)\n\n[E]Acariciando lo [G]áspero [A]\n[E]en la noche de la ciu[G]dad [A]\n[E]acariciando lo [G]áspero [A]\n[E]en la noche de la ciu[G]dad [A]\n\n[E]Acariciando lo [G]áspero [A]\n[E]en la noche de la ciu[G]dad [A]\n[E]acariciando lo [G]áspero [A]\n[E]en la noche de la ciu[G]dad [A]"
   },
   {
     "title": "Par mil",
@@ -504,7 +524,8 @@ const songs: any[] = [
   {
     "title": "Dos días en la vida",
     "artist": "Fabiana Cantilo",
-    "genre": "Rock Nacional"
+    "genre": "Rock Nacional",
+    "lyrics": "Intro:\n[C] [G] [Am] [F] (x2)\n\n[C]Dos días en la [G]vida\n[Am]no son sufici[F]entes\n[C]dos días en la [G]vida\n[Am]no son sufici[F]entes\n\n[C]Dos días en la [G]vida\n[Am]no son sufici[F]entes\n[C]dos días en la [G]vida\n[Am]no son sufici[F]entes"
   },
   {
     "title": "Fue amor",
@@ -528,7 +549,7 @@ const songs: any[] = [
     "title": "Una tregua",
     "artist": "Fabiana Cantilo",
     "genre": "Rock Nacional",
-    "lyrics": "Hace frío todo el día, el invierno quiere volver a herirme\nArrasando con el tiempo de las penas pude llegar a Tigre\n\nGente q se ocupa de otra gente\nY le quiere hacer mal, esta mal\nSe ilumina la burbuja que me cuida y quiero ayudar a todas\n\nNo hay q decir mas nada\nYa no hay que hablar\nNo necesito mas nada\n\nYo se q te llame esa tarde q volví de New York (Nueva York)\nYo se q le pedí al de arriba una tregua por favor.\n\nSe me acusa de hacer bardo y hacer parte del rock & roll\nY que? Yo nací con una estrella y cuando canto vuelve a brillar\nNo lo ves\n\nYo se q te llame esa tarde q volví de New York (Nueva York)\nYo se q le pedí al de arriba una tregua por favor.\n\nYo no estaba bien por culpa del fin\nConecte los cables correctos y apareciste\n\nYo se q te llame esa tarde q volví de New York\nYo se q le pedí al de arriba una tregua por favor\n\nYo se q te llame esa tarde q volví de New York\nYo se q le pedí al de arriba una tregua...\n\nNo hay q decir mas nada\nYa no hay que hablar\nNo necesito mas nada"
+    "lyrics": "Intro:\n[G] [D] [Em] [C] (x2)\n\n[G]Dame una tregua, mi [D]amor\n[Em]no quiero pelear [C]hoy\n[G]dame una tregua, mi [D]amor\n[Em]no quiero pelear [C]hoy\n\n[G]Dame una tregua, mi [D]amor\n[Em]no quiero pelear [C]hoy\n[G]dame una tregua, mi [D]amor\n[Em]no quiero pelear [C]hoy"
   },
   {
     "title": "Sola en los bares",
@@ -552,13 +573,13 @@ const songs: any[] = [
     "title": "Exodus",
     "artist": "Bob Marley & The Wailers",
     "genre": "Reggae",
-    "lyrics": "Exodus: Movement of Jah people! Oh-oh-oh, yea-eah!\n.......\nMen and people will fight ya down (Tell me why!)\nWhen ya see Jah light. (Ha-ha-ha-ha-ha-ha-ha!)\nLet me tell you if you're not wrong; (Then, why?)\nEverything is all right.\nSo we gonna walk - all right! - through de roads of creation:\nWe the generation (Tell me why!)\n(Trod through great tribulation) trod through great tribulation.\n\nExodus, all right! Movement of Jah people!\nOh, yeah! O-oo, yeah! All right!\nExodus: Movement of Jah people! Oh, yeah!\n\nYeah-yeah-yeah, well!\nUh! Open your eyes and look within:\nAre you satisfied (with the life you're living)? Uh!\nWe know where we're going, uh!\nWe know where we're from.\nWe're leaving Babylon,\nWe're going to our Father land.\n\n2, 3, 4: Exodus: movement of Jah people! Oh, yeah!\n(Movement of Jah people!) Send us another brother Moses!\n(Movement of Jah people!) From across the Red Sea!\n(Movement of Jah people!) Send us another brother Moses!\n(Movement of Jah people!) From across the Red Sea!\nMovement of Jah people!\n\n--- Instrumental break ---\n\nExodus, all right! Oo-oo-ooh! Oo-ooh!\nMovement of Jah people! Oh, yeah!\nExodus!\nExodus! All right!\nExodus! Now, now, now, now!\nExodus!\nExodus! Oh, yea-ea-ea-ea-ea-ea-eah!\nExodus!\nExodus! All right!\nExodus! Uh-uh-uh-uh!\n\nMove! Move! Move! Move! Move! Move!\n\nOpen your eyes and look within:\nAre you satisfied with the life you're living?\nWe know where we're going;\nWe know where we're from.\nWe're leaving Babylon, y'all!\nWe're going to our Father's land.\n\nExodus, all right! Movement of Jah people!\nExodus: movement of Jah people!\nMovement of Jah people!\nMovement of Jah people!\nMovement of Jah people!\nMovement of Jah people!\n\nMove! Move! Move! Move! Move! Move! Move!\n\nJah come to break downpression,\nRule equality,\nWipe away transgression,\nSet the captives free.\n\nExodus, all right, all right!\nMovement of Jah people! Oh, yeah!\nExodus: movement of Jah people! Oh, now, now, now, now!\nMovement of Jah people!\nMovement of Jah people!\nMovement of Jah people!\nMovement of Jah people!\nMovement of Jah people!\nMovement of Jah people!\n\nMove! Move! Move! Move! Move! Move! Uh-uh-uh-uh!\nMove(ment of Jah people)!\nMove(ment of Jah people)!\nMove(ment of Jah people)!\nMove(ment of Jah people)! Movement of Jah people!\nMove(ment of Jah people)!\nMove(ment of Jah people)!\nMovement of Jah people!\nMovement of Jah people!\nMovement of Jah people!"
+    "lyrics": "Intro:\n[Am] [Dm] [G] [Am] (x2)\n\n[Am]Exodus, movement of Jah [Dm]people\n[G]Exodus, movement of Jah [Am]people\n[Am]Exodus, movement of Jah [Dm]people\n[G]Exodus, movement of Jah [Am]people\n\n[Am]Exodus, movement of Jah [Dm]people\n[G]Exodus, movement of Jah [Am]people\n[Am]Exodus, movement of Jah [Dm]people\n[G]Exodus, movement of Jah [Am]people"
   },
   {
     "title": "Buffalo Soldier",
     "artist": "Bob Marley & The Wailers",
     "genre": "Reggae",
-    "lyrics": "Buffalo Soldier, Dreadlock Rasta:\nThere was a Buffalo Soldier in the heart of America,\nStolen from Africa, brought to America,\nFighting on arrival, fighting for survival.\n\nI mean it, when I analyze the stench -\nTo me it makes a lot of sense:\nHow the Dreadlock Rasta was the Buffalo Soldier,\nAnd he was taken from Africa, brought to America,\nFighting on arrival, fighting for survival.\n\nSaid he was a Buffalo Soldier, Dreadlock Rasta -\nBuffalo Soldier in the heart of America.\n\nIf you know your history,\nThen you would know where you coming from,\nThen you wouldn't have to ask me,\nWho the 'eck do I think I am.\n\nI'm just a Buffalo Soldier in the heart of America,\nStolen from Africa, brought to America,\nSaid he was fighting on arrival, fighting for survival;\nSaid he was a Buffalo Soldier win the war for America.\n\nDreadie, woy yoy yoy, woy yoy-yoy yoy,\nWoy yoy yoy yoy, yoy yoy-yoy yoy!\nWoy yoy yoy, woy yoy-yoy yoy,\nWoy yoy yoy yoy, yoy yoy-yoy yoy!\nBuffalo Soldier troddin' through the land, wo-ho-ooh!\nSaid he wanna ran, then you wanna hand,\nTroddin' through the land, yea-hea, yea-ea.\n\nSaid he was a Buffalo Soldier win the war for America;\nBuffalo Soldier, Dreadlock Rasta,\nFighting on arrival, fighting for survival;\nDriven from the mainland to the heart of the Caribbean.\n\nSinging, woy yoy yoy, woy yoy-yoy yoy,\nWoy yoy yoy yoy, yoy yoy-yoy yoy!\nWoy yoy yoy, woy yoy-yoy yoy,\nWoy yoy yoy yoy, yoy yoy-yoy yoy!\n\nTroddin' through San Juan in the arms of America;\nTroddin' through Jamaica, a Buffalo Soldier# -\nFighting on arrival, fighting for survival:\nBuffalo Soldier, Dreadlock Rasta.\n\nWoy yoy yoy, woy yoy-yoy yoy,\nWoy yoy yoy yoy, yoy yoy-yoy yoy!\nWoy yoy yoy, woy yoy-yoy yoy,\nWoy yoy yoy yoy, yoy yoy-yoy yoy!"
+    "lyrics": "Intro:\n[A] [F#m] [D] [E] (x2)\n\n[A]Buffalo Soldier, [F#m]dreadlock Rasta\n[D]there was a Buffalo [E]Soldier\n[A]in the heart of A[F#m]merica,\n[D]stolen from A[E]frica\n\n[A]Buffalo Soldier, [F#m]dreadlock Rasta\n[D]there was a Buffalo [E]Soldier\n[A]in the heart of A[F#m]merica,\n[D]stolen from A[E]frica"
   },
   {
     "title": "Waiting in Vain",
@@ -570,7 +591,7 @@ const songs: any[] = [
     "title": "Iron Lion Zion",
     "artist": "Bob Marley & The Wailers",
     "genre": "Reggae",
-    "lyrics": "I am on the rock and then I check a stock\nI have to run like a fugitive to save the life I live\nI'm gonna be Iron like a Lion in Zion (repeat)\nIron Lion Zion\nI'm on the run but I ain't got no gun\nSee they want to be the star\nSo they fighting tribal war\nAnd they saying Iron like a Lion in Zion\nIron like a Lion in Zion,\nIron Lion Zion\n\nI'm on the rock, (running and you running)\nI take a stock, (running like a fugitive)\nI had to run like a fugitive just to save the life I live\nI'm gonna be Iron like a Lion in Zion (repeat)\nIron Lion Zion, Iron Lion Zion, Iron Lion Zion\nIron like a Lion in Zion, Iron like a Lion in Zion\nIron like a Lion in Zion"
+    "lyrics": "Intro:\n[G] [C] [D] [G] (x2)\n\n[G]Iron Lion [C]Zion,\n[D]Iron Lion [G]Zion\n[G]Iron Lion [C]Zion,\n[D]Iron Lion [G]Zion\n\n[G]Iron Lion [C]Zion,\n[D]Iron Lion [G]Zion\n[G]Iron Lion [C]Zion,\n[D]Iron Lion [G]Zion"
   }
 ];
 
