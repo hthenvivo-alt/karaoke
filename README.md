@@ -84,3 +84,36 @@ npm run db:seed
 ## Agregar letras
 
 Admin → Catálogo → ✏️ en la canción → pegar letra → Guardar.
+
+---
+
+## ⚠️ REGLAS CRÍTICAS PARA AGENTES IA — NO IGNORAR
+
+### NUNCA inventar letras de canciones
+
+Las letras de canciones son contenido real. Está **PROHIBIDO** inventar, aproximar o generar letras aunque parezcan correctas. Solo se pueden cargar letras verificadas desde la fuente original (ej: letras.com).
+
+### SIEMPRE hacer backup antes de tocar `prisma/seed.ts`
+
+Antes de cualquier modificación que afecte letras de canciones, ejecutar:
+
+```bash
+node -e "
+const fs = require('fs');
+const content = fs.readFileSync('prisma/seed.ts', 'utf8');
+const startIdx = content.indexOf('const songs: any[] =');
+const arrayStart = content.indexOf('[', startIdx + 20);
+let depth = 0; let arrayEnd = -1;
+for (let i = arrayStart; i < content.length; i++) {
+  if (content[i] === '[') depth++;
+  else if (content[i] === ']') { depth--; if (depth === 0) { arrayEnd = i + 1; break; } }
+}
+const songs = JSON.parse(content.substring(arrayStart, arrayEnd));
+const ts = new Date().toISOString().replace(/[:.]/g,'-').slice(0,19);
+fs.mkdirSync('docs', { recursive: true });
+fs.writeFileSync('docs/songs_backup_' + ts + '.json', JSON.stringify({ backupDate: new Date().toISOString(), totalSongs: songs.length, songs }, null, 2));
+console.log('Backup OK:', songs.length, 'songs');
+"
+```
+
+Los backups se guardan en `docs/songs_backup_*.json` y deben commitearse antes de cualquier cambio.
