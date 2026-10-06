@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { requireAdmin } from '@/lib/admin-auth'
 
 export async function GET() {
   const songs = await prisma.song.findMany({
@@ -9,6 +10,8 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+  const denied = await requireAdmin()
+  if (denied) return denied
   const { title, artist, genre, lyrics } = await req.json()
   if (!title || !artist) {
     return NextResponse.json({ error: 'title and artist required' }, { status: 400 })

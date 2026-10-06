@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { requireAdmin } from '@/lib/admin-auth'
 import { emitQueueUpdate } from '@/lib/socket'
 
 export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -22,6 +23,8 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
 }
 
 export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const denied = await requireAdmin()
+  if (denied) return denied
   const { id } = await params
   const body = await req.json()
   const { status, name, date, registrationPaused } = body
@@ -51,6 +54,8 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
 }
 
 export async function DELETE(_req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const denied = await requireAdmin()
+  if (denied) return denied
   const { id } = await params
   await prisma.event.delete({ where: { id } })
   return NextResponse.json({ ok: true })

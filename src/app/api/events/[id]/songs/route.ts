@@ -1,8 +1,11 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { requireAdmin } from '@/lib/admin-auth'
 
 // Add or remove songs from an event
 export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const denied = await requireAdmin()
+  if (denied) return denied
   const { id: eventId } = await params
   const { songId, songIds } = await req.json()
 
@@ -27,6 +30,8 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
 }
 
 export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const denied = await requireAdmin()
+  if (denied) return denied
   const { id: eventId } = await params
   const { songId, songIds } = await req.json()
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useAdminGuard } from '@/hooks/useAdminGuard'
 
 interface Event {
   id: string
@@ -20,6 +21,7 @@ interface Song {
 
 export default function AdminEventsPage() {
   const router = useRouter()
+  useAdminGuard()
   const [events, setEvents] = useState<Event[]>([])
   const [songs, setSongs] = useState<Song[]>([])
   const [loading, setLoading] = useState(true)
@@ -34,10 +36,6 @@ export default function AdminEventsPage() {
   const [savingSongs, setSavingSongs] = useState<Record<string, boolean>>({})
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !sessionStorage.getItem('admin_auth')) {
-      router.replace('/admin')
-      return
-    }
     Promise.all([
       fetch('/api/events').then(r => r.json()),
       fetch('/api/songs').then(r => r.json()),

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useAdminGuard } from '@/hooks/useAdminGuard'
 
 interface Event {
   id: string
@@ -13,14 +14,11 @@ interface Event {
 
 export default function AdminDashboard() {
   const router = useRouter()
+  useAdminGuard()
   const [events, setEvents] = useState<Event[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !sessionStorage.getItem('admin_auth')) {
-      router.replace('/admin')
-      return
-    }
     fetch('/api/events').then(r => r.json()).then(data => {
       setEvents(Array.isArray(data) ? data : [])
       setLoading(false)
@@ -64,7 +62,7 @@ export default function AdminDashboard() {
           <p className="text-slate-500 text-xs">Una que sepamos todos 🎤</p>
         </div>
         <button
-          onClick={() => { sessionStorage.removeItem('admin_auth'); router.push('/') }}
+          onClick={async () => { await fetch('/api/admin/auth', { method: 'DELETE' }); router.push('/') }}
           className="text-slate-600 text-sm hover:text-slate-400"
         >
           Salir

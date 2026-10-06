@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
+import { useAdminGuard } from '@/hooks/useAdminGuard'
 
 interface Song {
   id: string
@@ -16,6 +17,7 @@ const GENRES = ['Rock Nacional', 'Pop', 'Cumbia', 'Balada', 'Rock', 'Folk', 'Otr
 
 export default function AdminCatalogPage() {
   const router = useRouter()
+  useAdminGuard()
   const [songs, setSongs] = useState<Song[]>([])
   const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
@@ -32,10 +34,6 @@ export default function AdminCatalogPage() {
   }, [])
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !sessionStorage.getItem('admin_auth')) {
-      router.replace('/admin')
-      return
-    }
     loadSongs()
   }, [router, loadSongs])
 

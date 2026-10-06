@@ -19,7 +19,6 @@ export default function AdminLoginPage() {
       body: JSON.stringify({ pin }),
     })
     if (res.ok) {
-      sessionStorage.setItem('admin_auth', 'true')
       router.push('/admin/dashboard')
     } else {
       setError('PIN incorrecto')

@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSocket } from '@/hooks/useSocket'
+import { useAdminGuard } from '@/hooks/useAdminGuard'
 
 interface Registration {
   id: string
@@ -107,6 +108,7 @@ function QueueItem({
 
 export default function AdminQueuePage() {
   const router = useRouter()
+  useAdminGuard()
   const [activeEvent, setActiveEvent] = useState<ActiveEvent | null>(null)
   const [queue, setQueue] = useState<Registration[]>([])
   const [randomPool, setRandomPool] = useState<RandomPoolEntry[]>([])
@@ -143,10 +145,6 @@ export default function AdminQueuePage() {
   }, [])
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !sessionStorage.getItem('admin_auth')) {
-      router.replace('/admin')
-      return
-    }
     fetch('/api/events/active')
       .then(r => r.json())
       .then(event => {

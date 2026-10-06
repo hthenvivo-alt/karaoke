@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { emitQueueUpdate, emitCallSinger, emitGetReady } from '@/lib/socket'
 import { cookies } from 'next/headers'
+import { isAdmin } from '@/lib/admin-auth'
 
 
 // GET full queue for an event (only confirmed, non-random registrations)
@@ -26,6 +27,12 @@ export async function GET(req: Request) {
 export async function PATCH(req: Request) {
   const body = await req.json()
   const { action, registrationId, eventId, newPositions } = body
+
+  // Participants may only cancel their own registration; everything else is admin-only
+  const admin = await isAdmin()
+  if (!admin && action !== 'cancel') {
+    return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+  }
 
   if (action === 'reorder' && newPositions) {
     // newPositions: Array<{ id: string, position: number }>
@@ -93,6 +100,14 @@ export async function PATCH(req: Request) {
       where: { id: registrationId },
     })
     if (!reg) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+    if (!admin) {
+      // The register route sets this cookie to the singer's name
+      const cookieStore = await cookies()
+      const owner = cookieStore.get(`karaoke_registered_${reg.eventId}`)?.value
+      if (!owner || owner.toLowerCase().trim() !== reg.singerName.toLowerCase().trim()) {
+        return NextResponse.json({ error: 'No podés cancelar la inscripción de otra persona' }, { status: 403 })
+      }
+    }
     // Only allow cancel if not already called or sung
     if (reg.status === 'CALLED' || reg.status === 'SUNG') {
       return NextResponse.json({ error: 'No podés bajarte cuando ya te llamaron o ya cantaste' }, { status: 400 })
@@ -106,8 +121,10 @@ export async function PATCH(req: Request) {
     ])
 
     // Delete anti-cheat cookie
-    const cookieStore = await cookies()
-    cookieStore.delete(`karaoke_registered_${reg.eventId}`)
+    if (!admin) {
+      const cookieStore = await cookies()
+      cookieStore.delete(`karaoke_registered_${reg.eventId}`)
+    }
 
     emitQueueUpdate(reg.eventId, { type: 'cancel', registrationId, songId: reg.songId })
     return NextResponse.json({ ok: true })
