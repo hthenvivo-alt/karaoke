@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["partialIndexes"]
 }
 
 datasource db {
@@ -68,7 +69,9 @@ model Registration {
   isRandom   Boolean            @default(false)
   createdAt  DateTime           @default(now())
 
-  @@unique([eventId, songId])
+  // A song can only be held by one singer who hasn't sung it yet; sung registrations
+  // stay as history so the song can be released with "Resetear canciones"
+  @@unique([eventId, songId], where: raw("status <> 'SUNG'"))
 }
 
 enum RegistrationStatus {

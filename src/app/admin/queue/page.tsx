@@ -259,25 +259,38 @@ export default function AdminQueuePage() {
     }
   }
 
-  const handleResetSung = async () => {
+  const runReset = async (action: 'reset_singers' | 'reset_songs', question: string, done: (n: number) => string) => {
     if (!activeEvent) return
-    const confirm = window.confirm(
-      '¿Estás seguro de que querés resetear las inscripciones de los que ya cantaron? Esto les permitirá volver a anotarse.'
-    )
-    if (!confirm) return
+    if (!window.confirm(question)) return
 
     const res = await fetch('/api/queue', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'reset_sung', eventId: activeEvent.id }),
+      body: JSON.stringify({ action, eventId: activeEvent.id }),
     })
 
     if (res.ok) {
+      const { count } = await res.json()
       await loadQueue(activeEvent.id)
+      alert(done(count))
     } else {
-      alert('Error al resetear los cantados')
+      alert('Error al resetear')
     }
   }
+
+  const handleResetSingers = () =>
+    runReset(
+      'reset_singers',
+      '¿Resetear cantantes? Los que ya cantaron se van a poder volver a anotar. Las canciones que cantaron siguen sin estar disponibles.',
+      (n) => `${n} cantante(s) se pueden volver a anotar`
+    )
+
+  const handleResetSongs = () =>
+    runReset(
+      'reset_songs',
+      '¿Resetear canciones? Las canciones que ya se cantaron vuelven a estar disponibles. Los que cantaron no se pueden volver a anotar.',
+      (n) => `${n} canción(es) volvieron a estar disponibles`
+    )
 
   const waiting = queue.filter(r => r.status !== 'SUNG')
   const sung = queue.filter(r => r.status === 'SUNG')
@@ -486,22 +499,29 @@ export default function AdminQueuePage() {
               </div>
             )}
 
+            <div className="mt-6 flex gap-2">
+              <button
+                onClick={handleResetSingers}
+                className="flex-1 text-xs px-3 py-2.5 rounded-xl border border-red-500/40 bg-red-500/10 text-red-400 hover:bg-red-500/20 font-bold transition-all active:scale-95"
+              >
+                👤 Resetear cantantes
+              </button>
+              <button
+                onClick={handleResetSongs}
+                className="flex-1 text-xs px-3 py-2.5 rounded-xl border border-red-500/40 bg-red-500/10 text-red-400 hover:bg-red-500/20 font-bold transition-all active:scale-95"
+              >
+                🎵 Resetear canciones
+              </button>
+            </div>
+
             {sung.length > 0 && (
-              <div className="mt-6">
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => setShowSung(!showSung)}
-                    className="btn-secondary text-sm flex-1"
-                  >
-                    {showSung ? 'Ocultar' : 'Ver'} ya cantaron ({sung.length})
-                  </button>
-                  <button
-                    onClick={handleResetSung}
-                    className="text-xs px-3 py-2.5 rounded-xl border border-red-500/40 bg-red-500/10 text-red-400 hover:bg-red-500/20 font-bold transition-all active:scale-95"
-                  >
-                    🗑️ Resetear cantados
-                  </button>
-                </div>
+              <div className="mt-3">
+                <button
+                  onClick={() => setShowSung(!showSung)}
+                  className="btn-secondary text-sm w-full"
+                >
+                  {showSung ? 'Ocultar' : 'Ver'} ya cantaron ({sung.length})
+                </button>
                 {showSung && (
                   <div className="flex flex-col gap-2 mt-3">
                     {sung.map(reg => (

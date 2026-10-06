@@ -130,29 +130,23 @@ export async function PATCH(req: Request) {
     return NextResponse.json({ ok: true })
   }
 
-  if (action === 'reset_sung' && eventId) {
-    const sungRegs = await prisma.registration.findMany({
+  // Singers who already sang can sign up again; their songs stay used
+  if (action === 'reset_singers' && eventId) {
+    const { count } = await prisma.registration.deleteMany({
       where: { eventId, status: 'SUNG' },
-      select: { songId: true },
     })
+    emitQueueUpdate(eventId, { type: 'reset_singers' })
+    return NextResponse.json({ ok: true, count })
+  }
 
-    const songIds = sungRegs.map(r => r.songId)
-
-    await prisma.$transaction([
-      prisma.registration.deleteMany({
-        where: { eventId, status: 'SUNG' },
-      }),
-      prisma.eventSong.updateMany({
-        where: {
-          eventId,
-          songId: { in: songIds },
-        },
-        data: { status: 'AVAILABLE' },
-      }),
-    ])
-
-    emitQueueUpdate(eventId, { type: 'reset_sung' })
-    return NextResponse.json({ ok: true })
+  // Sung songs go back on the list; singers who sang keep their "Cantó" record
+  if (action === 'reset_songs' && eventId) {
+    const { count } = await prisma.eventSong.updateMany({
+      where: { eventId, status: 'SUNG' },
+      data: { status: 'AVAILABLE' },
+    })
+    emitQueueUpdate(eventId, { type: 'reset_songs' })
+    return NextResponse.json({ ok: true, count })
   }
 
   if (action === 'call_random' && eventId) {

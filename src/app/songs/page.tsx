@@ -344,6 +344,16 @@ function SongsContent() {
             </p>
           </div>
         )}
+        {event && event.eventSongs.length > 0 && !event.eventSongs.some((es) => es.status === 'AVAILABLE') && (!myRegistration || isChanging) && (
+          <div className="glass-card p-4 mb-4 border-yellow-500/40 text-center">
+            <p className="text-yellow-400 font-bold text-base mb-1">
+              No quedan canciones libres
+            </p>
+            <p className="text-slate-300 text-sm">
+              Esperá un momento, en breve se liberan más.
+            </p>
+          </div>
+        )}
         {inRandomPool && !myRegistration && !isChanging && (
           <div className="glass-card p-4 mb-4 border-yellow-500/40">
             <p className="text-sm text-yellow-300 font-semibold text-center">

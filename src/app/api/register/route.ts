@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { Prisma } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { emitSongTaken, emitQueueUpdate } from '@/lib/socket'
 import { cookies } from 'next/headers'
@@ -38,18 +39,6 @@ export async function POST(req: Request) {
     )
   }
 
-  // For random pool: if ALL songs are taken, reset them all so the cycle restarts
-  if (isRandom) {
-    const totalSongs = await prisma.eventSong.count({ where: { eventId } })
-    const takenSongs = await prisma.eventSong.count({ where: { eventId, status: 'TAKEN' } })
-    if (totalSongs > 0 && takenSongs >= totalSongs) {
-      await prisma.eventSong.updateMany({
-        where: { eventId },
-        data: { status: 'AVAILABLE' },
-      })
-    }
-  }
-
   // Check if song is still available in this event
   const eventSong = await prisma.eventSong.findUnique({
     where: { eventId_songId: { eventId, songId } },
@@ -78,16 +67,25 @@ export async function POST(req: Request) {
   }
 
   // Create registration and mark song as taken
-  const [registration] = await prisma.$transaction([
-    prisma.registration.create({
-      data: { eventId, singerName, songId, position: count + 1, isRandom: !!isRandom },
-      include: { song: true },
-    }),
-    prisma.eventSong.update({
-      where: { eventId_songId: { eventId, songId } },
-      data: { status: 'TAKEN' },
-    }),
-  ])
+  let registration
+  try {
+    ;[registration] = await prisma.$transaction([
+      prisma.registration.create({
+        data: { eventId, singerName, songId, position: count + 1, isRandom: !!isRandom },
+        include: { song: true },
+      }),
+      prisma.eventSong.update({
+        where: { eventId_songId: { eventId, songId } },
+        data: { status: 'TAKEN' },
+      }),
+    ])
+  } catch (err) {
+    // Someone else grabbed the same song at the same moment
+    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2002') {
+      return NextResponse.json({ error: 'Song not available' }, { status: 409 })
+    }
+    throw err
+  }
 
   // Set anti-cheat cookie
   cookieStore.set({
