@@ -48,8 +48,12 @@ export function useSocket(eventId?: string, singerName?: string) {
     }
   }, [])
 
+  const emit = useCallback((event: string, data: unknown) => {
+    socket?.emit(event, data)
+  }, [])
+
   const resetYouAreUp = useCallback(() => setYouAreUp(false), [])
   const resetYouAreNext = useCallback(() => setYouAreNext(false), [])
 
-  return { isConnected, youAreUp, resetYouAreUp, youAreNext, resetYouAreNext, on }
+  return { isConnected, youAreUp, resetYouAreUp, youAreNext, resetYouAreNext, on, emit }
 }

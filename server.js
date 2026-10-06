@@ -34,6 +34,14 @@ app.prepare().then(() => {
       }
     })
 
+    // The big screen reports whether auto-scroll is running (e.g. it stops at the end of
+    // the lyrics) so the admin panels can update their Play/Pause button
+    socket.on('screen:state', ({ eventId, scrolling } = {}) => {
+      if (typeof eventId === 'string' && eventId) {
+        io.emit(`screen:state:${eventId}`, { scrolling: scrolling === true })
+      }
+    })
+
     socket.on('disconnect', () => {
       console.log(`[Socket] Client disconnected: ${socket.id}`)
     })

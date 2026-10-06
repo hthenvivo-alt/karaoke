@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { useSocket } from '@/hooks/useSocket'
 import { parseLine } from '@/lib/lyrics-utils'
+import type { ScreenCommand, ViewMode } from '@/lib/screen-commands'
 
 interface Song {
   id: string
@@ -20,15 +21,6 @@ interface Registration {
   song: { id: string; title: string; artist: string }
 }
 
-type OperatorCommand =
-  | { type: 'play' }
-  | { type: 'pause' }
-  | { type: 'speed'; value: number }
-  | { type: 'font_size'; value: number }
-  | { type: 'scroll_top' }
-  | { type: 'set_view_mode'; value: ViewMode }
-
-type ViewMode = 'lyrics' | 'singer_intro' | 'qr'
 
 export default function OperatorPage() {
   const [eventId, setEventId] = useState<string | null>(null)
@@ -36,6 +28,10 @@ export default function OperatorPage() {
   const [song, setSong] = useState<Song | null>(null)
   const [loading, setLoading] = useState(true)
   const [fontSize, setFontSize] = useState(56)
+  const fontSizeRef = useRef(fontSize)
+  useEffect(() => {
+    fontSizeRef.current = fontSize
+  }, [fontSize])
   const [autoScroll, setAutoScroll] = useState(false)
   const [scrollSpeed, setScrollSpeed] = useState(2)
   const [viewMode, setViewMode] = useState<ViewMode>('lyrics')
@@ -45,7 +41,13 @@ export default function OperatorPage() {
   const scrollRef = useRef<HTMLDivElement>(null)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  const { on } = useSocket(eventId ?? undefined)
+  const { on, emit } = useSocket(eventId ?? undefined)
+
+  // Keep the admin panels' Play/Pause button in sync (auto-scroll also stops by itself
+  // at the end of the lyrics or when the song changes)
+  useEffect(() => {
+    if (eventId) emit('screen:state', { eventId, scrolling: autoScroll })
+  }, [eventId, autoScroll, emit])
 
   // Auto-scroll via setInterval
   useEffect(() => {
@@ -117,24 +119,26 @@ export default function OperatorPage() {
     return unsub
   }, [eventId, on, loadCurrentSong])
 
-  // Listen for commands from the queue page via BroadcastChannel
+  // Commands from any admin panel (PC or phone), relayed by the server
   useEffect(() => {
-    if (typeof window === 'undefined') return
-    const channel = new BroadcastChannel('karaoke_operator')
-    channel.onmessage = (e: MessageEvent<OperatorCommand>) => {
-      const cmd = e.data
+    if (!eventId) return
+    return on(`screen:cmd:${eventId}`, (data) => {
+      const cmd = data as ScreenCommand
       if (cmd.type === 'play') setAutoScroll(true)
       if (cmd.type === 'pause') setAutoScroll(false)
       if (cmd.type === 'speed') setScrollSpeed(cmd.value)
       if (cmd.type === 'font_size') setFontSize(cmd.value)
       if (cmd.type === 'set_view_mode') setViewMode(cmd.value)
+      if (cmd.type === 'nudge' && scrollRef.current) {
+        // About two lines of lyrics per tap
+        scrollRef.current.scrollBy({ top: cmd.value * fontSizeRef.current * 2.8, behavior: 'smooth' })
+      }
       if (cmd.type === 'scroll_top' && scrollRef.current) {
         scrollRef.current.scrollTop = 0
         setAutoScroll(false)
       }
-    }
-    return () => channel.close()
-  }, [])
+    })
+  }, [eventId, on])
 
   if (viewMode === 'singer_intro' && currentReg) {
     return (

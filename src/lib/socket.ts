@@ -1,4 +1,5 @@
 import type { Server } from 'socket.io'
+import type { ScreenCommand } from '@/lib/screen-commands'
 
 declare global {
   // eslint-disable-next-line no-var
@@ -37,5 +38,13 @@ export function emitGetReady(eventId: string, nextSingerName: string) {
   if (io) {
     const room = `singer:${eventId}:${nextSingerName.toLowerCase().trim()}`
     io.to(room).emit('you_are_next', { singerName: nextSingerName })
+  }
+}
+
+// Reaches the big screen and every open admin panel, so all of them stay in sync
+export function emitScreenCommand(eventId: string, cmd: ScreenCommand) {
+  const io = getSocketServer()
+  if (io) {
+    io.emit(`screen:cmd:${eventId}`, cmd)
   }
 }

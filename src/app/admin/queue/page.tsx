@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useState, useCallback, useRef } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSocket } from '@/hooks/useSocket'
 import { useAdminGuard } from '@/hooks/useAdminGuard'
+import { MAX_FONT_SIZE, MIN_FONT_SIZE, type ScreenCommand, type ViewMode } from '@/lib/screen-commands'
 
 interface Registration {
   id: string
@@ -121,17 +122,39 @@ export default function AdminQueuePage() {
   const [scrolling, setScrolling] = useState(false)
   const [scrollSpeed, setScrollSpeed] = useState(2)
   const [fontSize, setFontSize] = useState(56)
-  const [bigScreenMode, setBigScreenMode] = useState<'lyrics' | 'singer_intro' | 'qr'>('lyrics')
-  const channelRef = useRef<BroadcastChannel | null>(null)
+  const [bigScreenMode, setBigScreenMode] = useState<ViewMode>('lyrics')
 
-  useEffect(() => {
-    channelRef.current = new BroadcastChannel('karaoke_operator')
-    return () => channelRef.current?.close()
-  }, [])
-
-  const sendCmd = (cmd: object) => channelRef.current?.postMessage(cmd)
+  // Goes through the server so the big screen reacts no matter which device sent it
+  const sendCmd = (command: ScreenCommand) => {
+    if (!activeEvent) return
+    fetch('/api/screen', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ eventId: activeEvent.id, command }),
+    })
+  }
 
   const { on } = useSocket(activeEvent?.id)
+
+  // Mirror commands sent from other admin devices, and the screen's own scroll state
+  useEffect(() => {
+    if (!activeEvent?.id) return
+    const unsubCmd = on(`screen:cmd:${activeEvent.id}`, (data) => {
+      const cmd = data as ScreenCommand
+      if (cmd.type === 'play') setScrolling(true)
+      if (cmd.type === 'pause' || cmd.type === 'scroll_top') setScrolling(false)
+      if (cmd.type === 'speed') setScrollSpeed(cmd.value)
+      if (cmd.type === 'font_size') setFontSize(cmd.value)
+      if (cmd.type === 'set_view_mode') setBigScreenMode(cmd.value)
+    })
+    const unsubState = on(`screen:state:${activeEvent.id}`, (data) => {
+      setScrolling((data as { scrolling: boolean }).scrolling)
+    })
+    return () => {
+      unsubCmd?.()
+      unsubState?.()
+    }
+  }, [activeEvent?.id, on])
 
   const loadQueue = useCallback(async (eventId: string) => {
     const [queueRes, poolRes] = await Promise.all([
@@ -387,6 +410,16 @@ export default function AdminQueuePage() {
           >
             {scrolling ? '⏸ Pausar' : '▶ Auto-scroll'}
           </button>
+          <button
+            onClick={() => sendCmd({ type: 'nudge', value: -1 })}
+            title="Subir un poco la letra"
+            className="text-xs px-2 py-1 rounded-lg border border-slate-700 text-slate-400 hover:border-slate-500 transition-all"
+          >▲</button>
+          <button
+            onClick={() => sendCmd({ type: 'nudge', value: 1 })}
+            title="Bajar un poco la letra"
+            className="text-xs px-2 py-1 rounded-lg border border-slate-700 text-slate-400 hover:border-slate-500 transition-all"
+          >▼</button>
           <span className="text-slate-700 text-xs">Vel.</span>
           {[1, 2, 3, 4, 5].map((s) => (
             <button
@@ -402,12 +435,12 @@ export default function AdminQueuePage() {
           <div className="w-px h-4 bg-slate-800" />
           <span className="text-slate-700 text-xs">Letra</span>
           <button
-            onClick={() => { const v = Math.max(fontSize - 4, 16); setFontSize(v); sendCmd({ type: 'font_size', value: v }) }}
+            onClick={() => { const v = Math.max(fontSize - 4, MIN_FONT_SIZE); setFontSize(v); sendCmd({ type: 'font_size', value: v }) }}
             className="text-xs px-2 py-1 rounded-lg border border-slate-700 text-slate-400 hover:border-slate-500 transition-all"
           >A−</button>
           <span className="text-slate-600 text-xs w-6 text-center">{fontSize}</span>
           <button
-            onClick={() => { const v = Math.min(fontSize + 4, 96); setFontSize(v); sendCmd({ type: 'font_size', value: v }) }}
+            onClick={() => { const v = Math.min(fontSize + 4, MAX_FONT_SIZE); setFontSize(v); sendCmd({ type: 'font_size', value: v }) }}
             className="text-xs px-2 py-1 rounded-lg border border-slate-700 text-slate-400 hover:border-slate-500 transition-all"
           >A+</button>
         </div>
