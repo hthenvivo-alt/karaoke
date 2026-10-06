@@ -53,8 +53,6 @@ function SongsContent() {
   const [confirming, setConfirming] = useState(false)
   const [pendingSongId, setPendingSongId] = useState<string | null>(null)
   const [myRegistration, setMyRegistration] = useState<Registration | null>(null)
-  const [waitlistSong, setWaitlistSong] = useState<Song | null>(null)
-  const [waitlistMsg, setWaitlistMsg] = useState('')
   const [showRandomModal, setShowRandomModal] = useState(false)
   const [inRandomPool, setInRandomPool] = useState(false)
   const [joiningPool, setJoiningPool] = useState(false)
@@ -129,12 +127,6 @@ function SongsContent() {
         return matchSearch && matchGenre
       })
     : []
-
-  // Only taken songs open something (the waitlist); available ones use the Cantar buttons
-  const handleSelectSong = (song: Song, status: string) => {
-    if (myRegistration && !isChanging) return
-    if (status === 'TAKEN') setWaitlistSong(song)
-  }
 
   // Reserves the song right away, no confirmation step. asGroup shows the code to share next.
   const handleRegister = async (song: Song, asGroup: boolean) => {
@@ -236,21 +228,6 @@ function SongsContent() {
     localStorage.setItem('karaoke_registration', JSON.stringify({ registrationId: data.registrationId, singerName, eventId }))
     setShowJoinGroup(false)
     router.push(`/lyrics?songId=${data.songId}&eventId=${eventId}&name=${encodeURIComponent(singerName)}`)
-  }
-
-  const handleWaitlist = async () => {
-    if (!waitlistSong || !event) return
-    const res = await fetch('/api/waitlist', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ eventId: event.id, singerName, songId: waitlistSong.id }),
-    })
-    const data = await res.json()
-    setWaitlistMsg(res.ok ? '✅ Te anotaste en la lista de espera' : data.error)
-    setTimeout(() => {
-      setWaitlistSong(null)
-      setWaitlistMsg('')
-    }, 2000)
   }
 
   if (youAreNext && !youAreUp) {
@@ -427,7 +404,6 @@ function SongsContent() {
               <div
                 key={song.id}
                 className={`song-card ${isAvailable && !isDisabled ? 'available' : isTaken ? 'taken' : 'sung'}`}
-                onClick={() => !isDisabled && handleSelectSong(song, status)}
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
@@ -470,35 +446,6 @@ function SongsContent() {
         </div>
       </div>
 
-      {/* Waitlist modal */}
-      {waitlistSong && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-sm">
-          <div className="glass-card w-full max-w-sm mx-4 mb-8 p-6 slide-up">
-            {waitlistMsg ? (
-              <p className="text-center text-green-400 text-lg py-4">{waitlistMsg}</p>
-            ) : (
-              <>
-                <h2 className="font-display text-2xl neon-text-purple mb-1">Canción ocupada</h2>
-                <p className="text-white font-bold mb-1">{waitlistSong.title}</p>
-                <p className="text-slate-400 text-sm mb-4">{waitlistSong.artist}</p>
-                <p className="text-slate-500 text-sm mb-6">
-                  Esta canción ya fue elegida. ¿Querés anotarte en la lista de espera por si queda libre?
-                </p>
-                <div className="flex flex-col gap-3">
-                  <button className="btn-neon" onClick={handleWaitlist}>
-                    Anotarme en lista de espera
-                  </button>
-                  <button className="btn-secondary" onClick={() => setWaitlistSong(null)}>
-                    Cancelar
-                  </button>
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* Random pool modal — shown when capacity is full */}
       {showJoinGroup && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-sm">
           <div className="glass-card w-full max-w-sm mx-4 mb-8 p-6 slide-up">

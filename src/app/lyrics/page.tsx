@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useSocket } from '@/hooks/useSocket'
-import { formatSingers, isSingerIn } from '@/lib/singers'
+import { isSingerIn } from '@/lib/singers'
 
 interface Song {
   id: string
@@ -116,10 +116,8 @@ function LyricsContent() {
 
   const [song, setSong] = useState<Song | null>(null)
   const [myReg, setMyReg] = useState<Registration | null>(null)
-  const [queue, setQueue] = useState<Registration[]>([])
   const [cancelling, setCancelling] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
-  const [showSingers, setShowSingers] = useState(false)
   const [joinCode, setJoinCode] = useState<string | null>(null)
   const [showCodeIntro, setShowCodeIntro] = useState(justChoseGroup)
   // Set by the songs page when this person tapped "Cantar en grupo"
@@ -139,7 +137,6 @@ function LyricsContent() {
     const queueData = await queueRes.json()
     setSong(songData)
     const allQueue = Array.isArray(queueData) ? queueData : []
-    setQueue(allQueue.filter((r: Registration) => r.status !== 'SUNG'))
     // Prefer a pending turn (own or group) over a song already sung
     const mine = allQueue.filter((r: Registration) => isSingerIn(r, singerName))
     const reg = mine.find((r: Registration) => r.status !== 'SUNG') || mine[0]
@@ -286,7 +283,6 @@ function LyricsContent() {
     )
   }
 
-  const waitingQueue = queue.filter((r) => r.status === 'WAITING')
 
   return (
     <div className="gradient-bg min-h-dvh flex flex-col">
@@ -352,83 +348,21 @@ function LyricsContent() {
       {myReg && myReg.status === 'WAITING' && (
         <div className="fixed bottom-0 left-0 right-0 z-30 px-4 pb-safe pb-6 pt-3 glass-card rounded-none border-x-0 border-b-0">
           <div className="flex flex-col gap-2 max-w-sm mx-auto">
-            {/* Row 1: Ver cantantes + Cambiar canción */}
-            <div className="flex gap-2">
+            {/* Companions can't change the group's song */}
+            {isTitular && (
               <button
-                onClick={() => setShowSingers(true)}
-                className="flex-1 py-3 rounded-xl border border-purple-500/40 bg-purple-500/10 text-purple-300 text-sm font-semibold hover:bg-purple-500/20 transition-all active:scale-95 flex items-center justify-center gap-1"
+                onClick={handleChangeSong}
+                className="w-full py-3 rounded-xl border border-blue-500/40 bg-blue-500/10 text-blue-300 text-sm font-semibold hover:bg-blue-500/20 transition-all active:scale-95 flex items-center justify-center gap-1"
               >
-                👥 Ver cantantes
+                🔄 Cambiar canción
               </button>
-              {isTitular && (
-                <button
-                  onClick={handleChangeSong}
-                  className="flex-1 py-3 rounded-xl border border-blue-500/40 bg-blue-500/10 text-blue-300 text-sm font-semibold hover:bg-blue-500/20 transition-all active:scale-95 flex items-center justify-center gap-1"
-                >
-                  🔄 Cambiar canción
-                </button>
-              )}
-            </div>
-            {/* Row 2: Me quiero bajar */}
+            )}
             <button
               onClick={() => setShowConfirm(true)}
               className="w-full py-3 rounded-xl border border-red-500/30 bg-red-500/10 text-red-400 text-sm font-semibold hover:bg-red-500/20 transition-all active:scale-95"
             >
               {isTitular ? '🙅 Me quiero bajar' : '🙅 Me bajo del grupo'}
             </button>
-          </div>
-        </div>
-      )}
-
-      {/* Singers list panel */}
-      {showSingers && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-sm">
-          <div className="glass-card w-full max-w-sm mx-4 mb-8 p-6 slide-up max-h-[70vh] flex flex-col">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="font-display text-2xl neon-text-purple">Cantantes 🎤</h2>
-              <button
-                onClick={() => setShowSingers(false)}
-                className="text-slate-400 hover:text-white text-xl leading-none"
-              >
-                ✕
-              </button>
-            </div>
-            <p className="text-slate-500 text-xs text-center mb-3 italic">
-              El orden de la lista no indica un orden para subir a cantar
-            </p>
-            <div className="overflow-y-auto flex-1 flex flex-col gap-2">
-              {waitingQueue.length === 0 ? (
-                <p className="text-slate-500 text-sm text-center py-6">No hay cantantes en la cola aún</p>
-              ) : (
-                waitingQueue.map((r) => {
-                  const isMe = isSingerIn(r, singerName)
-                  return (
-                    <div
-                      key={r.id}
-                      className={`flex items-center gap-3 rounded-xl px-3 py-3 ${
-                        isMe
-                          ? 'bg-purple-500/20 border border-purple-500/40'
-                          : 'bg-white/5 border border-white/10'
-                      }`}
-                    >
-                      <div className="flex-1 min-w-0">
-                        <p className={`text-sm font-semibold truncate ${isMe ? 'text-purple-300' : 'text-white'}`}>
-                          {formatSingers(r)} {isMe && '(vos)'}
-                        </p>
-                        {r.song && (
-                          <p className="text-slate-500 text-xs truncate">
-                            {r.song.title} — {r.song.artist}
-                          </p>
-                        )}
-                      </div>
-                      {isMe && (
-                        <span className="text-purple-400 text-xs">⭐</span>
-                      )}
-                    </div>
-                  )
-                })
-              )}
-            </div>
           </div>
         </div>
       )}
