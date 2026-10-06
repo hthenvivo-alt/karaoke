@@ -76,8 +76,12 @@ export default function OperatorPage() {
         setViewMode('singer_intro')
       }
     }
+    const songChanged = current?.songId !== currentRegRef.current?.songId
     currentRegRef.current = current
     setCurrentReg(current)
+
+    // Queue updates (reorders, new sign-ups) must not interrupt the song being sung
+    if (!songChanged) return
 
     if (current?.songId) {
       const songRes = await fetch(`/api/songs/${current.songId}`)
