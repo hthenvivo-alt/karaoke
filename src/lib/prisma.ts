@@ -8,6 +8,9 @@ function createPrismaClient() {
   const adapter = new PrismaPg({ connectionString })
   return new PrismaClient({
     adapter,
+    // Group codes are private to the titular; registrations are broadcast to everyone
+    // (queue API, sockets), so the code must be requested explicitly with omit: { joinCode: false }
+    omit: { registration: { joinCode: true } },
     log: process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'],
   })
 }

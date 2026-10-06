@@ -13,7 +13,7 @@ export async function GET() {
       registrations: {
         orderBy: { position: 'asc' },
         where: { status: { not: 'SUNG' } },
-        include: { song: true },
+        include: { song: true, members: { orderBy: { createdAt: 'asc' } } },
       },
     },
   })

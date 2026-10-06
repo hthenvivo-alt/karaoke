@@ -14,7 +14,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
       },
       registrations: {
         orderBy: { position: 'asc' },
-        include: { song: true },
+        include: { song: true, members: { orderBy: { createdAt: 'asc' } } },
       },
     },
   })

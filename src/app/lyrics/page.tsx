@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useEffect, useCallback, Suspense } from 'react'
+import { useState, useEffect, useCallback, useRef, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useSocket } from '@/hooks/useSocket'
+import { formatSingers, isSingerIn } from '@/lib/singers'
 
 interface Song {
   id: string
@@ -17,6 +18,7 @@ interface Registration {
   position: number
   status: string
   singerName: string
+  members?: { singerName: string }[]
   isRandom: boolean
   song?: { title: string; artist: string }
   songId?: string
@@ -117,6 +119,9 @@ function LyricsContent() {
   const [cancelling, setCancelling] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
   const [showSingers, setShowSingers] = useState(false)
+  const [joinCode, setJoinCode] = useState<string | null>(null)
+  const hadTurnRef = useRef(false)
+  const leavingRef = useRef(false)
   const { youAreUp, resetYouAreUp, youAreNext, resetYouAreNext, on } = useSocket(eventId, singerName)
 
   const loadData = useCallback(async () => {
@@ -129,11 +134,34 @@ function LyricsContent() {
     setSong(songData)
     const allQueue = Array.isArray(queueData) ? queueData : []
     setQueue(allQueue.filter((r: Registration) => r.status !== 'SUNG'))
-    const reg = allQueue.find(
-      (r: Registration) => r.singerName.toLowerCase() === singerName.toLowerCase()
-    )
+    // Prefer a pending turn (own or group) over a song already sung
+    const mine = allQueue.filter((r: Registration) => isSingerIn(r, singerName))
+    const reg = mine.find((r: Registration) => r.status !== 'SUNG') || mine[0]
     setMyReg(reg || null)
-  }, [songId, eventId, singerName])
+
+    // The titular cancelled (or changed song) while this person was in their group
+    const hasTurn = !!reg && reg.status !== 'SUNG'
+    if (hadTurnRef.current && !hasTurn && !leavingRef.current) {
+      alert('Se canceló la inscripción del grupo. Podés elegir otra canción.')
+      router.replace(`/songs?eventId=${eventId}&name=${encodeURIComponent(singerName)}`)
+    }
+    hadTurnRef.current = hasTurn
+  }, [songId, eventId, singerName, router])
+
+  const isTitular = !!myReg && myReg.singerName.toLowerCase() === singerName.toLowerCase()
+  const companions = myReg ? [myReg.singerName, ...(myReg.members ?? []).map((m) => m.singerName)].filter(
+    (n) => n.toLowerCase() !== singerName.toLowerCase()
+  ) : []
+
+  // Only the titular can see (and share) the group code
+  const canShareCode = isTitular && myReg?.status === 'WAITING' && !myReg.isRandom
+  const myRegId = myReg?.id
+  useEffect(() => {
+    if (!canShareCode || !myRegId) return
+    fetch(`/api/groups?registrationId=${myRegId}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => setJoinCode(data?.joinCode ?? null))
+  }, [canShareCode, myRegId])
 
   useEffect(() => {
     if (!songId || !eventId) { router.replace('/'); return }
@@ -148,17 +176,27 @@ function LyricsContent() {
   const handleCancel = async () => {
     if (!myReg) return
     setCancelling(true)
-    const res = await fetch('/api/queue', {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'cancel', registrationId: myReg.id, eventId }),
-    })
+    leavingRef.current = true
+    // Companions leave the group; the titular cancels the whole registration
+    const res = isTitular
+      ? await fetch('/api/queue', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'cancel', registrationId: myReg.id, eventId }),
+        })
+      : await fetch('/api/groups', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'leave', eventId }),
+        })
     if (res.ok) {
+      localStorage.removeItem('karaoke_registration')
       sessionStorage.removeItem('karaoke_session')
       router.replace('/')
     } else {
       const data = await res.json()
       alert(data.error || 'No se pudo cancelar')
+      leavingRef.current = false
       setCancelling(false)
       setShowConfirm(false)
     }
@@ -223,6 +261,16 @@ function LyricsContent() {
             <h1 className="font-display text-3xl neon-text-pink leading-tight">{song.title}</h1>
             <p className="text-slate-300 font-semibold">{song.artist}</p>
             {song.genre && <p className="text-slate-500 text-xs">{song.genre}</p>}
+            {!isTitular && myReg && myReg.status !== 'SUNG' && (
+              <p className="text-pink-300 text-xs font-semibold mt-1">👥 Cantás con {companions.join(', ')}</p>
+            )}
+            {canShareCode && joinCode && (
+              <p className="text-pink-300 text-xs font-semibold mt-1">
+                👥 Código para sumarse: <span className="text-white text-base tracking-widest">{joinCode}</span>
+                <span className="text-slate-500 font-normal"> · {1 + (myReg?.members?.length ?? 0)}/4</span>
+                {companions.length > 0 && <span className="text-slate-400 font-normal"> · con {companions.join(', ')}</span>}
+              </p>
+            )}
           </div>
           {myReg?.status === 'CALLED' && (
             <span className="badge badge-called flex-shrink-0">¡AHORA VOS!</span>
@@ -260,19 +308,21 @@ function LyricsContent() {
               >
                 👥 Ver cantantes
               </button>
-              <button
-                onClick={handleChangeSong}
-                className="flex-1 py-3 rounded-xl border border-blue-500/40 bg-blue-500/10 text-blue-300 text-sm font-semibold hover:bg-blue-500/20 transition-all active:scale-95 flex items-center justify-center gap-1"
-              >
-                🔄 Cambiar canción
-              </button>
+              {isTitular && (
+                <button
+                  onClick={handleChangeSong}
+                  className="flex-1 py-3 rounded-xl border border-blue-500/40 bg-blue-500/10 text-blue-300 text-sm font-semibold hover:bg-blue-500/20 transition-all active:scale-95 flex items-center justify-center gap-1"
+                >
+                  🔄 Cambiar canción
+                </button>
+              )}
             </div>
             {/* Row 2: Me quiero bajar */}
             <button
               onClick={() => setShowConfirm(true)}
               className="w-full py-3 rounded-xl border border-red-500/30 bg-red-500/10 text-red-400 text-sm font-semibold hover:bg-red-500/20 transition-all active:scale-95"
             >
-              🙅 Me quiero bajar
+              {isTitular ? '🙅 Me quiero bajar' : '🙅 Me bajo del grupo'}
             </button>
           </div>
         </div>
@@ -299,7 +349,7 @@ function LyricsContent() {
                 <p className="text-slate-500 text-sm text-center py-6">No hay cantantes en la cola aún</p>
               ) : (
                 waitingQueue.map((r) => {
-                  const isMe = r.singerName.toLowerCase() === singerName.toLowerCase()
+                  const isMe = isSingerIn(r, singerName)
                   return (
                     <div
                       key={r.id}
@@ -311,7 +361,7 @@ function LyricsContent() {
                     >
                       <div className="flex-1 min-w-0">
                         <p className={`text-sm font-semibold truncate ${isMe ? 'text-purple-300' : 'text-white'}`}>
-                          {r.singerName} {isMe && '(vos)'}
+                          {formatSingers(r)} {isMe && '(vos)'}
                         </p>
                         {r.song && (
                           <p className="text-slate-500 text-xs truncate">
@@ -336,11 +386,17 @@ function LyricsContent() {
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-sm">
           <div className="glass-card w-full max-w-sm mx-4 mb-8 p-6 slide-up">
             <h2 className="font-display text-2xl neon-text-pink mb-2">¿Seguro?</h2>
-            <p className="text-slate-300 mb-1">Vas a cancelar tu inscripción para:</p>
+            <p className="text-slate-300 mb-1">
+              {isTitular ? 'Vas a cancelar tu inscripción para:' : 'Vas a bajarte del grupo para:'}
+            </p>
             <p className="font-bold text-white mb-1">{song?.title}</p>
             <p className="text-slate-400 text-sm mb-6">{song?.artist}</p>
             <p className="text-slate-500 text-xs mb-6 text-center">
-              La canción va a quedar libre para que otra persona la elija.
+              {!isTitular
+                ? 'El resto del grupo sigue anotado.'
+                : companions.length > 0
+                  ? `Se cancela para todo el grupo (${companions.join(', ')}) y la canción queda libre.`
+                  : 'La canción va a quedar libre para que otra persona la elija.'}
             </p>
             <div className="flex flex-col gap-3">
               <button

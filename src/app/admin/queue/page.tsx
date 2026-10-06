@@ -4,11 +4,13 @@ import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSocket } from '@/hooks/useSocket'
 import { useAdminGuard } from '@/hooks/useAdminGuard'
+import { formatSingers } from '@/lib/singers'
 import { MAX_FONT_SIZE, MIN_FONT_SIZE, type ScreenCommand, type ViewMode } from '@/lib/screen-commands'
 
 interface Registration {
   id: string
   singerName: string
+  members?: { singerName: string }[]
   position: number
   status: 'WAITING' | 'CALLED' | 'SUNG'
   song: { id: string; title: string; artist: string }
@@ -70,7 +72,10 @@ function QueueItem({
             {reg.status === 'WAITING' && <span className="badge badge-waiting">Esperando</span>}
             {reg.status === 'SUNG' && <span className="badge badge-sung">Cantó</span>}
           </div>
-          <p className="font-bold text-white">{reg.singerName}</p>
+          <p className="font-bold text-white">
+            {(reg.members?.length ?? 0) > 0 && <span className="mr-1">👥</span>}
+            {formatSingers(reg)}
+          </p>
           <p className="text-slate-400 text-sm truncate">{reg.song.title} — {reg.song.artist}</p>
         </div>
 
@@ -559,7 +564,7 @@ export default function AdminQueuePage() {
                   <div className="flex flex-col gap-2 mt-3">
                     {sung.map(reg => (
                       <div key={reg.id} className="glass-card p-3 opacity-40">
-                        <p className="font-semibold text-white text-sm">{reg.singerName}</p>
+                        <p className="font-semibold text-white text-sm">{formatSingers(reg)}</p>
                         <p className="text-slate-400 text-xs">{reg.song.title}</p>
                       </div>
                     ))}

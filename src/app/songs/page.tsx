@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useSocket } from '@/hooks/useSocket'
+import { isSingerIn } from '@/lib/singers'
 
 
 interface Song {
@@ -23,6 +24,7 @@ interface Registration {
   id: string
   songId: string
   singerName: string
+  members?: { singerName: string }[]
   position: number
   status: string
 }
@@ -56,6 +58,10 @@ function SongsContent() {
   const [inRandomPool, setInRandomPool] = useState(false)
   const [joiningPool, setJoiningPool] = useState(false)
   const [poolJoinMsg, setPoolJoinMsg] = useState('')
+  const [showJoinGroup, setShowJoinGroup] = useState(false)
+  const [groupCode, setGroupCode] = useState('')
+  const [joiningGroup, setJoiningGroup] = useState(false)
+  const [joinGroupError, setJoinGroupError] = useState('')
 
   const { youAreUp, resetYouAreUp, youAreNext, resetYouAreNext, on } = useSocket(eventId, singerName)
 
@@ -63,10 +69,11 @@ function SongsContent() {
     const res = await fetch(`/api/events/${eventId}`)
     const data = await res.json()
     setEvent(data)
-    // Check if singer already registered
-    const reg = data.registrations?.find(
-      (r: Registration) => r.singerName.toLowerCase() === singerName.toLowerCase()
-    )
+    // Check if singer already registered, either with their own song or in a group that hasn't sung
+    const regs: Registration[] = data.registrations ?? []
+    const reg =
+      regs.find((r) => r.singerName.toLowerCase() === singerName.toLowerCase()) ||
+      regs.find((r) => r.status !== 'SUNG' && isSingerIn(r, singerName))
     setMyRegistration(reg || null)
     // If server says not registered, clear any stale localStorage
     if (!reg) {
@@ -204,6 +211,28 @@ function SongsContent() {
     setJoiningPool(false)
   }
 
+  const handleJoinGroup = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!event || groupCode.length !== 4) return
+    setJoiningGroup(true)
+    setJoinGroupError('')
+    const res = await fetch('/api/groups', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'join', eventId: event.id, singerName, code: groupCode }),
+    })
+    const data = await res.json()
+    setJoiningGroup(false)
+    if (!res.ok) {
+      setJoinGroupError(data.error || 'No se pudo sumar al grupo')
+      return
+    }
+    // Save to localStorage so they can't re-register from home page
+    localStorage.setItem('karaoke_registration', JSON.stringify({ registrationId: data.registrationId, singerName, eventId }))
+    setShowJoinGroup(false)
+    router.push(`/lyrics?songId=${data.songId}&eventId=${eventId}&name=${encodeURIComponent(singerName)}`)
+  }
+
   const handleWaitlist = async () => {
     if (!waitlistSong || !event) return
     const res = await fetch('/api/waitlist', {
@@ -333,7 +362,9 @@ function SongsContent() {
         {myRegistration && !isChanging && (
           <div className="glass-card p-4 mb-4 border-purple-500/40">
             <p className="text-sm text-purple-300 font-semibold text-center">
-              ✅ Ya elegiste tu canción
+              {myRegistration.singerName.toLowerCase() === singerName.toLowerCase()
+                ? '✅ Ya elegiste tu canción'
+                : `✅ Estás en el grupo de ${myRegistration.singerName}`}
             </p>
           </div>
         )}
@@ -342,7 +373,21 @@ function SongsContent() {
             <p className="text-sm text-blue-300 font-semibold text-center">
               🔄 Elegí la canción que querés en cambio
             </p>
+            {(myRegistration?.members?.length ?? 0) > 0 && (
+              <p className="text-xs text-yellow-300 text-center mt-2">
+                ⚠️ Si cambiás de canción, se cancela tu grupo y tus compañeros van a tener que volver a sumarse
+              </p>
+            )}
           </div>
+        )}
+        {!myRegistration && !isChanging && !inRandomPool && (
+          <button
+            onClick={() => { setShowJoinGroup(true); setJoinGroupError(''); setGroupCode('') }}
+            className="w-full glass-card p-4 mb-4 border-pink-500/40 text-center hover:bg-pink-500/10 transition-all active:scale-95"
+          >
+            <p className="text-pink-300 font-bold text-sm">👥 ¿Te invitaron a cantar? Sumate a un grupo</p>
+            <p className="text-slate-500 text-xs mt-1">Pedile el código de 4 números a quien eligió la canción</p>
+          </button>
         )}
         {event && event.eventSongs.length > 0 && !event.eventSongs.some((es) => es.status === 'AVAILABLE') && (!myRegistration || isChanging) && (
           <div className="glass-card p-4 mb-4 border-yellow-500/40 text-center">
@@ -459,6 +504,36 @@ function SongsContent() {
       )}
 
       {/* Random pool modal — shown when capacity is full */}
+      {showJoinGroup && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-sm">
+          <div className="glass-card w-full max-w-sm mx-4 mb-8 p-6 slide-up">
+            <h2 className="font-display text-2xl neon-text-pink mb-2">Sumate a un grupo 👥</h2>
+            <p className="text-slate-400 text-sm mb-4">
+              Ingresá el código que le aparece a quien eligió la canción. Pueden cantar hasta 4.
+            </p>
+            <form onSubmit={handleJoinGroup} className="flex flex-col gap-3">
+              <input
+                className="input-neon text-center text-3xl tracking-[0.5em] font-bold"
+                inputMode="numeric"
+                autoComplete="off"
+                maxLength={4}
+                placeholder="0000"
+                value={groupCode}
+                onChange={(e) => setGroupCode(e.target.value.replace(/\D/g, '').slice(0, 4))}
+                autoFocus
+              />
+              {joinGroupError && <p className="text-red-400 text-sm text-center">{joinGroupError}</p>}
+              <button className="btn-neon" type="submit" disabled={joiningGroup || groupCode.length !== 4}>
+                {joiningGroup ? 'Sumándote...' : '🎤 Sumarme'}
+              </button>
+              <button type="button" className="btn-secondary" onClick={() => setShowJoinGroup(false)}>
+                Cancelar
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
       {showRandomModal && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-sm">
           <div className="glass-card w-full max-w-sm mx-4 mb-8 p-6 slide-up">

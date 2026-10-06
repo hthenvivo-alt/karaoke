@@ -3,10 +3,12 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSocket } from '@/hooks/useSocket'
+import { formatSingers } from '@/lib/singers'
 
 interface Registration {
   id: string
   singerName: string
+  members?: { singerName: string }[]
   status: string
   song: { title: string; artist: string }
 }
@@ -74,7 +76,7 @@ export default function BigScreenPage() {
               {current.status === 'CALLED' ? '🎤 Ahora canta' : '🎵 A continuación'}
             </p>
             <div className="big-screen-singer mb-4">
-              {current.singerName}
+              {formatSingers(current)}
             </div>
             <p className="text-white text-3xl font-bold mb-2">{current.song.title}</p>
             <p className="text-slate-400 text-xl">{current.song.artist}</p>
@@ -98,7 +100,7 @@ export default function BigScreenPage() {
             {upcoming.map((r, i) => (
               <div key={r.id} className="text-center">
                 <p className="text-slate-600 text-xs mb-1">#{i + 2}</p>
-                <p className="text-slate-300 font-semibold">{r.singerName}</p>
+                <p className="text-slate-300 font-semibold">{formatSingers(r)}</p>
                 <p className="text-slate-500 text-sm">{r.song.title}</p>
               </div>
             ))}

@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma'
 import { emitQueueUpdate, emitCallSinger, emitGetReady } from '@/lib/socket'
 import { cookies } from 'next/headers'
 import { isAdmin } from '@/lib/admin-auth'
+import { singersOf } from '@/lib/groups'
 
 
 // GET full queue for an event (only confirmed, non-random registrations)
@@ -17,6 +18,7 @@ export async function GET(req: Request) {
     orderBy: { position: 'asc' },
     include: {
       song: true,
+      members: { orderBy: { createdAt: 'asc' } },
       event: { select: { status: true } },
     },
   })
@@ -45,7 +47,7 @@ export async function PATCH(req: Request) {
     const registrations = await prisma.registration.findMany({
       where: { eventId },
       orderBy: { position: 'asc' },
-      include: { song: true },
+      include: { song: true, members: { orderBy: { createdAt: 'asc' } } },
     })
     emitQueueUpdate(eventId, { type: 'reorder', registrations })
     return NextResponse.json({ ok: true })
@@ -55,17 +57,18 @@ export async function PATCH(req: Request) {
     const reg = await prisma.registration.update({
       where: { id: registrationId },
       data: { status: 'CALLED' },
-      include: { song: true },
+      include: { song: true, members: { orderBy: { createdAt: 'asc' } } },
     })
-    emitCallSinger(reg.eventId, reg.singerName, reg.song.title)
+    emitCallSinger(reg.eventId, singersOf(reg), reg.song.title)
 
     // Notify the next WAITING singer to get ready
     const allWaiting = await prisma.registration.findMany({
       where: { eventId: reg.eventId, status: 'WAITING' },
       orderBy: { position: 'asc' },
+      include: { members: true },
     })
     if (allWaiting.length > 0) {
-      emitGetReady(reg.eventId, allWaiting[0].singerName)
+      emitGetReady(reg.eventId, singersOf(allWaiting[0]))
     }
 
     return NextResponse.json(reg)
@@ -166,7 +169,7 @@ export async function PATCH(req: Request) {
       data: { isRandom: false, status: 'CALLED' },
     })
 
-    emitCallSinger(eventId, chosen.singerName, chosen.song.title)
+    emitCallSinger(eventId, [chosen.singerName], chosen.song.title)
     emitQueueUpdate(eventId, { type: 'random_called', singerName: chosen.singerName })
 
     return NextResponse.json({ singerName: chosen.singerName, songTitle: chosen.song.title })

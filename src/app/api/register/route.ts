@@ -3,6 +3,7 @@ import { Prisma } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { emitSongTaken, emitQueueUpdate } from '@/lib/socket'
 import { cookies } from 'next/headers'
+import { findActiveTurn, generateJoinCode } from '@/lib/groups'
 
 export async function POST(req: Request) {
   const { eventId, singerName, songId, isRandom } = await req.json()
@@ -47,13 +48,20 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Song not available' }, { status: 409 })
   }
 
-  // Check if this singer already has a song (regular or random)
-  const existing = await prisma.registration.findFirst({
-    where: { eventId, singerName: { equals: singerName, mode: 'insensitive' } },
-  })
-  if (existing) {
-    return NextResponse.json({ error: 'You already registered a song', registration: existing }, { status: 409 })
+  // Check if this singer already has a song (regular or random) or is in a group that hasn't sung
+  const turn = await findActiveTurn(eventId, singerName)
+  if (turn?.kind === 'own') {
+    return NextResponse.json({ error: 'You already registered a song', registration: turn.registration }, { status: 409 })
   }
+  if (turn?.kind === 'group') {
+    return NextResponse.json(
+      { error: 'Ya estás en un grupo. Cuando canten, vas a poder elegir tu canción.' },
+      { status: 409 }
+    )
+  }
+
+  // Random pool entries can't form groups, so they don't get a code
+  const joinCode = isRandom ? null : await generateJoinCode(eventId)
 
   // Count existing NON-random registrations for capacity check
   const count = await prisma.registration.count({ where: { eventId, isRandom: false } })
@@ -71,8 +79,9 @@ export async function POST(req: Request) {
   try {
     ;[registration] = await prisma.$transaction([
       prisma.registration.create({
-        data: { eventId, singerName, songId, position: count + 1, isRandom: !!isRandom },
-        include: { song: true },
+        data: { eventId, singerName, songId, position: count + 1, isRandom: !!isRandom, joinCode },
+        include: { song: true, members: true },
+        omit: { joinCode: false },
       }),
       prisma.eventSong.update({
         where: { eventId_songId: { eventId, songId } },
@@ -99,7 +108,8 @@ export async function POST(req: Request) {
 
   // Emit real-time events
   emitSongTaken(eventId, songId, singerName)
-  emitQueueUpdate(eventId, { type: 'registration', registration })
+  // The code goes only to the titular, never in the broadcast
+  emitQueueUpdate(eventId, { type: 'registration', registration: { ...registration, joinCode: undefined } })
 
   return NextResponse.json(registration, { status: 201 })
 }

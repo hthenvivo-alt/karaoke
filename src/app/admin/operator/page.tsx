@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { useSocket } from '@/hooks/useSocket'
 import { parseLine } from '@/lib/lyrics-utils'
+import { formatSingers } from '@/lib/singers'
 import type { ScreenCommand, ViewMode } from '@/lib/screen-commands'
 
 interface Song {
@@ -16,6 +17,7 @@ interface Song {
 interface Registration {
   id: string
   singerName: string
+  members?: { singerName: string }[]
   status: string
   songId: string
   song: { id: string; title: string; artist: string }
@@ -205,12 +207,13 @@ export default function OperatorPage() {
               textShadow: '0 0 10px rgba(168,85,247,0.5)',
             }}
           >
-            🎙️ Sube al escenario
+            {(currentReg.members?.length ?? 0) > 0 ? '🎙️ Suben al escenario' : '🎙️ Sube al escenario'}
           </div>
           
           <h1
             style={{
-              fontSize: '84px',
+              // Groups need room for up to four names
+              fontSize: (currentReg.members?.length ?? 0) > 0 ? '64px' : '84px',
               fontWeight: 900,
               margin: '0 0 32px 0',
               background: 'linear-gradient(to right, #ec4899, #a855f7, #3b82f6)',
@@ -220,7 +223,7 @@ export default function OperatorPage() {
               letterSpacing: '-1px',
             }}
           >
-            {currentReg.singerName}
+            {formatSingers(currentReg)}
           </h1>
 
           <div

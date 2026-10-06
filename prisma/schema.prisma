@@ -67,7 +67,10 @@ model Registration {
   position   Int                @default(0)
   status     RegistrationStatus @default(WAITING)
   isRandom   Boolean            @default(false)
+  // 4-digit code the titular shares so friends can join and sing along (null for random pool)
+  joinCode   String?
   createdAt  DateTime           @default(now())
+  members    GroupMember[]
 
   // A song can only be held by one singer who hasn't sung it yet; sung registrations
   // stay as history so the song can be released with "Resetear canciones"
@@ -98,4 +101,15 @@ model RandomPoolEntry {
   createdAt  DateTime @default(now())
 
   @@unique([eventId, singerName])
+}
+
+// A companion who joined someone else's registration with its code (up to 3 per song)
+model GroupMember {
+  id             String       @id @default(cuid())
+  registration   Registration @relation(fields: [registrationId], references: [id], onDelete: Cascade)
+  registrationId String
+  singerName     String
+  createdAt      DateTime     @default(now())
+
+  @@index([registrationId])
 }

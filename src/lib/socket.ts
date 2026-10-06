@@ -24,20 +24,25 @@ export function emitSongTaken(eventId: string, songId: string, singerName: strin
   }
 }
 
-export function emitCallSinger(eventId: string, singerName: string, songTitle: string) {
+const singerRoom = (eventId: string, name: string) => `singer:${eventId}:${name.toLowerCase().trim()}`
+
+// singerNames: everyone in the registration (titular + group companions)
+export function emitCallSinger(eventId: string, singerNames: string[], songTitle: string) {
   const io = getSocketServer()
   if (io) {
-    const room = `singer:${eventId}:${singerName.toLowerCase().trim()}`
-    io.to(room).emit('you_are_up', { singerName, songTitle })
-    io.emit(`queue:update:${eventId}`, { type: 'call', singerName, songTitle })
+    for (const name of singerNames) {
+      io.to(singerRoom(eventId, name)).emit('you_are_up', { singerName: name, songTitle })
+    }
+    io.emit(`queue:update:${eventId}`, { type: 'call', singerNames, songTitle })
   }
 }
 
-export function emitGetReady(eventId: string, nextSingerName: string) {
+export function emitGetReady(eventId: string, singerNames: string[]) {
   const io = getSocketServer()
   if (io) {
-    const room = `singer:${eventId}:${nextSingerName.toLowerCase().trim()}`
-    io.to(room).emit('you_are_next', { singerName: nextSingerName })
+    for (const name of singerNames) {
+      io.to(singerRoom(eventId, name)).emit('you_are_next', { singerName: name })
+    }
   }
 }
 
