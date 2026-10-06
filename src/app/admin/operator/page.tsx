@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
+import { QRCodeSVG } from 'qrcode.react'
 import { useSocket } from '@/hooks/useSocket'
 import { parseLine } from '@/lib/lyrics-utils'
 
@@ -25,7 +26,9 @@ type OperatorCommand =
   | { type: 'speed'; value: number }
   | { type: 'font_size'; value: number }
   | { type: 'scroll_top' }
-  | { type: 'set_view_mode'; value: 'lyrics' | 'singer_intro' }
+  | { type: 'set_view_mode'; value: ViewMode }
+
+type ViewMode = 'lyrics' | 'singer_intro' | 'qr'
 
 export default function OperatorPage() {
   const [eventId, setEventId] = useState<string | null>(null)
@@ -35,7 +38,7 @@ export default function OperatorPage() {
   const [fontSize, setFontSize] = useState(56)
   const [autoScroll, setAutoScroll] = useState(false)
   const [scrollSpeed, setScrollSpeed] = useState(2)
-  const [viewMode, setViewMode] = useState<'lyrics' | 'singer_intro'>('lyrics')
+  const [viewMode, setViewMode] = useState<ViewMode>('lyrics')
 
   const currentRegRef = useRef<Registration | null>(null)
 
@@ -264,8 +267,50 @@ export default function OperatorPage() {
         flexDirection: 'column',
         fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif",
         overflow: 'hidden',
+        position: 'relative',
       }}
     >
+      {/* QR overlay — lyrics stay mounted underneath so the scroll position is kept */}
+      {viewMode === 'qr' && (
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            zIndex: 10,
+            background: '#000',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 32,
+            textAlign: 'center',
+            padding: 20,
+          }}
+        >
+          <div
+            style={{
+              fontSize: 40,
+              fontWeight: 900,
+              background: 'linear-gradient(to right, #ec4899, #a855f7, #3b82f6)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            🎤 Escaneá y anotate para cantar
+          </div>
+          <div style={{ background: '#fff', padding: 24, borderRadius: 24 }}>
+            <QRCodeSVG
+              value={window.location.origin}
+              size={512}
+              style={{ width: 'min(60vh, 70vw)', height: 'min(60vh, 70vw)', display: 'block' }}
+            />
+          </div>
+          <div style={{ fontSize: 28, color: '#94a3b8', fontWeight: 600 }}>
+            {window.location.host}
+          </div>
+        </div>
+      )}
+
       {/* Lyrics area — full screen, no controls */}
       <div
         ref={scrollRef}

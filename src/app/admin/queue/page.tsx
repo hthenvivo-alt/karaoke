@@ -119,7 +119,7 @@ export default function AdminQueuePage() {
   const [scrolling, setScrolling] = useState(false)
   const [scrollSpeed, setScrollSpeed] = useState(2)
   const [fontSize, setFontSize] = useState(56)
-  const [bigScreenMode, setBigScreenMode] = useState<'lyrics' | 'singer_intro'>('lyrics')
+  const [bigScreenMode, setBigScreenMode] = useState<'lyrics' | 'singer_intro' | 'qr'>('lyrics')
   const channelRef = useRef<BroadcastChannel | null>(null)
 
   useEffect(() => {
@@ -344,6 +344,16 @@ export default function AdminQueuePage() {
             }`}
           >
             🎵 Letra
+          </button>
+          <button
+            onClick={() => { setBigScreenMode('qr'); sendCmd({ type: 'set_view_mode', value: 'qr' }) }}
+            className={`text-xs px-2.5 py-1 rounded-lg border font-semibold transition-all ${
+              bigScreenMode === 'qr'
+                ? 'border-purple-500 bg-purple-500/20 text-purple-300'
+                : 'border-slate-700 text-slate-400 hover:border-purple-500'
+            }`}
+          >
+            📱 QR
           </button>
           <div className="w-px h-4 bg-slate-800" />
           <button
