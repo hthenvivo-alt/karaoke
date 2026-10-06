@@ -305,9 +305,6 @@ export default function OperatorPage() {
               style={{ width: 'min(60vh, 70vw)', height: 'min(60vh, 70vw)', display: 'block' }}
             />
           </div>
-          <div style={{ fontSize: 28, color: '#94a3b8', fontWeight: 600 }}>
-            {window.location.host}
-          </div>
         </div>
       )}
 
