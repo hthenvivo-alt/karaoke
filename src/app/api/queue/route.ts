@@ -1,9 +1,12 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { emitQueueUpdate, emitCallSinger, emitGetReady } from '@/lib/socket'
+import { Prisma } from '@prisma/client'
+import { emitQueueUpdate, emitCallSinger, emitGetReady, emitSongTaken } from '@/lib/socket'
 import { cookies } from 'next/headers'
 import { isAdmin } from '@/lib/admin-auth'
 import { singersOf } from '@/lib/groups'
+
+class SongUnavailableError extends Error {}
 
 
 // GET queue for an event: confirmed registrations by default, ?random=true for the random
@@ -32,9 +35,10 @@ export async function PATCH(req: Request) {
   const body = await req.json()
   const { action, registrationId, eventId, newPositions } = body
 
-  // Participants may only cancel their own registration; everything else is admin-only
+  // Participants may only cancel or change the song of their own registration;
+  // everything else is admin-only
   const admin = await isAdmin()
-  if (!admin && action !== 'cancel') {
+  if (!admin && action !== 'cancel' && action !== 'change_song') {
     return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
   }
 
@@ -98,6 +102,50 @@ export async function PATCH(req: Request) {
     })
     emitQueueUpdate(reg.eventId, { type: 'reset', registrationId })
     return NextResponse.json(reg)
+  }
+
+  // Swap the song on the same registration, so the singer keeps their place in the
+  // queue, their group and their group code
+  if (action === 'change_song' && registrationId && typeof body.songId === 'string') {
+    const newSongId: string = body.songId
+    const reg = await prisma.registration.findUnique({ where: { id: registrationId } })
+    if (!reg) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+    if (!admin) {
+      const cookieStore = await cookies()
+      const owner = cookieStore.get(`karaoke_registered_${reg.eventId}`)?.value
+      if (!owner || owner.toLowerCase().trim() !== reg.singerName.toLowerCase().trim()) {
+        return NextResponse.json({ error: 'No podés cambiar la canción de otra persona' }, { status: 403 })
+      }
+    }
+    if (reg.status !== 'WAITING') {
+      return NextResponse.json({ error: 'No podés cambiar la canción cuando ya te llamaron o ya cantaste' }, { status: 400 })
+    }
+    if (reg.songId === newSongId) return NextResponse.json({ ok: true, songId: newSongId })
+
+    try {
+      await prisma.$transaction(async (tx) => {
+        // Claim the new song only if it's still free; someone may have taken it a second ago
+        const claimed = await tx.eventSong.updateMany({
+          where: { eventId: reg.eventId, songId: newSongId, status: 'AVAILABLE' },
+          data: { status: 'TAKEN' },
+        })
+        if (claimed.count !== 1) throw new SongUnavailableError()
+        await tx.registration.update({ where: { id: reg.id }, data: { songId: newSongId } })
+        await tx.eventSong.updateMany({
+          where: { eventId: reg.eventId, songId: reg.songId, status: 'TAKEN' },
+          data: { status: 'AVAILABLE' },
+        })
+      })
+    } catch (err) {
+      if (err instanceof SongUnavailableError || (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2002')) {
+        return NextResponse.json({ error: 'Esa canción ya no está disponible' }, { status: 409 })
+      }
+      throw err
+    }
+
+    emitSongTaken(reg.eventId, newSongId, reg.singerName)
+    emitQueueUpdate(reg.eventId, { type: 'change_song', registrationId: reg.id, songId: newSongId, oldSongId: reg.songId })
+    return NextResponse.json({ ok: true, songId: newSongId })
   }
 
   if (action === 'cancel' && registrationId) {

@@ -149,6 +149,14 @@ function LyricsContent() {
       router.replace(`/songs?eventId=${eventId}&name=${encodeURIComponent(singerName)}`)
     }
     hadTurnRef.current = hasTurn
+
+    // The titular changed the song (from this or another phone): follow it
+    if (hasTurn && reg.songId && reg.songId !== songId) {
+      if (reg.singerName.toLowerCase() !== singerName.toLowerCase()) {
+        alert(`${reg.singerName} cambió la canción${reg.song ? ` a ${reg.song.title}` : ''}`)
+      }
+      router.replace(`/lyrics?songId=${reg.songId}&eventId=${eventId}&name=${encodeURIComponent(singerName)}`)
+    }
   }, [songId, eventId, singerName, router])
 
   const isTitular = !!myReg && myReg.singerName.toLowerCase() === singerName.toLowerCase()

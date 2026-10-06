@@ -133,22 +133,26 @@ function SongsContent() {
     if (!event || confirming) return
     setConfirming(true)
     setPendingSongId(song.id)
-    // If changing song, cancel old registration first
+    // Changing song keeps the same registration: same place in the queue, same group
     if (isChanging && myRegistration) {
-      const cancelRes = await fetch('/api/queue', {
+      const changeRes = await fetch('/api/queue', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'cancel', registrationId: myRegistration.id, eventId }),
+        body: JSON.stringify({ action: 'change_song', registrationId: myRegistration.id, songId: song.id, eventId }),
       })
-      if (!cancelRes.ok) {
-        const err = await cancelRes.json()
-        alert(err.error || 'No se pudo cancelar la canción anterior')
-        setConfirming(false)
-        setPendingSongId(null)
+      if (changeRes.ok) {
+        if (asGroup) localStorage.setItem('karaoke_group_registration', myRegistration.id)
+        router.push(
+          `/lyrics?songId=${song.id}&eventId=${eventId}&name=${encodeURIComponent(singerName)}${asGroup ? '&group=1' : ''}`
+        )
         return
       }
-      // Clear localStorage so they can re-enter with a new song
-      localStorage.removeItem('karaoke_registration')
+      const err = await changeRes.json()
+      alert(err.error || 'No se pudo cambiar la canción')
+      await loadEvent()
+      setConfirming(false)
+      setPendingSongId(null)
+      return
     }
     const res = await fetch('/api/register', {
       method: 'POST',
@@ -355,11 +359,11 @@ function SongsContent() {
             <p className="text-sm text-blue-300 font-semibold text-center">
               🔄 Elegí la canción que querés en cambio
             </p>
-            {(myRegistration?.members?.length ?? 0) > 0 && (
-              <p className="text-xs text-yellow-300 text-center mt-2">
-                ⚠️ Si cambiás de canción, se cancela tu grupo y tus compañeros van a tener que volver a sumarse
-              </p>
-            )}
+            <p className="text-xs text-slate-400 text-center mt-1">
+              {(myRegistration?.members?.length ?? 0) > 0
+                ? 'Mantenés tu lugar en la cola y tu grupo'
+                : 'Mantenés tu lugar en la cola'}
+            </p>
           </div>
         )}
         {!myRegistration && !isChanging && !inRandomPool && (
