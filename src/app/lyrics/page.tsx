@@ -131,7 +131,7 @@ function LyricsContent() {
   const loadData = useCallback(async () => {
     const [songRes, queueRes] = await Promise.all([
       fetch(`/api/songs/${songId}`),
-      fetch(`/api/queue?eventId=${eventId}`),
+      fetch(`/api/queue?eventId=${eventId}&random=all`),
     ])
     const songData = await songRes.json()
     const queueData = await queueRes.json()

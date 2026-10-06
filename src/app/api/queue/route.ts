@@ -6,11 +6,13 @@ import { isAdmin } from '@/lib/admin-auth'
 import { singersOf } from '@/lib/groups'
 
 
-// GET full queue for an event (only confirmed, non-random registrations)
+// GET queue for an event: confirmed registrations by default, ?random=true for the random
+// pool, ?random=all for both (a participant's own page needs to find them either way)
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
   const eventId = searchParams.get('eventId')
-  const random = searchParams.get('random') === 'true'
+  const randomParam = searchParams.get('random')
+  const random = randomParam === 'all' ? undefined : randomParam === 'true'
   if (!eventId) return NextResponse.json({ error: 'Missing eventId' }, { status: 400 })
 
   const registrations = await prisma.registration.findMany({
