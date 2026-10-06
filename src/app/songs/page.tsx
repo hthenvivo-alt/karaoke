@@ -51,6 +51,7 @@ function SongsContent() {
   const [loading, setLoading] = useState(true)
   const [selectedSong, setSelectedSong] = useState<Song | null>(null)
   const [confirming, setConfirming] = useState(false)
+  const [pendingSongId, setPendingSongId] = useState<string | null>(null)
   const [myRegistration, setMyRegistration] = useState<Registration | null>(null)
   const [waitlistSong, setWaitlistSong] = useState<Song | null>(null)
   const [waitlistMsg, setWaitlistMsg] = useState('')
@@ -129,21 +130,17 @@ function SongsContent() {
       })
     : []
 
+  // Only taken songs open something (the waitlist); available ones use the Cantar buttons
   const handleSelectSong = (song: Song, status: string) => {
-    // In change mode, user can pick a new available song even if they already have a registration
     if (myRegistration && !isChanging) return
-    if (status === 'TAKEN' || status === 'SUNG') {
-      if (status === 'TAKEN') {
-        setWaitlistSong(song)
-      }
-      return
-    }
-    setSelectedSong(song)
+    if (status === 'TAKEN') setWaitlistSong(song)
   }
 
-  const handleConfirm = async () => {
-    if (!selectedSong || !event) return
+  // Reserves the song right away, no confirmation step. asGroup shows the code to share next.
+  const handleRegister = async (song: Song, asGroup: boolean) => {
+    if (!event || confirming) return
     setConfirming(true)
+    setPendingSongId(song.id)
     // If changing song, cancel old registration first
     if (isChanging && myRegistration) {
       const cancelRes = await fetch('/api/queue', {
@@ -155,6 +152,7 @@ function SongsContent() {
         const err = await cancelRes.json()
         alert(err.error || 'No se pudo cancelar la canción anterior')
         setConfirming(false)
+        setPendingSongId(null)
         return
       }
       // Clear localStorage so they can re-enter with a new song
@@ -163,25 +161,32 @@ function SongsContent() {
     const res = await fetch('/api/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ eventId: event.id, singerName, songId: selectedSong.id }),
+      body: JSON.stringify({ eventId: event.id, singerName, songId: song.id }),
     })
     const data = await res.json()
     if (res.ok) {
       setMyRegistration(data)
       // Save to localStorage so they can't re-register from home page
       localStorage.setItem('karaoke_registration', JSON.stringify({ registrationId: data.id, singerName, eventId }))
-      setSelectedSong(null)
-      await loadEvent()
-      router.push(`/lyrics?songId=${selectedSong.id}&eventId=${eventId}&name=${encodeURIComponent(singerName)}`)
-    } else if (res.status === 409 && data.isFull) {
-      // Capacity full — keep selectedSong and show the random pool modal
+      if (asGroup) {
+        // Lets the lyrics page keep the code front and center for this registration
+        localStorage.setItem('karaoke_group_registration', data.id)
+      }
+      router.push(
+        `/lyrics?songId=${song.id}&eventId=${eventId}&name=${encodeURIComponent(singerName)}${asGroup ? '&group=1' : ''}`
+      )
+      return
+    }
+    if (res.status === 409 && data.isFull) {
+      // Capacity full — offer this song through the random pool instead
+      setSelectedSong(song)
       setShowRandomModal(true)
-      // Don't clear selectedSong — we'll offer to register it as random
     } else {
       alert(data.error || 'Error al registrar')
-      setSelectedSong(null)
+      await loadEvent()
     }
     setConfirming(false)
+    setPendingSongId(null)
   }
 
   const handleJoinRandom = async () => {
@@ -433,9 +438,6 @@ function SongsContent() {
                     )}
                   </div>
                   <div className="flex-shrink-0">
-                    {isAvailable && !isDisabled && (
-                      <span className="badge badge-available">Libre</span>
-                    )}
                     {isTaken && (
                       <span className="badge badge-taken">Ocupada</span>
                     )}
@@ -444,36 +446,29 @@ function SongsContent() {
                     )}
                   </div>
                 </div>
+                {isAvailable && !isDisabled && (
+                  <div className="flex gap-2 mt-3">
+                    <button
+                      onClick={(e) => { e.stopPropagation(); handleRegister(song, false) }}
+                      disabled={confirming}
+                      className="flex-1 px-2 py-2.5 whitespace-nowrap rounded-xl border border-green-500/50 bg-green-500/15 text-green-300 text-sm font-bold hover:bg-green-500/25 transition-all active:scale-95 disabled:opacity-50"
+                    >
+                      {pendingSongId === song.id ? 'Reservando...' : '🎤 Cantar'}
+                    </button>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); handleRegister(song, true) }}
+                      disabled={confirming}
+                      className="flex-1 px-2 py-2.5 whitespace-nowrap rounded-xl border border-pink-500/50 bg-pink-500/15 text-pink-300 text-sm font-bold hover:bg-pink-500/25 transition-all active:scale-95 disabled:opacity-50"
+                    >
+                      {pendingSongId === song.id ? 'Reservando...' : '👥 Cantar en grupo'}
+                    </button>
+                  </div>
+                )}
               </div>
             )
           })}
         </div>
       </div>
-
-      {/* Confirm modal */}
-      {selectedSong && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-sm">
-          <div className="glass-card w-full max-w-sm mx-4 mb-8 p-6 slide-up">
-            <h2 className="font-display text-3xl neon-text-pink mb-1">{isChanging ? '¿La cambiamos?' : '¿Esta es?'}</h2>
-            <p className="text-white text-xl font-bold mb-1">{selectedSong.title}</p>
-            <p className="text-slate-400 mb-6">{selectedSong.artist}</p>
-            <p className="text-slate-500 text-sm mb-6 text-center">
-              {isChanging
-                ? 'Tu canción anterior quedará libre y se reservará esta 🔄'
-                : 'Una vez que la elegís, la canción queda reservada para vos 🎤'
-              }
-            </p>
-            <div className="flex flex-col gap-3">
-              <button className="btn-neon" onClick={handleConfirm} disabled={confirming}>
-                {confirming ? (isChanging ? 'Cambiando...' : 'Reservando...') : (isChanging ? '¡Sí, cambiarla! 🔄' : '¡Sí, la quiero! 🎵')}
-              </button>
-              <button className="btn-secondary" onClick={() => setSelectedSong(null)}>
-                Seguir viendo
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Waitlist modal */}
       {waitlistSong && (

@@ -112,6 +112,7 @@ function LyricsContent() {
   const songId = searchParams.get('songId') || ''
   const eventId = searchParams.get('eventId') || ''
   const singerName = searchParams.get('name') || ''
+  const justChoseGroup = searchParams.get('group') === '1'
 
   const [song, setSong] = useState<Song | null>(null)
   const [myReg, setMyReg] = useState<Registration | null>(null)
@@ -120,6 +121,11 @@ function LyricsContent() {
   const [showConfirm, setShowConfirm] = useState(false)
   const [showSingers, setShowSingers] = useState(false)
   const [joinCode, setJoinCode] = useState<string | null>(null)
+  const [showCodeIntro, setShowCodeIntro] = useState(justChoseGroup)
+  // Set by the songs page when this person tapped "Cantar en grupo"
+  const [groupRegistrationId] = useState(() =>
+    typeof window === 'undefined' ? null : localStorage.getItem('karaoke_group_registration')
+  )
   const hadTurnRef = useRef(false)
   const leavingRef = useRef(false)
   const { youAreUp, resetYouAreUp, youAreNext, resetYouAreNext, on } = useSocket(eventId, singerName)
@@ -242,6 +248,36 @@ function LyricsContent() {
     )
   }
 
+  const groupSize = 1 + (myReg?.members?.length ?? 0)
+  const groupFull = groupSize >= 4
+  // Big, highlighted code for people who chose "Cantar en grupo" or already have companions
+  const highlightCode = !!joinCode && (groupRegistrationId === myReg?.id || groupSize > 1)
+
+  if (showCodeIntro && canShareCode && joinCode && song) {
+    return (
+      <div className="gradient-bg min-h-dvh flex flex-col items-center justify-center px-6 text-center">
+        <div className="glass-card p-8 w-full max-w-sm slide-up border-pink-500/40">
+          <div className="text-5xl mb-3">👥</div>
+          <h1 className="font-display text-4xl neon-text-pink mb-2">¡Listo!</h1>
+          <p className="text-slate-300 mb-1">Ya tenés <span className="font-bold text-white">{song.title}</span></p>
+          <p className="text-slate-400 text-sm mb-6">Pasale este código a tus amigos para que se sumen</p>
+          <div className="rounded-2xl border-2 border-pink-500/60 bg-pink-500/10 py-5 mb-4">
+            <p className="font-display text-7xl text-white tracking-[0.25em] pl-[0.25em]">{joinCode}</p>
+          </div>
+          <p className="text-slate-500 text-xs mb-2">
+            Entran a la app, tocan <span className="text-pink-300">“Sumate a un grupo”</span> y lo escriben. Hasta 4 en total.
+          </p>
+          {companions.length > 0 && (
+            <p className="text-green-400 text-sm font-semibold mb-2">✅ Ya se sumaron: {companions.join(', ')}</p>
+          )}
+          <button className="btn-neon mt-4" onClick={() => setShowCodeIntro(false)}>
+            Ver la letra 🎵
+          </button>
+        </div>
+      </div>
+    )
+  }
+
   if (!song) {
     return (
       <div className="gradient-bg min-h-dvh flex items-center justify-center">
@@ -264,10 +300,10 @@ function LyricsContent() {
             {!isTitular && myReg && myReg.status !== 'SUNG' && (
               <p className="text-pink-300 text-xs font-semibold mt-1">👥 Cantás con {companions.join(', ')}</p>
             )}
-            {canShareCode && joinCode && (
+            {canShareCode && joinCode && !highlightCode && (
               <p className="text-pink-300 text-xs font-semibold mt-1">
                 👥 Código para sumarse: <span className="text-white text-base tracking-widest">{joinCode}</span>
-                <span className="text-slate-500 font-normal"> · {1 + (myReg?.members?.length ?? 0)}/4</span>
+                <span className="text-slate-500 font-normal"> · {groupSize}/4</span>
                 {companions.length > 0 && <span className="text-slate-400 font-normal"> · con {companions.join(', ')}</span>}
               </p>
             )}
@@ -282,6 +318,22 @@ function LyricsContent() {
           )}
         </div>
       </div>
+
+      {canShareCode && highlightCode && (
+        <div className="mx-4 mt-4 rounded-2xl border-2 border-pink-500/60 bg-pink-500/10 px-4 py-3 text-center">
+          {groupFull ? (
+            <p className="text-pink-300 font-bold">👥 Grupo completo</p>
+          ) : (
+            <>
+              <p className="text-pink-300 text-xs font-semibold uppercase tracking-widest">Código para sumarse</p>
+              <p className="font-display text-5xl text-white tracking-[0.25em] pl-[0.25em] my-1">{joinCode}</p>
+            </>
+          )}
+          <p className="text-slate-400 text-xs">
+            {groupSize}/4{companions.length > 0 ? ` · Cantás con ${companions.join(', ')}` : ' · Todavía no se sumó nadie'}
+          </p>
+        </div>
+      )}
 
       {/* Lyrics */}
       <div className="flex-1 overflow-y-auto px-4 py-6 pb-32">
