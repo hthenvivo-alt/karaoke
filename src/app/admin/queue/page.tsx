@@ -10,7 +10,7 @@ import { MAX_FONT_SIZE, MIN_FONT_SIZE, type ScreenCommand, type ViewMode } from 
 interface Registration {
   id: string
   singerName: string
-  members?: { singerName: string }[]
+  members?: { id: string; singerName: string }[]
   position: number
   status: 'WAITING' | 'CALLED' | 'SUNG'
   song: { id: string; title: string; artist: string }
@@ -35,6 +35,8 @@ function QueueItem({
   onSung,
   onReset,
   onMove,
+  onRemove,
+  onRemoveMember,
 }: {
   reg: Registration
   index: number
@@ -43,6 +45,8 @@ function QueueItem({
   onSung: (id: string) => void
   onReset: (id: string) => void
   onMove: (id: string, direction: 'up' | 'down') => void
+  onRemove: (reg: Registration) => void
+  onRemoveMember: (member: { id: string; singerName: string }) => void
 }) {
   return (
     <div className={`glass-card p-4 ${reg.status === 'SUNG' ? 'opacity-40' : ''}`}>
@@ -77,6 +81,20 @@ function QueueItem({
             {formatSingers(reg)}
           </p>
           <p className="text-slate-400 text-sm truncate">{reg.song.title} — {reg.song.artist}</p>
+          {reg.status === 'WAITING' && (reg.members?.length ?? 0) > 0 && (
+            <div className="flex flex-wrap gap-1 mt-1.5">
+              {reg.members!.map((m) => (
+                <button
+                  key={m.id}
+                  onClick={() => onRemoveMember(m)}
+                  title={`Sacar a ${m.singerName} del grupo`}
+                  className="text-[11px] px-2 py-0.5 rounded-full border border-slate-700 text-slate-400 hover:border-red-500/60 hover:text-red-400 transition-all"
+                >
+                  {m.singerName} ✕
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Action buttons */}
@@ -103,6 +121,12 @@ function QueueItem({
                 className="badge badge-sung px-3 py-1.5 text-xs cursor-pointer hover:scale-105 transition-transform"
               >
                 ✓ Cantó
+              </button>
+              <button
+                onClick={() => onRemove(reg)}
+                className="px-3 py-1.5 rounded-full text-xs font-semibold border border-red-500/40 text-red-400 hover:bg-red-500/10 transition-all"
+              >
+                ✕ Quitar
               </button>
             </>
           )}
@@ -224,6 +248,32 @@ export default function AdminQueuePage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'reset', registrationId: id, eventId: activeEvent.id }),
     })
+    await loadQueue(activeEvent.id)
+  }
+
+  // For people who won't sing (left, no-show): frees their song for someone else
+  const handleRemove = async (reg: { id: string; singerName: string; members?: { singerName: string }[] }) => {
+    if (!activeEvent) return
+    const who = formatSingers(reg)
+    if (!window.confirm(`¿Quitar a ${who} de la cola? La canción vuelve a quedar libre.`)) return
+    const res = await fetch('/api/queue', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'remove', registrationId: reg.id, eventId: activeEvent.id }),
+    })
+    if (!res.ok) alert((await res.json()).error || 'No se pudo quitar')
+    await loadQueue(activeEvent.id)
+  }
+
+  const handleRemoveMember = async (member: { id: string; singerName: string }) => {
+    if (!activeEvent) return
+    if (!window.confirm(`¿Sacar a ${member.singerName} del grupo? El resto sigue anotado.`)) return
+    const res = await fetch('/api/queue', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'remove_member', memberId: member.id, eventId: activeEvent.id }),
+    })
+    if (!res.ok) alert((await res.json()).error || 'No se pudo sacar del grupo')
     await loadQueue(activeEvent.id)
   }
 
@@ -501,6 +551,8 @@ export default function AdminQueuePage() {
                   onSung={handleSung}
                   onReset={handleReset}
                   onMove={handleMove}
+                  onRemove={handleRemove}
+                  onRemoveMember={handleRemoveMember}
                 />
               ))}
             </div>
@@ -516,7 +568,14 @@ export default function AdminQueuePage() {
                   {randomPool.map(entry => (
                     <div key={entry.id} className="flex items-center gap-3 rounded-xl px-3 py-2 bg-yellow-500/5 border border-yellow-500/20">
                       <span className="text-yellow-400 text-sm">🎲</span>
-                      <span className="text-slate-300 text-sm font-medium">{entry.singerName}</span>
+                      <span className="text-slate-300 text-sm font-medium flex-1">{entry.singerName}</span>
+                      <button
+                        onClick={() => handleRemove(entry)}
+                        title={`Quitar a ${entry.singerName} del random`}
+                        className="text-xs text-slate-500 hover:text-red-400 px-1"
+                      >
+                        ✕
+                      </button>
                     </div>
                   ))}
                 </div>

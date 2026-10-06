@@ -142,10 +142,10 @@ function LyricsContent() {
     const reg = mine.find((r: Registration) => r.status !== 'SUNG') || mine[0]
     setMyReg(reg || null)
 
-    // The titular cancelled (or changed song) while this person was in their group
+    // Their turn disappeared: the titular cancelled the group, or the admin removed them
     const hasTurn = !!reg && reg.status !== 'SUNG'
     if (hadTurnRef.current && !hasTurn && !leavingRef.current) {
-      alert('Se canceló la inscripción del grupo. Podés elegir otra canción.')
+      alert('Se canceló tu inscripción. Podés elegir otra canción.')
       router.replace(`/songs?eventId=${eventId}&name=${encodeURIComponent(singerName)}`)
     }
     hadTurnRef.current = hasTurn

@@ -133,6 +133,37 @@ export async function PATCH(req: Request) {
     return NextResponse.json({ ok: true })
   }
 
+  // Admin removes someone who isn't going to sing (left, no-show): the song is freed
+  // and, for a group, everyone in it is out
+  if (action === 'remove' && registrationId) {
+    const reg = await prisma.registration.findUnique({ where: { id: registrationId } })
+    if (!reg) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+    if (reg.status === 'SUNG') {
+      return NextResponse.json({ error: 'Ya cantó; para eso está Resetear cantantes' }, { status: 400 })
+    }
+    await prisma.$transaction([
+      prisma.registration.delete({ where: { id: registrationId } }),
+      prisma.eventSong.updateMany({
+        where: { eventId: reg.eventId, songId: reg.songId, status: 'TAKEN' },
+        data: { status: 'AVAILABLE' },
+      }),
+    ])
+    emitQueueUpdate(reg.eventId, { type: 'remove', registrationId, songId: reg.songId })
+    return NextResponse.json({ ok: true })
+  }
+
+  // Admin takes one companion out of a group; the rest keep their turn
+  if (action === 'remove_member' && body.memberId) {
+    const member = await prisma.groupMember.findUnique({
+      where: { id: body.memberId },
+      include: { registration: true },
+    })
+    if (!member) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+    await prisma.groupMember.delete({ where: { id: member.id } })
+    emitQueueUpdate(member.registration.eventId, { type: 'group_leave', registrationId: member.registrationId })
+    return NextResponse.json({ ok: true })
+  }
+
   // Singers who already sang can sign up again; their songs stay used
   if (action === 'reset_singers' && eventId) {
     const { count } = await prisma.registration.deleteMany({
