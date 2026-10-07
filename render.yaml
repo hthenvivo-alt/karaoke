@@ -15,6 +15,7 @@ services:
         value: production
 
 databases:
+  # No plan on purpose: Render keeps an existing database on its current (paid) plan.
+  # "plan: free" here could downgrade it if the Blueprint were ever re-synced.
   - name: karaoke-db
     databaseName: karaoke
-    plan: free
